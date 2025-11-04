@@ -1,19 +1,19 @@
 .about-page {
   min-height: 100vh;
-  padding: 120px var(--spacing-xl) var(--spacing-3xl);
+  padding: 100px var(--spacing-xl) var(--spacing-2xl);
   color: var(--apple-dark-gray);
   background: var(--bg-page-light);
 }
 
 .about-container {
   width: 100%;
-  max-width: 1600px;
+  max-width: 1300px;
   margin: 0 auto;
-  padding: 0 var(--spacing-2xl);
+  padding: 0 var(--spacing-xl);
 }
 
 .page-title {
-  font-size: clamp(var(--font-size-4xl), 5vw, var(--font-size-5xl));
+  font-size: clamp(var(--font-size-3xl), 4.5vw, var(--font-size-4xl));
   font-weight: var(--font-weight-bold);
   text-align: center;
   margin-bottom: var(--spacing-2xl);

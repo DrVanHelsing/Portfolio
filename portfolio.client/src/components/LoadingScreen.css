@@ -74,6 +74,19 @@
   margin-top: 1rem;
 }
 
+.mobile-notice {
+  display: none;
+  color: #86868b;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: -0.008em;
+  margin-top: 0.5rem;
+  padding: 8px 16px;
+  background: rgba(134, 134, 139, 0.08);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(134, 134, 139, 0.15);
+}
+
 /* Animations */
 @keyframes fadeIn {
   from {
@@ -106,6 +119,12 @@
   .welcome-subtitle {
     color: #a1a1a6;
   }
+
+  .mobile-notice {
+    background: rgba(161, 161, 166, 0.1);
+    border-color: rgba(161, 161, 166, 0.2);
+    color: #a1a1a6;
+  }
 }
 
 /* Mobile responsive */
@@ -125,5 +144,9 @@
 
   .welcome-subtitle {
     font-size: var(--font-size-base);
+  }
+
+  .mobile-notice {
+    display: block !important;
   }
 }

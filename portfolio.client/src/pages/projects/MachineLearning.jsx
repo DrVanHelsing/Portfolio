@@ -131,7 +131,7 @@ const MachineLearning = () => {
 
           <motion.div className="content-section" variants={itemVariants}>
             <h2 className="section-title"><BarChart3 size={24} />Experiment Results</h2>
-            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(400px,1fr))',gap:'var(--spacing-lg)',maxWidth:'1200px',margin:'0 auto'}}>
+            <div className="chart-grid-section" style={{display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(400px,1fr))',gap:'var(--spacing-lg)',maxWidth:'1200px',margin:'0 auto'}}>
               <AnimatedChart
                 title="Image Classification Accuracy"
                 data={[

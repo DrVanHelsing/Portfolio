@@ -25,8 +25,22 @@ const location = useLocation();
     { path: '/contact', label: 'Contact' }
   ];
 
+  // Close menu on route change
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
+
+  // Close on Escape key
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') setIsMobileMenuOpen(false);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, []);
+
   return (
-  <nav className={`navigation ${isScrolled ? 'scrolled' : ''}`}>
+  <nav className={`navigation ${isScrolled ? 'scrolled' : ''}`} aria-label="Primary">
 <div className="nav-container">
         <Link to="/" className="nav-logo">
           <span className="logo-text">Tredir</span>
@@ -36,14 +50,26 @@ const location = useLocation();
         <button 
           className="mobile-menu-toggle"
       onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-      aria-label="Toggle menu"
+      aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+      aria-expanded={isMobileMenuOpen}
+      aria-controls="primary-navigation"
         >
-          <span></span>
-        <span></span>
-          <span></span>
+          <span className={isMobileMenuOpen ? 'bar open' : 'bar'}></span>
+          <span className={isMobileMenuOpen ? 'bar open' : 'bar'}></span>
+          <span className={isMobileMenuOpen ? 'bar open' : 'bar'}></span>
      </button>
 
-      <ul className={`nav-links ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
+      {/* Backdrop to close menu when clicking outside */}
+      {isMobileMenuOpen && (
+        <button
+          type="button"
+          className="nav-backdrop"
+          aria-label="Close menu"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+
+      <ul id="primary-navigation" className={`nav-links ${isMobileMenuOpen ? 'mobile-open' : ''}`} role="menubar">
           {navLinks.map(({ path, label }) => (
             <li key={path}>
      <Link 

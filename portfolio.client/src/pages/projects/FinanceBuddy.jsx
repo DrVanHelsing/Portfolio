@@ -166,8 +166,8 @@ const FinanceBuddy = () => {
               <TrendingUp size={24} />
               Plant Growth Journey
             </h2>
-            <div style={{background: 'var(--bg-accent-light)', padding: 'var(--spacing-xl)', borderRadius: 'var(--radius-lg)', marginBottom: 'var(--spacing-lg)', overflowX: 'auto'}}>
-              <div style={{display: 'flex', gap: 'var(--spacing-lg)', textAlign: 'center', minWidth: 'fit-content'}}>
+            <div style={{background: 'var(--bg-accent-light)', padding: 'var(--spacing-xl)', borderRadius: 'var(--radius-lg)', marginBottom: 'var(--spacing-lg)'}}>
+              <div style={{display: 'flex', flexWrap: 'wrap', justifyContent:'center', gap: 'var(--spacing-lg)', textAlign: 'center'}}>
                 <div style={{flex: '1 1 140px', minWidth: '120px'}}>
                   <Circle size={48} style={{color:'var(--apple-gray)',margin:'0 auto var(--spacing-sm)'}} />
                   <div style={{fontWeight: 'var(--font-weight-semibold)', color: 'var(--apple-blue)'}}>Seed</div>
@@ -207,6 +207,7 @@ const FinanceBuddy = () => {
               <Code2 size={24} />
               System Architecture
             </h2>
+            <div className="architecture-section">
             <ArchitectureDiagram
               columns={[
                 {
@@ -298,6 +299,7 @@ const FinanceBuddy = () => {
                 }
               ]}
             />
+            </div>
           </motion.div>
 
           <motion.div className="content-section" variants={itemVariants}>
@@ -308,7 +310,7 @@ const FinanceBuddy = () => {
             <p className="section-content" style={{marginBottom:'var(--spacing-lg)'}}>
               FinanceBuddy provides comprehensive visual analytics to help you understand your spending patterns, track progress toward goals, and improve your overall financial wellness.
             </p>
-            <div style={{display:'flex',gap:'var(--spacing-xl)',maxWidth:'1400px',margin:'0 auto',overflowX:'auto'}}>
+            <div className="chart-grid-section" style={{display:'flex',flexWrap:'wrap',gap:'var(--spacing-xl)',maxWidth:'1400px',margin:'0 auto'}}>
               <div style={{background:'var(--bg-secondary)',borderRadius:'var(--radius-lg)',padding:'var(--spacing-xl)',flex:'1 1 350px',minWidth:'320px'}}>
                 <h3 style={{fontSize:'var(--font-size-md)',fontWeight:600,marginBottom:'var(--spacing-md)',display:'flex',alignItems:'center',gap:'var(--spacing-sm)'}}>
                   <PieChart size={20} />
@@ -452,7 +454,7 @@ const FinanceBuddy = () => {
             <p className="section-content" style={{marginBottom:'var(--spacing-lg)'}}>
               Built with .NET MAUI 9, FinanceBuddy runs natively on all major platforms with a single codebase, providing a consistent and high-performance experience everywhere.
             </p>
-            <div style={{display:'flex',gap:'var(--spacing-lg)',maxWidth:'1400px',margin:'0 auto',overflowX:'auto'}}>
+            <div style={{display:'flex',flexWrap:'wrap',gap:'var(--spacing-lg)',maxWidth:'1400px',margin:'0 auto'}}>
               <div style={{background:'var(--bg-accent-light)',padding:'var(--spacing-xl)',borderRadius:'var(--radius-lg)',textAlign:'center',flex:'1 1 200px',minWidth:'180px'}}>
                 <div style={{marginBottom:'var(--spacing-md)',color:'var(--apple-blue)'}}>
                   <Smartphone size={48} strokeWidth={1.5} />

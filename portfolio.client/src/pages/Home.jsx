@@ -39,19 +39,8 @@ import './Home.css';
  animate={{ opacity:1, x:0 }}
  transition={{ delay:0.4, duration:0.8 }}
  >
- Computer Science Graduate | Software Engineering Enthusiast | Passionate about AI, Machine Learning, and Scalable Systems
+ I am a Computer Science Graduate, that is passionate about software development, teamwork, and continuous learning. Specializing in machine learning, and multiplatform development with C# and .NET MAUI.
  </motion.h2>
- 
- <motion.p 
- className="hero-description"
- initial={{ opacity:0 }}
- animate={{ opacity:1 }}
- transition={{ delay:0.6, duration:0.8 }}
- >
- Passionate about software development, teamwork, and continuous learning. Specializing in multiplatform development with C# and .NET MAUI.
- <br />
- <span className="location"><MapPin size={16} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '4px' }} /> Based in Cape Town, South Africa</span>
- </motion.p>
 
  <motion.div 
  className="hero-cta"

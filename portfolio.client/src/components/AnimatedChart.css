@@ -121,17 +121,103 @@
 }
 
 /* Responsive adjustments */
-@media (max-width: 640px) {
-  .animated-chart-pie {
-    width: 160px;
-    height: 160px;
+@media (max-width: 768px) {
+  .animated-chart-root {
+    max-width: 100%;
+    overflow: visible; /* No horizontal scroll */
   }
-  
-  .animated-chart-pie-labels {
-    font-size: 11px;
+
+  /* Bar Charts - fit to container width, NO horizontal scroll */
+  .animated-chart-bars {
+    grid-template-columns: repeat(auto-fit, minmax(20px, 1fr));
+    gap: 4px;
+    padding-bottom: 25px;
+    width: 100%;
+    max-width: 100%;
   }
-  
+
   .animated-chart-bar {
-    max-width: 20px;
+    max-width: 24px;
+    min-width: 16px;
+  }
+
+  .animated-chart-label {
+    font-size: 8px;
+    max-width: 50px;
+  }
+
+  .animated-chart-value {
+    font-size: 8px;
+  }
+
+  /* Pie/Donut Charts - smaller on mobile */
+  .animated-chart-pie {
+    width: 140px;
+    height: 140px;
+  }
+
+  .animated-chart-pie-labels {
+    gap: 4px;
+    max-width: 100%;
+  }
+
+  .animated-chart-pie-label {
+    padding: 3px 6px;
+    font-size: 9px;
+  }
+
+  .animated-chart-pie-label .color-dot {
+    width: 7px;
+    height: 7px;
+  }
+
+  /* Line Charts - fit to container width */
+  .animated-chart-line {
+    width: 100%;
+    max-width: 100%;
+    min-width: unset;
   }
 }
+
+@media (max-width: 480px) {
+  .animated-chart-bars {
+    grid-template-columns: repeat(auto-fit, minmax(16px, 1fr));
+    gap: 3px;
+    padding-bottom: 20px;
+    width: 100%;
+  }
+
+  .animated-chart-bar {
+    max-width: 20px;
+    min-width: 14px;
+  }
+
+  .animated-chart-label {
+    font-size: 7px;
+    max-width: 40px;
+  }
+
+  .animated-chart-value {
+    font-size: 7px;
+  }
+
+  .animated-chart-pie {
+    width: 120px;
+    height: 120px;
+  }
+
+  .animated-chart-pie-labels {
+    gap: 3px;
+  }
+
+  .animated-chart-pie-label {
+    padding: 2px 5px;
+    font-size: 8px;
+  }
+
+  .animated-chart-pie-label .color-dot {
+    width: 6px;
+    height: 6px;
+  }
+}
+

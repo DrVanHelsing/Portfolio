@@ -58,6 +58,7 @@ const StudentLink = () => {
 
           <div className="content-section">
             <h2 className="section-title"><GitBranch size={24} />System Architecture</h2>
+            <div className="architecture-section">
             <ArchitectureDiagram
               columns={[
                 {
@@ -144,6 +145,7 @@ const StudentLink = () => {
                 }
               ]}
             />
+            </div>
           </div>
 
           <div className="content-section">
@@ -194,7 +196,7 @@ const StudentLink = () => {
 
           <div className="content-section">
             <h2 className="section-title"><BarChart3 size={24} />Platform Metrics</h2>
-            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(400px,1fr))',gap:'var(--spacing-lg)',maxWidth:'1200px',margin:'0 auto'}}>
+            <div className="chart-grid-section" style={{display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(400px,1fr))',gap:'var(--spacing-lg)',maxWidth:'1200px',margin:'0 auto'}}>
               <AnimatedChart
                 title="CV Quality Score Distribution"
                 data={[
@@ -251,7 +253,7 @@ const StudentLink = () => {
             <div style={{background:'linear-gradient(135deg, rgba(191,90,242,0.08), rgba(191,90,242,0.02))',padding:'var(--spacing-xl)',borderRadius:'var(--radius-lg)',borderLeft:'4px solid var(--apple-purple)'}}>
               <div style={{marginBottom:'var(--spacing-lg)'}}>
                 <h3 style={{margin:'0 0 var(--spacing-md) 0',color:'var(--apple-purple)'}}>Analysis Pipeline</h3>
-                <div style={{background:'var(--bg-glass-light)',border:'1px solid rgba(191,90,242,0.2)',borderRadius:'var(--radius-lg)',padding:'var(--spacing-lg)',overflowX:'auto'}}>
+                <div className="architecture-section" style={{background:'var(--bg-glass-light)',border:'1px solid rgba(191,90,242,0.2)',borderRadius:'var(--radius-lg)',padding:'var(--spacing-lg)'}}>
                   <div className="architecture-grid" style={{minWidth:'800px'}}>
                     <div className="architecture-column" style={{minWidth:'200px'}}>
                       <h3 className="architecture-column-title" style={{color:'var(--apple-purple)',fontSize:'var(--font-size-md)'}}>Input</h3>

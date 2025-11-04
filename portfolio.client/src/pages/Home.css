@@ -12,10 +12,10 @@
 
 .home-content {
   width: 100%;
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
   /* Extra top padding to give space below the nav */
-  padding: 100px var(--spacing-xl) var(--spacing-xl);
+  padding: 90px var(--spacing-xl) var(--spacing-xl);
   position: relative;
   z-index: 2;
 }
@@ -145,7 +145,7 @@
 }
 
 .hero-title {
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 600;
   margin-bottom: 0.4rem;
   line-height: 1.05;
@@ -163,7 +163,7 @@
 }
 
 .hero-subtitle {
-  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-size: clamp(1.2rem, 2.5vw, 1.75rem);
   font-weight: 600;
   margin-bottom: 0.8rem;
   color: var(--apple-dark-gray);
@@ -172,8 +172,8 @@
 }
 
 .hero-description {
-  font-size: clamp(var(--font-size-sm), 2vw, var(--font-size-lg));
-  max-width: 600px;
+  font-size: clamp(var(--font-size-sm), 1.8vw, var(--font-size-md));
+  max-width: 550px;
   margin: 0 auto 1.5rem;
   color: var(--apple-gray);
   line-height: 1.47059;
@@ -437,37 +437,176 @@
 
 @media (max-width: 768px) {
   .home-content {
-    padding: 100px var(--spacing-lg) 60px;
+    padding: 80px var(--spacing-md) var(--spacing-lg);
   }
 
   .hero-section {
-    margin-bottom: 60px;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 7vw, 3rem);
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1.1rem, 4vw, 1.5rem);
+    margin-bottom: 0.6rem;
+  }
+
+  .hero-description {
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    margin-bottom: var(--spacing-md);
   }
 
   .hero-cta {
     flex-direction: column;
     align-items: stretch;
     gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
   }
 
   .cta-button {
     width: 100%;
+    padding: 12px 20px;
+    font-size: 0.95rem;
   }
 
+  .hero-stats {
+    margin-top: var(--spacing-md);
+    gap: var(--spacing-md);
+    padding: var(--spacing-sm);
+  }
+
+  .stat-value {
+    font-size: clamp(1.3rem, 5vw, 1.8rem);
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+  }
+
+  .stat-divider {
+    height: 24px;
+  }
+
+  /* 2x2 Grid for highlight cards on mobile */
   .hero-highlights {
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-md);
-    margin-top: 60px;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-lg);
   }
 
   .highlight-card {
-    padding: 36px 28px;
+    padding: var(--spacing-md) var(--spacing-sm);
+    border-radius: var(--radius-lg);
+  }
+
+  .highlight-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .highlight-card h3 {
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+  }
+
+  .highlight-card p {
+    font-size: 0.7rem;
+    line-height: 1.3;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .card-footer {
+    margin-top: var(--spacing-xs);
+    padding-top: var(--spacing-xs);
+  }
+
+  .tech-count {
+    font-size: 0.6rem;
+  }
+
+  /* Tech Marquee adjustments */
+  .tech-marquee {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-sm) 0;
+  }
+
+  .marquee-content span {
+    font-size: 0.85rem;
+  }
+
+  /* Availability badge mobile positioning */
+  .availability-badge {
+    bottom: var(--spacing-md);
+    right: var(--spacing-md);
+    font-size: 0.75rem;
+    padding: 4px 10px;
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  /* Reduce orb sizes on mobile for performance */
+  .orb-1 {
+    width: 250px;
+    height: 250px;
+  }
+
+  .orb-2 {
+    width: 200px;
+    height: 200px;
+  }
+
+  .orb-3 {
+    width: 220px;
+    height: 220px;
   }
 }
 
 @media (max-width: 480px) {
+  .home-content {
+    padding: 70px var(--spacing-sm) var(--spacing-md);
+  }
+
   .hero-highlights {
-    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .highlight-card {
+    padding: var(--spacing-sm);
+  }
+
+  .highlight-icon {
+    font-size: 1.3rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .highlight-card h3 {
+    font-size: 0.75rem;
+  }
+
+  .highlight-card p {
+    font-size: 0.65rem;
+  }
+
+  .tech-count {
+    font-size: 0.55rem;
+  }
+
+  .marquee-content span {
+    font-size: 0.75rem;
+  }
+
+  .stat-value {
+    font-size: clamp(1.2rem, 5vw, 1.5rem);
+  }
+
+  .stat-label {
+    font-size: 0.65rem;
   }
 }
 

@@ -1,22 +1,22 @@
 /* Shared styles for all project detail pages */
 .project-detail-page {
   min-height: 100vh;
-  padding: 100px var(--spacing-3xl) var(--spacing-3xl);
+  padding: 90px var(--spacing-2xl) var(--spacing-2xl);
   color: var(--apple-dark-gray);
   background: var(--bg-page-light);
 }
 
 .project-detail-container {
   width: 100%;
-  max-width: 1800px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 var(--spacing-2xl);
+  padding: 0 var(--spacing-xl);
 }
 
 .project-header {
   text-align: center;
-  margin-bottom: var(--spacing-2xl);
-  max-width: 1400px;
+  margin-bottom: var(--spacing-xl);
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -31,10 +31,16 @@
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   margin-bottom: var(--spacing-md);
+  line-height: 1.4;
+  text-align: center;
+  letter-spacing: .02em;
+  max-width: min(90vw, 560px);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .project-title {
-  font-size: clamp(var(--font-size-4xl), 5vw, var(--font-size-5xl));
+  font-size: clamp(var(--font-size-3xl), 4.5vw, var(--font-size-4xl));
   font-weight: var(--font-weight-bold);
   margin-bottom: var(--spacing-lg);
   background: linear-gradient(135deg, var(--apple-blue), var(--apple-indigo));
@@ -45,10 +51,10 @@
 }
 
 .project-subtitle {
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-lg);
   color: var(--apple-gray);
-  max-width: 800px;
-  margin: 0 auto var(--spacing-xl);
+  max-width: 700px;
+  margin: 0 auto var(--spacing-lg);
   line-height: 1.6;
 }
 
@@ -68,6 +74,9 @@
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   color: var(--apple-blue);
+  line-height: 1.4;
+  text-align: center;
+  letter-spacing: .01em;
 }
 
 .project-links {
@@ -104,7 +113,7 @@
 .project-content {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-2xl);
+  gap: var(--spacing-xl);
 }
 
 .content-section {
@@ -112,9 +121,9 @@
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   border-radius: var(--radius-xl);
-  padding: var(--spacing-2xl);
+  padding: var(--spacing-xl);
   border: var(--border-light);
-  max-width: 1600px;
+  max-width: 1300px;
   margin: 0 auto var(--spacing-xl) auto;
 }
 
@@ -159,6 +168,8 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
+  justify-content: center;
+  text-align: center;
 }
 
 .section-title svg {
@@ -310,25 +321,360 @@
 
 @media (max-width: 768px) {
   .project-detail-page {
-    padding: 100px var(--spacing-md) var(--spacing-2xl);
+    padding: 90px var(--spacing-md) var(--spacing-xl);
   }
 
-  .content-section {
-    padding: var(--spacing-xl) var(--spacing-lg);
+  .project-detail-container {
+    padding: 0 var(--spacing-sm);
   }
 
-  /* Keep features horizontal with scroll on mobile */
-  .features-grid {
-    flex-wrap: nowrap;
+  .project-header {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .project-title {
+    font-size: clamp(1.8rem, 6vw, 2.5rem);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .project-subtitle {
+    font-size: var(--font-size-base);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .project-badges {
+    gap: var(--spacing-xs);
+    justify-content: center;
+    text-align: center;
+  }
+
+  .tech-badge {
+    font-size: 0.75rem;
+    padding: 4px 12px;
   }
 
   .project-links {
     flex-direction: column;
+    gap: var(--spacing-sm);
   }
 
-  /* Keep tech stack horizontal with scroll on mobile */
+  .project-link-btn {
+    width: 100%;
+    justify-content: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: 0.9rem;
+  }
+
+  .content-section {
+    padding: var(--spacing-lg) var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    border-radius: var(--radius-lg);
+  }
+
+  .section-title {
+    font-size: clamp(1.3rem, 4vw, 1.6rem);
+    margin-bottom: var(--spacing-md);
+    flex-wrap: wrap;
+  }
+
+  .section-title svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .section-content p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  /* HIDE ELEMENTS THAT DON'T FIT ON MOBILE - NO HORIZONTAL SCROLLING */
+  
+  /* Hide architecture diagrams - they're too wide for mobile */
+  .content-section > div:has(> svg[id*="mermaid"]),
+  .content-section .mermaid,
+  .content-section svg[id*="mermaid"],
+  .content-section div[class*="architecture"],
+  .content-section section:has(h2:contains("Architecture")) {
+    display: none !important;
+  }
+
+  /* Hide tables - replace with simplified data if needed */
+  .content-section table {
+    display: none !important;
+  }
+
+  /* Hide wide chart grids with multiple charts side-by-side */
+  .content-section > div[style*="display:flex"][style*="maxWidth:'1400px"],
+  .content-section > div[style*="display: flex"][style*="maxWidth: '1400px"],
+  .content-section > div[style*="display:'flex'"][style*="maxWidth:'1400px"] {
+    display: none !important;
+  }
+
+  /* Hide grids with minmax > 300px (too wide for mobile) */
+  .content-section > div[style*="minmax(400px"],
+  .content-section > div[style*="minmax(350px"] {
+    display: none !important;
+  }
+
+  /* Feature cards - convert to vertical stack, NO horizontal scroll */
+  .features-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    overflow-x: visible !important;
+  }
+
+  .feature-card {
+    flex: 1 1 auto !important;
+    min-width: unset !important;
+    width: 100%;
+    padding: var(--spacing-md);
+  }
+
+  .feature-title {
+    font-size: 1rem;
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .feature-description {
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  /* Tech stack - convert to wrapped grid */
   .tech-stack-list {
-    flex-wrap: nowrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--spacing-sm);
+    overflow-x: visible !important;
+  }
+
+  .tech-item {
+    flex: 1 1 auto !important;
+    min-width: unset !important;
+    padding: var(--spacing-sm);
+    font-size: 0.85rem;
+  }
+
+  .tech-item svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Highlights - convert to vertical list */
+  .highlights-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    overflow-x: visible !important;
+  }
+
+  .highlights-list li {
+    flex: 1 1 auto !important;
+    min-width: unset !important;
+    width: 100%;
+    padding: var(--spacing-md);
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .highlights-list li::before {
+    width: 20px;
+    height: 20px;
+    font-size: 0.9rem;
+  }
+
+  /* Charts - hide complex multi-chart layouts, keep single charts */
+  .content-section canvas,
+  .content-section svg:not([id*="lucide"]):not([data-lucide]) {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Grid layouts with metric cards - convert to 2-column grid */
+  .content-section > div[style*="grid"][style*="minmax(250px"],
+  .content-section > div[style*="grid"][style*="minmax(280px"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: var(--spacing-xs) !important;
+  }
+
+  /* Flex containers - force wrap, no horizontal scroll */
+  .content-section > div[style*="display: flex"],
+  .content-section > div[style*="display:flex"] {
+    flex-wrap: wrap !important;
+    gap: var(--spacing-sm) !important;
+    overflow-x: visible !important;
+  }
+
+  /* Code blocks - allow minimal horizontal scroll only for code */
+  .content-section pre,
+  .content-section code {
+    font-size: 0.75rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+  }
+
+  /* Status badges */
+  .status-badge {
+    font-size: 0.75rem;
+    padding: 4px var(--spacing-sm);
+  }
+
+  /* Metric cards in grids */
+  .content-section .metric-card,
+  .content-section div[style*="flex: '1 1 200px"],
+  .content-section div[style*="flex:'1 1 200px"] {
+    flex: 1 1 auto !important;
+    min-width: unset !important;
+    max-width: unset !important;
+    width: 100%;
+    padding: var(--spacing-sm) !important;
+    font-size: 0.85rem !important;
+  }
+
+  /* Platform/feature cards in flex containers */
+  .content-section div[style*="display: flex"] > div,
+  .content-section div[style*="display:flex"] > div {
+    flex: 1 1 auto !important;
+    min-width: 120px !important;
+    max-width: unset !important;
+    padding: var(--spacing-sm) !important;
+    font-size: 0.85rem !important;
+  }
+
+  /* Icons in mobile view */
+  .content-section svg[data-lucide],
+  .content-section svg[id*="lucide"] {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  /* Headings in cards */
+  .content-section h3,
+  .content-section h4 {
+    font-size: 0.9rem !important;
+  }
+
+  /* Paragraphs in cards */
+  .content-section div[style*="padding"] > p {
+    font-size: 0.8rem !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Make all fixed-width containers responsive */
+  .content-section div[style*="width:"],
+  .content-section div[style*="minWidth:"],
+  .content-section div[style*="maxWidth:"] {
+    max-width: 100% !important;
+    min-width: unset !important;
+  }
+
+  /* Remove all horizontal overflow */
+  .content-section,
+  .content-section > div,
+  .content-section > section {
+    overflow-x: visible !important;
+  }
+
+  /* Ensure proper spacing */
+  .content-section > div[style] {
+    margin-bottom: var(--spacing-md) !important;
+  }
+
+  /* If a section contains hidden-only content (architecture/chart/table), hide the entire card */
+  .content-section:has(.architecture-section),
+  .content-section:has(.diagram-section),
+  .content-section:has(.chart-grid-section),
+  .content-section:has(> table),
+  .content-section:has(.hide-mobile),
+  .content-section:has(.mobile-hide) {
+    display: none !important;
+  }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+  .project-detail-page {
+    padding: 80px var(--spacing-sm) var(--spacing-md);
+  }
+
+  .project-title {
+    font-size: clamp(1.5rem, 7vw, 2rem);
+  }
+
+  .project-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .content-section {
+    padding: var(--spacing-md) var(--spacing-sm);
+  }
+
+  .section-title {
+    font-size: 1.2rem;
+  }
+
+  .section-content p {
+    font-size: 0.85rem;
+  }
+
+  .feature-card {
+    padding: var(--spacing-sm);
+  }
+
+  .feature-title {
+    font-size: 0.9rem;
+  }
+
+  .feature-description {
+    font-size: 0.8rem;
+  }
+
+  .tech-item {
+    font-size: 0.8rem;
+    padding: var(--spacing-xs);
+  }
+
+  .highlights-list li {
+    padding: var(--spacing-sm);
+    font-size: 0.75rem;
+  }
+
+  /* Further reduce metric grid to single column on very small screens */
+  .content-section > div[style*="grid"][style*="minmax(250px"],
+  .content-section > div[style*="grid"][style*="minmax(280px"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Class-based mobile hiding for specific sections */
+@media (max-width: 768px) {
+  /* Add these classes to sections you want to hide on mobile */
+  .hide-mobile,
+  .mobile-hide,
+  .architecture-section,
+  .diagram-section,
+  .chart-grid-section {
+    display: none !important;
+  }
+  
+  /* Hide sections containing "Architecture" or "System Design" in title */
+  section:has(h2[class*="section-title"]:contains("Architecture")),
+  section:has(h2[class*="section-title"]:contains("System Design")),
+  section:has(.section-title:contains("Architecture")),
+  section:has(.section-title:contains("System Design")) {
+    display: none !important;
+  }
+
+  /* Compact badges/chips on mobile */
+  .project-badge,
+  .tech-badge,
+  .status-badge {
+    font-size: 0.8rem;
+    padding: 4px 10px;
+    line-height: 1.3;
   }
 }
 

@@ -124,6 +124,7 @@ const CallCentreAI = () => {
           {/* Architecture Diagram */}
           <div className="content-section">
             <h2 className="section-title">System Architecture</h2>
+            <div className="architecture-section">
             <ArchitectureDiagram
               columns={[
                 {
@@ -200,6 +201,7 @@ const CallCentreAI = () => {
                 }
               ]}
             />
+            </div>
           </div>
 
           {/* Live Analytics */}
@@ -235,7 +237,7 @@ const CallCentreAI = () => {
             </div>
 
             {/* Charts - 2x2 Grid for better sizing */}
-            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(400px,1fr))',gap:'var(--spacing-xl)',maxWidth:'1200px',margin:'0 auto'}}>
+            <div className="chart-grid-section" style={{display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(400px,1fr))',gap:'var(--spacing-xl)',maxWidth:'1200px',margin:'0 auto'}}>
               <div style={{background:'var(--bg-secondary)',borderRadius:'var(--radius-lg)',padding:'var(--spacing-xl)'}}>
                 <h3 style={{fontSize:'var(--font-size-md)',fontWeight:600,marginBottom:'var(--spacing-md)'}}>Weekly Call Volume</h3>
                 <AnimatedChart 

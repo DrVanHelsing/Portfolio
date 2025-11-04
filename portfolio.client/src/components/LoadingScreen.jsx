@@ -84,6 +84,15 @@ const LoadingScreen = ({ onEnter }) => {
             >
               Portfolio · Tredir Sewpaul
             </motion.p>
+
+            <motion.p
+              className="mobile-notice"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.4, duration: 0.6 }}
+            >
+              💡 Best viewed on desktop
+            </motion.p>
           </div>
         </motion.div>
       )}

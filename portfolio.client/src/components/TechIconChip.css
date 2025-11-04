@@ -8,4 +8,19 @@
   font-size: 0.75rem;
   font-weight: var(--font-weight-semibold);
   background: var(--bg-accent-light);
+  line-height: 1.4;
+  letter-spacing: .02em;
+  text-align: center;
+  justify-content: center;
+  /* Allow long technology names to wrap instead of creating very wide chips */
+  white-space: normal;
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  .tech-chip {
+    font-size: 0.72rem;
+    padding: 4px 8px;
+    line-height: 1.3;
+  }
 }

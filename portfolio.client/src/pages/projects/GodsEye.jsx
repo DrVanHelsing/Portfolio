@@ -61,6 +61,7 @@ const GodsEye = () => {
 
           <div className="content-section">
             <h2 className="section-title"><Activity size={24} />Computer Vision Pipeline</h2>
+            <div className="architecture-section">
             <ArchitectureDiagram
               columns={[
                 {
@@ -137,11 +138,12 @@ const GodsEye = () => {
                 }
               ]}
             />
+            </div>
           </div>
 
           <div className="content-section">
             <h2 className="section-title"><Gauge size={24} />Performance Metrics</h2>
-            <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(400px,1fr))',gap:'var(--spacing-lg)',maxWidth:'1200px',margin:'0 auto'}}>
+            <div className="chart-grid-section" style={{display:'grid',gridTemplateColumns:'repeat(auto-fit, minmax(400px,1fr))',gap:'var(--spacing-lg)',maxWidth:'1200px',margin:'0 auto'}}>
               <AnimatedChart
                 title="Detection Accuracy"
                 data={[
