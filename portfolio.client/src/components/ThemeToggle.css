@@ -1,0 +1,52 @@
+.theme-toggle {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-glass-light);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: var(--border-light);
+  border-radius: var(--radius-full);
+  padding: 4px;
+}
+
+.theme-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--apple-gray);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.theme-option:hover {
+  background: var(--bg-accent-light);
+  color: var(--apple-blue);
+  transform: scale(1.05);
+}
+
+.theme-option.active {
+  background: var(--apple-blue);
+  color: var(--apple-white);
+  box-shadow: var(--shadow-blue-sm);
+}
+
+.theme-option:focus-visible {
+  outline: 2px solid var(--apple-blue);
+  outline-offset: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .theme-option {
+    color: var(--apple-gray-light);
+  }
+  
+  .theme-option:hover {
+    background: rgba(10, 132, 255, 0.15);
+    color: var(--apple-blue);
+  }
+}

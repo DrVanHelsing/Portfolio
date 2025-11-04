@@ -1,0 +1,346 @@
+.architecture-diagram {
+  width: 100%;
+  background: linear-gradient(135deg, rgba(10, 132, 255, 0.05), rgba(88, 86, 214, 0.05));
+  border: 1px solid rgba(10, 132, 255, 0.1);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-2xl);
+  position: relative;
+}
+
+.architecture-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  gap: 0;
+  align-items: center;
+}
+
+/* Arrow connectors between columns */
+.architecture-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--spacing-lg);
+  align-self: stretch;
+}
+
+.architecture-arrow .arrow-icon {
+  width: 32px;
+  height: 32px;
+  color: var(--apple-blue);
+  opacity: 0.7;
+  animation: pulse-arrow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-arrow {
+  0%, 100% {
+    opacity: 0.7;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(4px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .architecture-grid {
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+  }
+}
+
+.architecture-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  min-width: 280px;
+}
+
+.architecture-column-title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--apple-blue);
+  text-align: center;
+  margin: 0 0 var(--spacing-md) 0;
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 2px solid rgba(10, 132, 255, 0.2);
+}
+
+.architecture-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.architecture-card {
+  background: var(--bg-glass-light);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.architecture-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--apple-blue), var(--apple-indigo));
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.architecture-card:hover::before {
+  opacity: 1;
+}
+
+.architecture-card:hover {
+  background: rgba(10, 132, 255, 0.08);
+  border-color: rgba(10, 132, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.architecture-card-content {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+}
+
+.architecture-card-icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background: rgba(10, 132, 255, 0.1);
+  transition: all var(--transition-normal);
+}
+
+.architecture-card:hover .architecture-card-icon {
+  background: rgba(10, 132, 255, 0.15);
+  transform: scale(1.05);
+}
+
+.architecture-card-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.architecture-card-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.architecture-card-title {
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  color: var(--apple-light-gray);
+  margin-bottom: 2px;
+}
+
+.architecture-card-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--apple-gray-light);
+  line-height: 1.4;
+}
+
+/* Feature cards below main diagram */
+.architecture-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-2xl);
+  padding-top: var(--spacing-2xl);
+  border-top: 1px solid rgba(10, 132, 255, 0.1);
+}
+
+.architecture-feature-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--spacing-xl);
+  background: linear-gradient(135deg, rgba(10, 132, 255, 0.05), rgba(88, 86, 214, 0.05));
+  border: 1px solid rgba(10, 132, 255, 0.1);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-normal);
+}
+
+.architecture-feature-card:hover {
+  background: linear-gradient(135deg, rgba(10, 132, 255, 0.08), rgba(88, 86, 214, 0.08));
+  border-color: rgba(10, 132, 255, 0.2);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.architecture-feature-icon {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(10, 132, 255, 0.1);
+  margin-bottom: var(--spacing-md);
+  transition: all var(--transition-normal);
+}
+
+.architecture-feature-card:hover .architecture-feature-icon {
+  background: rgba(10, 132, 255, 0.15);
+  transform: scale(1.1);
+}
+
+.architecture-feature-icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.architecture-feature-text {
+  flex: 1;
+}
+
+.architecture-feature-title {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--apple-light-gray);
+  margin-bottom: var(--spacing-xs);
+}
+
+.architecture-feature-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--apple-gray-light);
+  line-height: 1.5;
+}
+
+@media (max-width: 1024px) {
+  .architecture-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+  }
+
+  .architecture-arrow {
+    display: none;
+  }
+
+  .architecture-column {
+    min-width: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .architecture-diagram {
+    padding: var(--spacing-lg);
+  }
+
+  .architecture-card-content {
+    padding: var(--spacing-md);
+  }
+
+  .architecture-card-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .architecture-card-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .architecture-features {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Code/Formula blocks with theme-aware backgrounds */
+.code-block {
+  background: var(--bg-glass-light);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border: 1px solid rgba(10, 132, 255, 0.1);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Consolas', monospace;
+  font-size: var(--font-size-sm);
+  line-height: 1.8;
+}
+
+.code-block-dense {
+  background: var(--bg-glass-light);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border: 1px solid rgba(10, 132, 255, 0.1);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Consolas', monospace;
+  font-size: var(--font-size-sm);
+  line-height: 2;
+}
+
+.info-card {
+  background: var(--bg-glass-light);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border: 1px solid rgba(10, 132, 255, 0.1);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  transition: all var(--transition-normal);
+}
+
+.info-card:hover {
+  background: rgba(10, 132, 255, 0.08);
+  border-color: rgba(10, 132, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.info-card-sm {
+  background: var(--bg-glass-light);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border: 1px solid rgba(10, 132, 255, 0.1);
+  border-radius: var(--radius-sm);
+  padding: var(--spacing-sm);
+  transition: all var(--transition-normal);
+}
+
+.info-card-sm:hover {
+  background: rgba(10, 132, 255, 0.08);
+  border-color: rgba(10, 132, 255, 0.2);
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .architecture-diagram {
+    background: linear-gradient(135deg, rgba(10, 132, 255, 0.08), rgba(88, 86, 214, 0.08));
+  }
+
+  .architecture-card {
+    background: var(--bg-glass-light);
+  }
+
+  .architecture-card:hover {
+    background: rgba(10, 132, 255, 0.12);
+  }
+
+  .code-block,
+  .code-block-dense,
+  .info-card,
+  .info-card-sm {
+    background: var(--bg-glass-light);
+    border-color: rgba(10, 132, 255, 0.15);
+  }
+
+  .info-card:hover,
+  .info-card-sm:hover {
+    background: rgba(10, 132, 255, 0.12);
+    border-color: rgba(10, 132, 255, 0.25);
+  }
+}

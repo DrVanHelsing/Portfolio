@@ -1,0 +1,174 @@
+{
+  "name": "Tredir Sewpaul",
+  "headline": "Computer Science Graduate | Software Engineering Enthusiast | Passionate about AI, Machine Learning, and Scalable Systems",
+  "location": "Cape Town, Western Cape, South Africa",
+  "email": "tredirs@gmail.com",
+  "phone": "067-408-2819",
+  "links": {
+    "linkedin": "https://www.linkedin.com/in/tredir-sewpaul",
+    "github": "https://github.com/DrVanHelsing"
+  },
+  "about": {
+    "summary": "I am a Computer Science graduate from the University of the Western Cape, passionate about software engineering, artificial intelligence, and scalable systems. My academic journey and practical experiences have strengthened my technical, analytical, and collaborative skills. I thrive in environments that merge creativity, technology, and teamwork — always seeking to build solutions that make a difference."
+  },
+  "education": [
+    {
+      "institution": "University of the Western Cape",
+      "degree": "Bachelor of Science in Computer Science",
+      "duration": "2018 – 2024",
+      "details": {
+        "major": "Computer Science",
+        "minor": "Information Systems",
+        "elected": "Physics",
+        "awards": [
+          "Merit Award in Mathematics (MAM152) – 2021",
+          "Merit Award in Astrophysics (PHY217) – 2023"
+        ]
+      }
+    },
+    {
+      "institution": "Stanger Manor Secondary",
+      "degree": "Matric (Information Technology)",
+      "duration": "2012 – 2017"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Student",
+      "company": "Samsung Future Innovation Lab",
+      "location": "University of the Western Cape / Belhar",
+      "duration": "March 2025 – Present",
+      "responsibilities": [
+        "Developing cross-platform software using C# and .NET MAUI.",
+        "Applying Agile, Scrum, and Project Management concepts.",
+        "Improving communication and collaboration through team-based projects and presentations."
+      ]
+    },
+    {
+      "title": "Lead Physics Tutor",
+      "company": "University of the Western Cape / Belhar",
+      "duration": "February 2020 – 2024",
+      "responsibilities": [
+        "Tutored first-year Physics (PHY151) students and supervised 20–30 learners per lab session.",
+        "Planned, prepared, and delivered lab sessions and experimental activities.",
+        "Graded and provided feedback on reports and exams.",
+        "Collaborated with other tutors for lesson planning and academic support."
+      ]
+    },
+    {
+      "title": "Website Developer",
+      "company": "Meals on Time",
+      "location": "Kraaifontein",
+      "duration": "January 2022 – December 2024",
+      "responsibilities": [
+        "Developed and maintained the company’s informational website showcasing products and menus.",
+        "Created and managed product catalogues.",
+        "Handled social media updates and website functionality improvements."
+      ]
+    },
+    {
+      "title": "Website Administrator & Developer",
+      "company": "Cuban Connection",
+      "location": "Goodwood",
+      "duration": "November 2022 – December 2023",
+      "responsibilities": [
+        "Built and managed the company’s e-commerce website (www.cigarsemporium.com).",
+        "Handled IT-related tasks including hardware and software maintenance.",
+        "Created and maintained online catalogues for products.",
+        "Managed customer engagement, online sales, and social media interactions."
+      ]
+    },
+    {
+      "title": "Mathematics & English Tutor",
+      "company": "LM Tutoring",
+      "location": "Kraaifontein",
+      "duration": "June 2023 – December 2024",
+      "responsibilities": [
+        "Tutored Grade 6–11 students in Mathematics and English.",
+        "Developed personalized lesson plans and teaching materials.",
+        "Assessed student progress and adapted teaching methods to individual needs."
+      ]
+    },
+    {
+      "title": "Computer Science Volunteer",
+      "company": "UWC IT Society & Women in Tech",
+      "duration": "April 2024 – Present",
+      "responsibilities": [
+        "Visited high schools across Cape Town to promote STEM careers.",
+        "Delivered presentations on Computer Science and tertiary education.",
+        "Organized hands-on activities to engage students in technology learning."
+      ]
+    }
+  ],
+  "skills": {
+    "programming_languages": ["Python", "C#", "Java", "Matlab"],
+    "web_development": ["HTML", "CSS", "JavaScript", "PHP", "SQL"],
+    "frameworks_and_tools": [".NET MAUI", "Git", "GitHub", "Agile", "Scrum"],
+    "software": ["Microsoft Word", "Excel", "PowerPoint"],
+    "soft_skills": [
+      "Problem Solving",
+      "Analytical Thinking",
+      "Communication",
+      "Team Collaboration",
+      "Adaptability"
+    ]
+  },
+  "projects": [
+    {
+      "name": "Neural Networks Implementation",
+      "description": "Developed a machine learning project focused on implementing neural networks with forward propagation, cost function, and backpropagation. Explored optimization, classification, and hyperparameter tuning.",
+      "technologies": ["Python", "NumPy", "Machine Learning"],
+      "links": {
+        "github": "https://github.com/DrVanHelsing/MachineLearning"
+      }
+    },
+    {
+      "name": "Fitness Center Management System",
+      "description": "Designed and implemented a relational database in MySQL with a PHP, HTML, and JavaScript front-end. Built CRUD functionality and an interactive user interface for managing fitness center operations.",
+      "technologies": ["MySQL", "PHP", "HTML", "JavaScript", "SQL"],
+      "links": {
+        "report": "https://docs.google.com/document/d/1WEo1Ck0GH5kEc6svQBJdpA9RMet8qqQ_/edit?usp=drive_link",
+        "demo": "https://drive.google.com/file/d/184Qs5spXZD6FkkyxEl9HJgEIXkFTTL5E/view?usp=drive_link"
+      }
+    }
+  ],
+  "awards": [
+    "TelkomXHackathon Winner",
+    "Merit Award in Mathematics (2021)",
+    "Merit Award in Astrophysics (2023)"
+  ],
+  "activities": [
+    {
+      "name": "Standard Bank Hackathon (UniHack)",
+      "date": "June 2024",
+      "description": "Collaborated in a 5-member team to develop and prototype a transport industry solution focused on community-driven innovation."
+    },
+    {
+      "name": "SANReN Cyber Security Challenge (CSC)",
+      "date": "October 2024",
+      "description": "Participated in challenges involving Capture the Flag, Penetration Testing, Forensics, Cryptography, and Malware Analysis. Collaborated with teammates to defend systems against simulated cyberattacks."
+    }
+  ],
+  "personal_traits": [
+    "Curious and self-motivated learner",
+    "Strong interest in AI and emerging technologies",
+    "Passionate about education and mentoring",
+    "Enjoys team collaboration and innovation",
+    "Lifelong learner with continuous growth mindset"
+  ],
+  "awards_and_honors": [
+    {
+      "title": "TelkomXHackathon Winner",
+      "year": 2025,
+      "month" : "August"
+    },
+    {
+      "title": "Merit Award in Mathematics",
+      "year": 2021
+    },
+    {
+      "title": "Merit Award in Astrophysics",
+      "year": 2023
+    }
+  ]
+}

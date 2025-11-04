@@ -1,0 +1,17 @@
+/* Resume/Experience Page - Scrollable layout with transparent background */
+
+.resume-page {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* Remove any inherited styles that might interfere */
+.resume-page * {
+  box-sizing: border-box;
+}
+

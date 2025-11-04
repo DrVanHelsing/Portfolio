@@ -1,0 +1,86 @@
+.mermaid-diagram-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.mermaid-diagram-title {
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  color: var(--apple-blue);
+  margin: 0;
+}
+
+.mermaid-diagram-container {
+  background: linear-gradient(135deg, rgba(10,132,255,0.06), rgba(88,86,214,0.06));
+  border: 1px solid rgba(10, 132, 255, 0.1);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+/* Mermaid theme customization */
+.mermaid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Mermaid flowchart node styling */
+.mermaid .flowchart-v2 g.classGroup,
+.mermaid g.node {
+  stroke: rgba(10, 132, 255, 0.3) !important;
+  fill: rgba(10, 132, 255, 0.08) !important;
+}
+
+.mermaid g.node text {
+  fill: var(--apple-light-gray) !important;
+  font-size: 14px;
+}
+
+.mermaid .edgeLabel text {
+  fill: var(--apple-gray-light) !important;
+  font-size: 12px;
+}
+
+.mermaid g.edgePath path {
+  stroke: rgba(10, 132, 255, 0.5) !important;
+  stroke-width: 2px !important;
+}
+
+.mermaid text {
+  fill: var(--apple-light-gray) !important;
+}
+
+/* Subgraph styling */
+.mermaid g.cluster {
+  stroke: rgba(88, 86, 214, 0.3) !important;
+  fill: rgba(88, 86, 214, 0.05) !important;
+}
+
+.mermaid .cluster text {
+  fill: var(--apple-blue) !important;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .mermaid-diagram-container {
+    padding: var(--spacing-lg);
+    min-height: 250px;
+  }
+
+  .mermaid svg {
+    width: 100%;
+  }
+}

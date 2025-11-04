@@ -1,0 +1,43 @@
+rect, g{
+  transition: all 1s ease;
+}
+
+.button path,
+.button circle,
+[id*="header--"]{
+  transition: all .125s ease-out;
+}
+
+.button:hover{
+  cursor: pointer;
+}
+
+/*add hover effects to all buttons*/
+.button:hover path, .button:hover circle{
+  stroke:#fff;
+  stroke-width:2;
+  fill-opacity:0;
+}
+
+/*then override settings for question mark*/
+.button:hover circle + path{
+  stroke-width:1;
+  fill-opacity:1;
+}
+
+[id*="popup--"]{
+  transition: opacity .25s ease;
+}
+
+
+/*
+.hide{
+  transform: translateX(2000px) !important; 
+}
+
+*/
+/*
+.hide--header{
+  fill-opacity:0;
+}*/
+
