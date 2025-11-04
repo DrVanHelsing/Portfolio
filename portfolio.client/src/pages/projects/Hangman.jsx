@@ -20,7 +20,7 @@ const Hangman = () => {
         <div className="project-header">
           <span className="status-badge completed">Educational Project</span>
           <h1 className="project-title">Hangman</h1>
-          <p className="project-subtitle">Classic Hangman word-guessing game with customizable word lists, difficulty selection, and clean command-line interface</p>
+          <p className="project-subtitle">Classic Hangman word-guessing game built as a C# console application with customizable word lists, difficulty selection, and clean command-line interface</p>
           <div className="project-badges" style={{marginTop:'var(--spacing-sm)'}}>
             <span className="status-badge" style={{background:'var(--bg-accent-light)'}}>
               <Calendar size={16} style={{display:'inline',marginRight:4}} />
@@ -29,7 +29,8 @@ const Hangman = () => {
           </div>
           
           <div style={{marginTop:'var(--spacing-lg)',display:'flex',gap:'var(--spacing-sm)',flexWrap:'wrap'}}>
-            <TechIconChip technology="Python" />
+            <TechIconChip technology="C#" />
+            <TechIconChip technology=".NET" />
           </div>
 
           <div className="project-links">
@@ -44,7 +45,7 @@ const Hangman = () => {
           <div className="content-section">
             <h2 className="section-title"><GamepadIcon size={24} />Overview</h2>
             <div className="section-content">
-              <p>A clean implementation of the classic Hangman word-guessing game. Players guess letters to reveal a hidden word before running out of attempts. Features include customizable word lists, difficulty levels, and round-based gameplay with scorekeeping.</p>
+              <p>A clean implementation of the classic Hangman word-guessing game built as a C# console application. Players guess letters to reveal a hidden word before running out of attempts. Features include customizable word lists, difficulty levels, and round-based gameplay with scorekeeping. Demonstrates fundamental C# programming concepts including collections, control flow, and console I/O.</p>
             </div>
           </div>
 

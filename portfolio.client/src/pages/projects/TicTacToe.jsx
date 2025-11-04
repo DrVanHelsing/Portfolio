@@ -20,7 +20,7 @@ const TicTacToe = () => {
         <div className="project-header">
           <span className="status-badge completed">Educational Project</span>
           <h1 className="project-title">Tic Tac Toe</h1>
-          <p className="project-subtitle">Classic Tic Tac Toe (noughts and crosses) game with local two-player and optional computer opponent modes</p>
+          <p className="project-subtitle">Classic Tic Tac Toe (noughts and crosses) game built as a C# console application with local two-player and optional computer opponent modes</p>
           <div className="project-badges" style={{marginTop:'var(--spacing-sm)'}}>
             <span className="status-badge" style={{background:'var(--bg-accent-light)'}}>
               <Calendar size={16} style={{display:'inline',marginRight:4}} />
@@ -29,7 +29,8 @@ const TicTacToe = () => {
           </div>
           
           <div style={{marginTop:'var(--spacing-lg)',display:'flex',gap:'var(--spacing-sm)',flexWrap:'wrap'}}>
-            <TechIconChip technology="Python" />
+            <TechIconChip technology="C#" />
+            <TechIconChip technology=".NET" />
           </div>
 
           <div className="project-links">
@@ -44,7 +45,7 @@ const TicTacToe = () => {
           <div className="content-section">
             <h2 className="section-title"><Grid3x3 size={24} />Overview</h2>
             <div className="section-content">
-              <p>A straightforward implementation of the classic Tic Tac Toe game designed as an educational project to demonstrate basic game logic, board representation, and win condition checking. Features clean, readable code suitable for beginners learning programming concepts.</p>
+              <p>A straightforward implementation of the classic Tic Tac Toe game built as a C# console application. Designed as an educational project to demonstrate basic game logic, board representation, and win condition checking using C# language features. Features clean, readable code suitable for beginners learning C# programming concepts.</p>
             </div>
           </div>
 

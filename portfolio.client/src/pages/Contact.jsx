@@ -3,11 +3,9 @@ import { motion } from 'framer-motion';
 import AnimatedBackground from '../components/AnimatedBackground';
 import SEO from '../components/SEO';
 import { Mail, User, MessageSquare, Send, CheckCircle, AlertCircle, Phone, MapPin } from 'lucide-react';
-import useNoScroll from '../hooks/useNoScroll';
 import './Contact.css';
 
 const Contact = () => {
-  useNoScroll();
   const [formData, setFormData] = useState({
     name: '',
     email: '',

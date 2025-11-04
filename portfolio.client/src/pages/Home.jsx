@@ -3,11 +3,9 @@ import AnimatedBackground from '../components/AnimatedBackground';
 import SEO from '../components/SEO';
 import { Link } from 'react-router-dom';
 import { MapPin, Monitor, Globe, Brain, GraduationCap } from 'lucide-react';
-import useNoScroll from '../hooks/useNoScroll';
 import './Home.css';
 
-const Home = () => {
- useNoScroll();
+ const Home = () => {
  return (
  <div className="home-page">
  <AnimatedBackground variant="particles" />
