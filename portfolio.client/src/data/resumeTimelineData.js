@@ -21,6 +21,22 @@ export const resumeTimelineData = {
       status: 'completed'
     },
     {
+      id: 'samsung-fil-ce',
+      period: 'Mar 2025 - Dec 2025',
+      title: 'Samsung Future Innovation Lab – Continuing Education',
+      institution: 'University of the Western Cape / Samsung SA / Microsoft SA',
+      details: [
+        'Completed Introduction to Multi-Platform Software Development (CEM016)',
+        'Completed Digital Social Innovation for Impact (CES143)',
+        'Completed Multi-Platform Solutions Development (MPS)',
+        'Integrated .NET, C#, mobile/web app design, AI-assisted development (GitHub Copilot, ChatGPT)',
+        'Cloud integration, Design Thinking, SDG-aligned innovation',
+        'Delivered end-to-end digital solutions via industry-moderated projects'
+      ],
+      type: 'education',
+      status: 'completed'
+    },
+    {
       id: 'stanger-manor',
       period: '2012 - 2017',
       title: 'Matric (Information Technology)',
@@ -35,15 +51,17 @@ export const resumeTimelineData = {
   ],
   experience: [
     {
-      id: 'samsung-fil',
-      period: 'Mar 2025 - Present',
-      title: 'Samsung Future Innovation Lab',
-      company: 'University of the Western Cape / Belhar',
-      description: 'Multiplatform Software Development (C#, .NET MAUI)',
+      id: 'uwc-pharmacy-ai-intern',
+      period: 'Dec 2025 - Present',
+      title: 'AI Engineering Intern',
+      company: 'Department of Pharmacy, University of the Western Cape',
+      description: 'Technical lead for multi-team AI delivery combining ML, LLMs, vector search, and Azure cloud.',
       highlights: [
-        'Agile & Scrum methodologies',
-        'Project Management',
-        'Professional communication & presentation'
+        'Guiding architecture spanning supervised ML, LLM reasoning/summarisation, and vector search',
+        'Building document similarity models with evidence-linked outputs and human override paths',
+        'Implementing explainability, traceability, and governance-aligned controls',
+        'Running Azure-based experimentation, ingestion, and model versioning pipelines',
+        'Leading weekly technical reviews and cross-team delivery alignment'
       ],
       type: 'work',
       status: 'current'

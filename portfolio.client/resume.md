@@ -31,7 +31,13 @@ Merit Award in Astrophysics (PHY217) — 2023
 
 # 💼 Experience
 
-## Samsung Future Innovation Lab — University of the Western Cape / Belhar (March 2025 – Present)
+## AI Engineering Intern, Department of Pharmacy — University of the Western Cape (Dec 2025 – Present)
+
+Technical lead across teams, steering architecture for supervised ML, LLM reasoning/summarisation, vector search, and Azure cloud pipelines. Built document similarity models with evidence-linked outputs, human override paths, and explainability/traceability controls. Operate Azure-based experimentation, ingestion, and model versioning; lead weekly technical reviews and ensure responsible AI governance.
+
+## Samsung Future Innovation Lab — Continuing Education (University of the Western Cape / Samsung SA / Microsoft SA) (March 2025 – Dec 2025)
+
+Completed a university-certified Continuing Education programme: Introduction to Multi-Platform Software Development (CEM016), Digital Social Innovation for Impact (CES143), and Multi-Platform Solutions Development (MPS). Covered .NET, C#, mobile and web application design, AI-assisted development (GitHub Copilot, ChatGPT), and cloud integration with Design Thinking and SDG-aligned innovation. Delivered end-to-end digital solutions through industry-moderated projects.
 
 Focus on Multiplatform Software Development (C#, .NET MAUI)
 

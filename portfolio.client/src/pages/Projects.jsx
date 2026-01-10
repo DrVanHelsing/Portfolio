@@ -21,10 +21,10 @@ const Projects = () => {
     {
       title: "StudentLink",
       date: "Apr 2025 - Present",
-      description: "Comprehensive career readiness platform with AI CV analysis, ML-powered job recommendations, and cross-platform support. Features React web app, .NET MAUI mobile app, and ASP.NET Core API.",
+      description: "AI-powered career platform featuring Interview Studio with real-time coaching, personalized job recommendations, and comprehensive recruiter tools. Built for students, recruiters, and career centers.",
       technologies: [".NET 9", "React", "Azure OpenAI", ".NET MAUI", "ML.NET"],
       category: "Full-Stack",
-      impact: "Complete multi-platform career solution",
+      impact: "Complete career readiness ecosystem",
       color: "purple",
       link: "/projects/studentlink"
     },
@@ -39,12 +39,12 @@ const Projects = () => {
       link: "/projects/callcentre-ai"
     },
     {
-      title: "Neural Networks Lab",
+      title: "Machine Learning Basics",
       date: "2024",
-      description: "Comprehensive ML research repository with neural network implementations from scratch, image classification (MNIST, CIFAR-10), text classification, and unsupervised learning algorithms.",
-      technologies: ["Python", "NumPy", "TensorFlow", "PyTorch", "Scikit-learn"],
+      description: "Hands-on machine learning fundamentals: Linear Regression, Logistic Regression, and Neural Networks implemented from scratch in Jupyter notebooks with experiments on polynomial features, regularization, and backpropagation.",
+      technologies: ["Python", "NumPy", "Scikit-learn", "Jupyter", "Matplotlib"],
       category: "Machine Learning",
-      impact: "Deep understanding of ML fundamentals",
+      impact: "Educational implementation of ML fundamentals",
       color: "blue",
       link: "/projects/machine-learning",
       github: "https://github.com/DrVanHelsing/MachineLearning"

@@ -51,9 +51,8 @@ const About = () => {
  build solutions that make a difference.
  </p>
  <p>
- Currently, I'm working at the Samsung Future Innovation Lab at UWC, focusing on 
- multiplatform software development with C# and .NET MAUI, while gaining exposure to 
- Agile, Scrum, and project management methodologies.
+ I completed a university-certified Continuing Education programme with the Samsung Future Innovation Lab (Mar–Dec 2025), covering multi-platform solutions, .NET/C#, AI-assisted development (GitHub Copilot, ChatGPT), cloud integration, Design Thinking, and SDG-aligned innovation through industry-moderated projects.
+ Currently, I’m an AI Engineering Intern and Technical Lead, guiding architecture across supervised ML, LLM reasoning/summarisation, vector search, and Azure-based pipelines, while driving explainability, governance, and cross-team delivery.
  </p>
  </div>
  </motion.div>
@@ -74,6 +73,23 @@ const About = () => {
  <div className="education-highlights">
  <span className="highlight-badge">Merit Award - Mathematics (MAM152) 2021</span>
  <span className="highlight-badge">Merit Award - Astrophysics (PHY217) 2023</span>
+ </div>
+ </div>
+ <div className="education-card">
+ <div className="education-header">
+ <h3>Continuing Education - Multi-Platform Solutions</h3>
+ <span className="year">Mar - Dec 2025</span>
+ </div>
+ <p className="institution">Samsung Future Innovation Lab (University-certified)</p>
+ <p className="description">
+ University-certified programme covering multi-platform solutions, .NET/C#, AI-assisted development
+ with GitHub Copilot and ChatGPT, cloud integration, Design Thinking, and SDG-aligned innovation
+ through industry-moderated projects.
+ </p>
+ <div className="education-highlights">
+ <span className="highlight-badge">Courses: CEM016, CES143, MPS</span>
+ <span className="highlight-badge">AI-assisted delivery & cloud</span>
+ <span className="highlight-badge">Design Thinking & SDG focus</span>
  </div>
  </div>
  </motion.div> <motion.div className="values-section" variants={itemVariants}>

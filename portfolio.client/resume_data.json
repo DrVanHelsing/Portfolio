@@ -30,18 +30,39 @@
       "institution": "Stanger Manor Secondary",
       "degree": "Matric (Information Technology)",
       "duration": "2012 – 2017"
+    },
+    {
+      "institution": "University of the Western Cape / Samsung South Africa / Microsoft SA",
+      "degree": "Continuing Education – Samsung Future Innovation Lab",
+      "duration": "March 2025 – December 2025",
+      "details": {
+        "courses": [
+          "Introduction to Multi-Platform Software Development (CEM016)",
+          "Digital Social Innovation for Impact (CES143)",
+          "Multi-Platform Solutions Development (MPS)"
+        ],
+        "focus": [
+          ".NET and C#",
+          "Mobile and web application design",
+          "AI-assisted development (GitHub Copilot, ChatGPT)",
+          "Cloud integration",
+          "Design Thinking and SDG-aligned innovation"
+        ],
+        "outcome": "Delivered end-to-end digital solutions through industry-moderated projects"
+      }
     }
   ],
   "experience": [
     {
-      "title": "Student",
-      "company": "Samsung Future Innovation Lab",
-      "location": "University of the Western Cape / Belhar",
-      "duration": "March 2025 – Present",
+      "title": "AI Engineering Intern",
+      "company": "Department of Pharmacy, University of the Western Cape",
+      "duration": "December 2025 – Present",
       "responsibilities": [
-        "Developing cross-platform software using C# and .NET MAUI.",
-        "Applying Agile, Scrum, and Project Management concepts.",
-        "Improving communication and collaboration through team-based projects and presentations."
+        "Technical lead guiding architecture across supervised ML, LLM reasoning/summarisation, and vector search",
+        "Built document similarity models with evidence-linked outputs and human override paths",
+        "Implemented explainability, traceability, and governance-aligned controls",
+        "Ran Azure-based experimentation, ingestion, and model versioning environments",
+        "Led weekly technical reviews and aligned cross-team delivery"
       ]
     },
     {
