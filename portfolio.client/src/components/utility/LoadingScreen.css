@@ -114,6 +114,21 @@
   overflow: hidden;
 }
 
+/* ── Content split (editor + terminal) ─────────────────── */
+.ide-content-split {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.ide-editor-wrap {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 52%;
+  overflow: hidden;
+  border-right: 1px solid #252526;
+}
+
 /* ── Activity bar ──────────────────────────────────────── */
 .ide-activitybar {
   width: 46px;
@@ -255,6 +270,100 @@
   box-shadow: 0 4px 18px rgba(29, 185, 84, 0.45);
 }
 
+/* ── Terminal panel ────────────────────────────────────── */
+.ide-terminal-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #0d1117;
+}
+
+.ide-term-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #161b22;
+  height: 34px;
+  padding: 0 14px 0 0;
+  border-bottom: 1px solid #30363d;
+  flex-shrink: 0;
+}
+
+.ide-term-tabs {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+}
+
+.ide-term-tab {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  color: #8b949e;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+.ide-term-tab:hover { color: #c9d1d9; }
+.ide-term-tab-active {
+  color: #e6edf3;
+  border-bottom-color: #58a6ff;
+  background: rgba(88, 166, 255, 0.06);
+}
+
+.ide-term-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-right: 4px;
+}
+
+.ide-term-action {
+  color: #8b949e;
+  font-size: 14px;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.15s;
+  user-select: none;
+}
+.ide-term-action:hover { color: #e6edf3; }
+
+.ide-term-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 18px 22px 20px;
+  scrollbar-width: thin;
+  scrollbar-color: #30363d transparent;
+}
+.ide-term-body::-webkit-scrollbar { width: 6px; }
+.ide-term-body::-webkit-scrollbar-track { background: transparent; }
+.ide-term-body::-webkit-scrollbar-thumb { background: #30363d; border-radius: 3px; }
+
+.ide-term-lines {
+  display: flex;
+  flex-direction: column;
+}
+
+.ide-term-line {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.8;
+  white-space: pre;
+}
+.ide-term-blank  { height: 0.7em; }
+.ide-term-ctx    { color: #58a6ff; font-size: 12px; opacity: 0.7; }
+.ide-term-cmd    { color: #e6edf3; }
+.ide-term-sym    { color: #3fb950; font-weight: 700; }
+.ide-term-out    { color: #e6edf3; font-weight: 500; letter-spacing: 0.01em; }
+.ide-term-dim    { color: #8b949e; font-style: italic; }
+.ide-term-ok     { color: #3fb950; }
+.ide-term-prompt { display: flex; align-items: center; gap: 2px; color: #e6edf3; }
+
 /* ── Status bar ────────────────────────────────────────── */
 .ide-statusbar {
   display: flex;
@@ -294,6 +403,15 @@
 
   .ide-activitybar {
     display: none;
+  }
+
+  .ide-terminal-panel {
+    display: none;
+  }
+
+  .ide-editor-wrap {
+    flex: 1;
+    border-right: none;
   }
 
   .ide-titlebar {

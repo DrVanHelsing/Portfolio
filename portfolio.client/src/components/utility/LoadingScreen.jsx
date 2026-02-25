@@ -26,7 +26,7 @@ const CodeLine = ({ line, cursor = false, cursorVisible = true }) => {
 const greetings = [
   // ── JavaScript ──────────────────────────────────────────────────────────────
   {
-    lang: 'JavaScript', ext: 'js',
+    lang: 'JavaScript', ext: 'js', termCmd: 'node portfolio.js',
     pre: [
       { tokens: [{ c: 'ide-cmt', v: '// portfolio · tredir sewpaul' }] },
       null,
@@ -47,7 +47,7 @@ const greetings = [
   },
   // ── Python ──────────────────────────────────────────────────────────────────
   {
-    lang: 'Python', ext: 'py',
+    lang: 'Python', ext: 'py', termCmd: 'python3 portfolio.py',
     pre: [
       { tokens: [{ c: 'ide-cmt', v: '# portfolio · tredir sewpaul' }] },
       null,
@@ -68,7 +68,7 @@ const greetings = [
   },
   // ── C# ──────────────────────────────────────────────────────────────────────
   {
-    lang: 'C#', ext: 'cs',
+    lang: 'C#', ext: 'cs', termCmd: 'dotnet run',
     pre: [
       { tokens: [{ c: 'ide-cmt', v: '// portfolio · tredir sewpaul' }] },
       null,
@@ -89,7 +89,7 @@ const greetings = [
   },
   // ── Java ────────────────────────────────────────────────────────────────────
   {
-    lang: 'Java', ext: 'java',
+    lang: 'Java', ext: 'java', termCmd: 'java Portfolio',
     pre: [
       { tokens: [{ c: 'ide-cmt', v: '// portfolio · tredir sewpaul' }] },
       null,
@@ -110,7 +110,7 @@ const greetings = [
   },
   // ── Go ──────────────────────────────────────────────────────────────────────
   {
-    lang: 'Go', ext: 'go',
+    lang: 'Go', ext: 'go', termCmd: 'go run portfolio.go',
     pre: [
       { tokens: [{ c: 'ide-cmt', v: '// portfolio · tredir sewpaul' }] },
       null,
@@ -131,7 +131,7 @@ const greetings = [
   },
   // ── C++ ─────────────────────────────────────────────────────────────────────
   {
-    lang: 'C++', ext: 'cpp',
+    lang: 'C++', ext: 'cpp', termCmd: './portfolio',
     pre: [
       { tokens: [{ c: 'ide-cmt', v: '// portfolio · tredir sewpaul' }] },
       null,
@@ -152,7 +152,7 @@ const greetings = [
   },
   // ── PHP ─────────────────────────────────────────────────────────────────────
   {
-    lang: 'PHP', ext: 'php',
+    lang: 'PHP', ext: 'php', termCmd: 'php portfolio.php',
     pre: [
       { tokens: [{ c: 'ide-cmt', v: '// portfolio · tredir sewpaul' }] },
       null,
@@ -173,7 +173,7 @@ const greetings = [
   },
   // ── Rust ────────────────────────────────────────────────────────────────────
   {
-    lang: 'Rust', ext: 'rs',
+    lang: 'Rust', ext: 'rs', termCmd: 'cargo run',
     pre: [
       { tokens: [{ c: 'ide-cmt', v: '// portfolio · tredir sewpaul' }] },
       null,
@@ -194,15 +194,18 @@ const greetings = [
   },
 ];
 
+const TERM_LINE_COUNT = 12;
+
 const LoadingScreen = ({ onEnter }) => {
   const [isVisible, setIsVisible]             = useState(true);
   const [currentGreeting, setCurrentGreeting] = useState(0);
   const [cursorOn, setCursorOn]               = useState(true);
+  const [termVisible, setTermVisible]         = useState(0);
 
   useEffect(() => {
     const id = setInterval(() => {
       setCurrentGreeting(p => (p + 1) % greetings.length);
-    }, 3200);
+    }, 5000);
     return () => clearInterval(id);
   }, []);
 
@@ -211,6 +214,17 @@ const LoadingScreen = ({ onEnter }) => {
     return () => clearInterval(id);
   }, []);
 
+  useEffect(() => {
+    setTermVisible(0);
+    let count = 0;
+    const id = setInterval(() => {
+      count++;
+      setTermVisible(count);
+      if (count >= TERM_LINE_COUNT + 1) clearInterval(id);
+    }, 65);
+    return () => clearInterval(id);
+  }, [currentGreeting]);
+
   const handleEnter = () => {
     setIsVisible(false);
     setTimeout(() => { if (onEnter) onEnter(); }, 800);
@@ -218,6 +232,20 @@ const LoadingScreen = ({ onEnter }) => {
 
   const g        = greetings[currentGreeting];
   const filename = `portfolio.${g.ext}`;
+  const termLines = [
+    { t: 'ctx', v: 'tredir@portfolio  ~/portfolio  (glassomorphism)' },
+    { t: 'cmd', v: g.termCmd },
+    { t: 'blank' },
+    { t: 'out', v: '  Hello, World!' },
+    { t: 'blank' },
+    { t: 'dim', v: '  Loading profile...' },
+    { t: 'ok',  v: '  ✓  Tredir Sewpaul  ·  CS Graduate & AI Engineer' },
+    { t: 'ok',  v: '  ✓  Projects shipped: 8' },
+    { t: 'ok',  v: '  ✓  Stack: React · Python · TypeScript · ML' },
+    { t: 'ok',  v: '  ✓  Status: Open to opportunities' },
+    { t: 'blank' },
+    { t: 'ctx', v: 'tredir@portfolio  ~/portfolio  (glassomorphism)' },
+  ];
 
   return (
     <AnimatePresence>
@@ -303,45 +331,90 @@ const LoadingScreen = ({ onEnter }) => {
                 </div>
               </div>
 
-              {/* Gutter + code — whole block crossfades on language change */}
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentGreeting}
-                  className="ide-editor"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.18 }}
-                >
-                  <div className="ide-gutter">
-                    {[1,2,3,4,5,6,7,8,9,10,11,12,13].map(n => (
-                      <div key={n} className={`ide-linenum${n === 10 ? ' ide-linenum-active' : ''}`}>{n}</div>
-                    ))}
-                  </div>
+              {/* Content split: code editor left · terminal right */}
+              <div className="ide-content-split">
 
-                  <div className="ide-code">
-                    {/* Lines 1–9: language-specific pre-block */}
-                    {g.pre.map((line, i) => (
-                      <CodeLine key={i} line={line} />
-                    ))}
+                {/* Left: code editor */}
+                <div className="ide-editor-wrap">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={currentGreeting}
+                      className="ide-editor"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.18 }}
+                    >
+                      <div className="ide-gutter">
+                        {[1,2,3,4,5,6,7,8,9,10,11,12,13].map(n => (
+                          <div key={n} className={`ide-linenum${n === 10 ? ' ide-linenum-active' : ''}`}>{n}</div>
+                        ))}
+                      </div>
+                      <div className="ide-code">
+                        {g.pre.map((line, i) => (
+                          <CodeLine key={i} line={line} />
+                        ))}
+                        <div className="ide-line ide-line-ind ide-line-active">
+                          <Tokens tokens={g.greeting} />
+                        </div>
+                        {g.post.map((line, i) => (
+                          <CodeLine
+                            key={i}
+                            line={line}
+                            cursor={i === g.post.length - 1}
+                            cursorVisible={cursorOn}
+                          />
+                        ))}
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
 
-                    {/* Line 10: active highlighted greeting */}
-                    <div className="ide-line ide-line-ind ide-line-active">
-                      <Tokens tokens={g.greeting} />
+                {/* Right: terminal panel */}
+                <div className="ide-terminal-panel">
+                  <div className="ide-term-header">
+                    <div className="ide-term-tabs">
+                      <span className="ide-term-tab ide-term-tab-active">TERMINAL</span>
+                      <span className="ide-term-tab">OUTPUT</span>
                     </div>
-
-                    {/* Lines 11–13: language-specific post-block */}
-                    {g.post.map((line, i) => (
-                      <CodeLine
-                        key={i}
-                        line={line}
-                        cursor={i === g.post.length - 1}
-                        cursorVisible={cursorOn}
-                      />
-                    ))}
+                    <div className="ide-term-actions">
+                      <span className="ide-term-action" title="New Terminal">+</span>
+                      <span className="ide-term-action" title="Split Terminal">⌗</span>
+                      <span className="ide-term-action" title="Kill Terminal">×</span>
+                    </div>
                   </div>
-                </motion.div>
-              </AnimatePresence>
+                  <div className="ide-term-body">
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={currentGreeting}
+                        className="ide-term-lines"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.15 }}
+                      >
+                        {termLines.slice(0, termVisible).map((line, i) =>
+                          line.t === 'blank'
+                            ? <div key={i} className="ide-term-blank" />
+                            : <div key={i} className={`ide-term-line ide-term-${line.t}`}>
+                                {line.t === 'cmd'
+                                  ? <><span className="ide-term-sym">$</span>{' '}{line.v}</>
+                                  : line.v
+                                }
+                              </div>
+                        )}
+                        {termVisible > TERM_LINE_COUNT && (
+                          <div className="ide-term-line ide-term-prompt">
+                            <span className="ide-term-sym">$</span>
+                            <span className={`ide-cursor${cursorOn ? '' : ' ide-cursor-off'}`}>&nbsp;█</span>
+                          </div>
+                        )}
+                      </motion.div>
+                    </AnimatePresence>
+                  </div>
+                </div>
+
+              </div>
             </div>
 
             {/* ── Run button ───────────────────────────── */}
