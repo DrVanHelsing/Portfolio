@@ -3,6 +3,7 @@
   padding: 90px var(--spacing-xl) var(--spacing-xl);
   color: var(--apple-dark-gray);
   background: transparent;
+  overflow-x: hidden;
 }
 
 .contact-container {
@@ -316,6 +317,21 @@ content: '';
 @media (max-width: 768px) {
   .contact-page {
     padding: 110px var(--spacing-md) var(--spacing-xl);
+  }
+
+  .memoji-title-accent {
+    position: static;
+    display: block;
+    margin: 0 auto var(--spacing-md);
+    transform: none;
+    width: 90px;
+    height: 90px;
+  }
+
+  .contact-title-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .contact-info,

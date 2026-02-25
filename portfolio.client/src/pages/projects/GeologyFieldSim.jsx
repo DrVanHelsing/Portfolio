@@ -77,12 +77,14 @@ const GeologyFieldSim = () => {
             </span>
             <span className="status-badge" style={{ background: 'var(--bg-accent-light)' }}>
               <Calendar size={16} style={{ display: 'inline', marginRight: 4 }} />
-              2025 - Present
+              Feb 2025 - Present
             </span>
           </div>
           <h1 className="project-title">Structural Geology Field Mapping Simulator</h1>
           <p className="project-subtitle">
-            A browser-based 3D interactive geology field simulator for education, training, and research &mdash; featuring procedurally generated terrain, 6 stratigraphic layers, and virtual field instruments
+            A browser-based 3D interactive geology field simulator for education, training, and research &mdash; featuring procedurally generated terrain, 6 stratigraphic layers, and virtual field instruments.
+            <br /><br />
+            <span style={{ color: 'var(--apple-indigo)', fontWeight: 600 }}>Research Collaboration</span> &mdash; Working with a PhD student as the software developer; co-authoring a paper on the platform.
           </p>
 
           <div className="project-badges">

@@ -4,6 +4,7 @@
   padding: 90px var(--spacing-2xl) var(--spacing-2xl);
   color: var(--apple-dark-gray);
   background: transparent;
+  overflow-x: hidden;
 }
 
 .project-detail-container {
@@ -242,6 +243,13 @@
 }
 
 /* ── 3-column chart grid ─────────────────────────────────── */
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-lg);
+  width: 100%;
+}
+
 .chart-grid-3x3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -280,6 +288,9 @@
   .chart-grid-3x3 {
     grid-template-columns: repeat(2, 1fr);
   }
+  .charts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
   .chart-card-full {
     grid-column: 1 / -1;
     max-width: 100%;
@@ -288,6 +299,9 @@
 
 @media (max-width: 560px) {
   .chart-grid-3x3 {
+    grid-template-columns: 1fr;
+  }
+  .charts-grid {
     grid-template-columns: 1fr;
   }
 }

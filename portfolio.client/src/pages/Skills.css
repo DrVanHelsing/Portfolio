@@ -3,6 +3,7 @@
   padding: 90px var(--spacing-xl) var(--spacing-xl);
   color: var(--apple-dark-gray);
   background: transparent;
+  overflow-x: hidden;
 }
 
 .skills-container {
@@ -215,6 +216,21 @@ animation: shimmer 2.5s infinite;
 @media (max-width: 768px) {
   .skills-page {
     padding: 100px var(--spacing-md) var(--spacing-xl);
+  }
+
+  .memoji-page-float {
+    position: static;
+    display: block;
+    margin: 0 auto var(--spacing-md);
+    transform: none;
+    width: 90px;
+    height: 90px;
+  }
+
+  .page-title-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .skill-category,

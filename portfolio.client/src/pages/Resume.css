@@ -29,3 +29,13 @@
   z-index: 5;
 }
 
+@media (max-width: 768px) {
+  .memoji-resume-float {
+    position: static;
+    display: block;
+    margin: 80px auto var(--spacing-md);
+    width: 90px;
+    height: 90px;
+  }
+}
+

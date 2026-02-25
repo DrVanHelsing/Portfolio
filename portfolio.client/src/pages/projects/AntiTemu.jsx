@@ -67,7 +67,7 @@ const AntiTemu = () => {
             </span>
             <span className="status-badge" style={{ background: 'var(--bg-accent-light)' }}>
               <Calendar size={16} style={{ display: 'inline', marginRight: 4 }} />
-              2025
+              Jan 2025
             </span>
           </div>
           <h1 className="project-title">Hide Distracting Items</h1>

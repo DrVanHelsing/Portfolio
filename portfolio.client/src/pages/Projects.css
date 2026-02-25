@@ -3,6 +3,7 @@
   padding: 100px var(--spacing-xl) var(--spacing-2xl);
   color: var(--apple-dark-gray);
   background: transparent;
+  overflow-x: hidden;
 }
 
 .projects-container {
@@ -291,6 +292,21 @@
 @media (max-width: 768px) {
   .projects-page {
     padding: 100px var(--spacing-md) var(--spacing-xl);
+  }
+
+  .memoji-page-float {
+    position: static;
+    display: block;
+    margin: 0 auto var(--spacing-md);
+    transform: none;
+    width: 90px;
+    height: 90px;
+  }
+
+  .page-title-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .projects-grid {

@@ -64,7 +64,7 @@ const PhysicsLab = () => {
             </span>
             <span className="status-badge" style={{ background: 'var(--bg-accent-light)' }}>
               <Calendar size={16} style={{ display: 'inline', marginRight: 4 }} />
-              2025 - Present
+              Feb 2025 - Present
             </span>
           </div>
           <h1 className="project-title">Physics Lab IDE</h1>

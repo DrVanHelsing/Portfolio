@@ -253,9 +253,9 @@ export const resumeTimelineData = {
     },
     {
       id: 'postgrad-portal',
-      period: '2025 - Present',
+      period: 'Feb 2025 - Present',
       title: 'UWC PostGrad Portal',
-      description: 'Comprehensive academic administration portal with role-based access and dynamic form builder',
+      description: 'Comprehensive academic administration portal with role-based access and dynamic form builder. Research collaboration with a PhD student — co-authoring a paper on the system.',
       technologies: ['React 19', 'Firebase', 'Cloud Firestore', 'EmailJS'],
       highlights: [
         '6 user roles with granular permissions',
@@ -269,9 +269,9 @@ export const resumeTimelineData = {
     },
     {
       id: 'geology-sim',
-      period: '2025 - Present',
+      period: 'Feb 2025 - Present',
       title: 'Geology Field Mapping Sim',
-      description: '3D structural geology field mapping simulator with procedural terrain and field instruments',
+      description: '3D structural geology field mapping simulator with procedural terrain and field instruments. Research collaboration with a PhD student — co-authoring a paper on the platform.',
       technologies: ['Three.js', 'React', 'WebGL', 'Simplex Noise'],
       highlights: [
         '2 km² procedural terrain with 148K vertices',
@@ -285,7 +285,7 @@ export const resumeTimelineData = {
     },
     {
       id: 'physics-lab',
-      period: '2025 - Present',
+      period: 'Feb 2025 - Present',
       title: 'Physics Lab IDE',
       description: 'Visual block-based programming environment for physics simulations',
       technologies: ['React', 'Blockly', 'GlowScript', 'VPython'],
@@ -301,7 +301,7 @@ export const resumeTimelineData = {
     },
     {
       id: 'anti-temu',
-      period: '2025',
+      period: 'Jan 2025',
       title: 'Hide Distracting Items',
       description: 'Privacy-preserving Chrome extension to permanently hide ads and distracting elements',
       technologies: ['JavaScript', 'Chrome Extension', 'Manifest V3'],

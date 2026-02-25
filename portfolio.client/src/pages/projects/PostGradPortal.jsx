@@ -80,12 +80,14 @@ const PostGradPortal = () => {
             </span>
             <span className="status-badge" style={{ background: 'var(--bg-accent-light)' }}>
               <Calendar size={16} style={{ display: 'inline', marginRight: 4 }} />
-              2025 - Present
+              Feb 2025 - Present
             </span>
           </div>
           <h1 className="project-title">UWC PostGrad Portal</h1>
           <p className="project-subtitle">
-            A comprehensive role-based postgraduate request management system for the University of the Western Cape with 6 user roles, dynamic forms, and full workflow lifecycle
+            A comprehensive role-based postgraduate request management system for the University of the Western Cape with 6 user roles, dynamic forms, and full workflow lifecycle.
+            <br /><br />
+            <span style={{ color: 'var(--apple-indigo)', fontWeight: 600 }}>Research Collaboration</span> — Working with a PhD student as the software developer; co-authoring a paper on the system.
           </p>
 
           <div className="project-badges">

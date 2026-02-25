@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import AnimatedBackground from '../components/sections/AnimatedBackground';
 import SEO from '../components/utility/SEO';
-import { Zap, Users, BookOpen, Lightbulb } from 'lucide-react';
+import { Zap, Users, BookOpen, Lightbulb, Award } from 'lucide-react';
 import './About.css';
 
 const About = () => {
@@ -93,6 +93,38 @@ const About = () => {
  <span className="highlight-badge">Courses: CEM016, CES143, MPS</span>
  <span className="highlight-badge">AI-assisted delivery & cloud</span>
  <span className="highlight-badge">Design Thinking & SDG focus</span>
+ <span className="highlight-badge" style={{ background: 'rgba(255, 204, 0, 0.12)', color: '#d4a017', borderColor: 'rgba(255, 204, 0, 0.3)' }}>🏅 Distinction</span>
+ <span className="highlight-badge" style={{ background: 'rgba(192, 192, 192, 0.12)', color: '#6b7280', borderColor: 'rgba(192, 192, 192, 0.3)' }}>🥈 2nd Place in Course</span>
+ </div>
+ </div>
+ </motion.div>
+
+         <motion.div className="education-section" variants={itemVariants} style={{ marginTop: 0 }}>
+ <h2><Award size={24} style={{ display: 'inline', verticalAlign: 'middle', marginRight: 8 }} />Awards & Achievements</h2>
+ <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'var(--spacing-md)' }}>
+ <div className="education-card" style={{ borderLeftColor: '#FFD700' }}>
+ <div className="education-header">
+ <h3 style={{ fontSize: 'var(--font-size-lg)' }}>🏅 Merit Award — Mathematics</h3>
+ <span className="year">2021</span>
+ </div>
+ <p className="institution">MAM152 · University of the Western Cape</p>
+ <p className="description" style={{ marginBottom: 0 }}>Awarded for outstanding academic performance in Mathematics.</p>
+ </div>
+ <div className="education-card" style={{ borderLeftColor: '#FFD700' }}>
+ <div className="education-header">
+ <h3 style={{ fontSize: 'var(--font-size-lg)' }}>🏅 Merit Award — Astrophysics</h3>
+ <span className="year">2023</span>
+ </div>
+ <p className="institution">PHY217 · University of the Western Cape</p>
+ <p className="description" style={{ marginBottom: 0 }}>Awarded for outstanding academic performance in Astrophysics.</p>
+ </div>
+ <div className="education-card" style={{ borderLeftColor: '#AF52DE' }}>
+ <div className="education-header">
+ <h3 style={{ fontSize: 'var(--font-size-lg)' }}>🎓 Distinction — Multiplatform Software Dev</h3>
+ <span className="year">2025</span>
+ </div>
+ <p className="institution">Samsung Future Innovation Lab</p>
+ <p className="description" style={{ marginBottom: 0 }}>Achieved a Distinction in the Multiplatform Software Development course and placed 2nd overall in the cohort.</p>
  </div>
  </div>
  </motion.div> <motion.div className="values-section" variants={itemVariants}>

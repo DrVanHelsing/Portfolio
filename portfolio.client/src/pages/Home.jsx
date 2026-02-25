@@ -82,8 +82,8 @@ import './Home.css';
  </div>
  <div className="stat-divider"></div>
  <div className="stat-item">
- <div className="stat-value">2</div>
- <div className="stat-label">Merit Awards</div>
+ <div className="stat-value">3</div>
+ <div className="stat-label">Academic Awards</div>
  </div>
  </motion.div>
  </motion.div>

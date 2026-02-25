@@ -377,6 +377,19 @@
     padding: 62px var(--spacing-md) 0;
   }
 
+  .home-page {
+    height: auto;
+    max-height: none;
+    min-height: 100dvh;
+    overflow: visible;
+  }
+
+  .home-content {
+    height: auto;
+    overflow: visible;
+    padding-bottom: var(--spacing-xl);
+  }
+
   .hero-section {
     margin-bottom: var(--spacing-md);
   }
