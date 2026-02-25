@@ -200,9 +200,41 @@ export default function TimelineModern() {
             </div>
           </div>
           <div className="skill-category">
+            <h4>Frameworks & Libraries</h4>
+            <div className="skill-tags">
+              {resumeTimelineData.skills.frameworks.map((skill, i) => (
+                <span key={i} className="skill-tag">{skill}</span>
+              ))}
+            </div>
+          </div>
+          <div className="skill-category">
+            <h4>Cloud & Azure</h4>
+            <div className="skill-tags">
+              {resumeTimelineData.skills.cloud.map((skill, i) => (
+                <span key={i} className="skill-tag">{skill}</span>
+              ))}
+            </div>
+          </div>
+          <div className="skill-category">
+            <h4>Databases</h4>
+            <div className="skill-tags">
+              {resumeTimelineData.skills.databases.map((skill, i) => (
+                <span key={i} className="skill-tag">{skill}</span>
+              ))}
+            </div>
+          </div>
+          <div className="skill-category">
             <h4>Tools & Technologies</h4>
             <div className="skill-tags">
               {resumeTimelineData.skills.tools.map((skill, i) => (
+                <span key={i} className="skill-tag">{skill}</span>
+              ))}
+            </div>
+          </div>
+          <div className="skill-category">
+            <h4>Soft Skills</h4>
+            <div className="skill-tags">
+              {resumeTimelineData.skills.soft.map((skill, i) => (
                 <span key={i} className="skill-tag">{skill}</span>
               ))}
             </div>

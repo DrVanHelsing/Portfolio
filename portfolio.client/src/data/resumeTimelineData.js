@@ -353,7 +353,10 @@ export const resumeTimelineData = {
   ],
   skills: {
     programming: ['Python', 'Java', 'Matlab', 'C#', '.NET MAUI'],
-    tools: ['Git', 'MySQL', 'Microsoft Office Suite'],
+    frameworks: ['React', 'ASP.NET Core', '.NET 9', 'ML.NET', 'Three.js', 'TensorFlow', 'PyTorch'],
+    cloud: ['Azure OpenAI', 'Azure App Service', 'Application Insights', 'Azure Cognitive Services', 'SignalR', 'Azure SQL'],
+    databases: ['MySQL', 'Firebase', 'Cloud Firestore', 'Azure SQL', 'MongoDB'],
+    tools: ['Git', 'GitHub', 'VS Code', 'Visual Studio', 'MySQL Workbench', 'Postman'],
     soft: ['Problem-solving', 'Team Collaboration', 'Communication', 'Analytical Thinking']
   }
 };
