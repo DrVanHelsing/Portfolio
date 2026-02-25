@@ -4,35 +4,200 @@ import { Play, GitBranch, Check } from 'lucide-react';
 import AnimatedBackground from '../sections/AnimatedBackground';
 import './LoadingScreen.css';
 
-// Syntax-highlight one greeting line
-const GreetingCode = ({ text }) => {
-  const firstQ = text.indexOf('"');
-  const lastQ  = text.lastIndexOf('"') + 1;
-  if (firstQ === -1) return <span className="ide-txt">{text}</span>;
+// Render an array of {c, v} token objects as spans
+const Tokens = ({ tokens }) => (
+  <>{tokens.map((t, i) => <span key={i} className={t.c}>{t.v}</span>)}</>
+);
+
+// Render a single code line from data — null = blank line
+const CodeLine = ({ line, cursor = false, cursorVisible = true }) => {
+  if (!line) return <div className="ide-line ide-line-blank" />;
   return (
-    <>
-      <span className="ide-fn">{text.slice(0, firstQ)}</span>
-      <span className="ide-str">{text.slice(firstQ, lastQ)}</span>
-      <span className="ide-punc">{text.slice(lastQ)}</span>
-    </>
+    <div className={`ide-line${line.ind ? ' ide-line-ind' : ''}`}>
+      <Tokens tokens={line.tokens} />
+      {cursor && (
+        <span className={`ide-cursor${cursorVisible ? '' : ' ide-cursor-off'}`}>▌</span>
+      )}
+    </div>
   );
 };
+
+// Per-language code blocks: 9 pre-lines, greeting tokens (line 10), 3 post-lines
+const greetings = [
+  // ── JavaScript ──────────────────────────────────────────────────────────────
+  {
+    lang: 'JavaScript', ext: 'js',
+    pre: [
+      { tokens: [{ c: 'ide-cmt', v: '// portfolio · tredir sewpaul' }] },
+      null,
+      { tokens: [{ c: 'ide-kw', v: 'const ' }, { c: 'ide-var', v: 'developer' }, { c: 'ide-punc', v: ' = {' }] },
+      { ind: true, tokens: [{ c: 'ide-prop', v: 'name' }, { c: 'ide-punc', v: ': ' }, { c: 'ide-str', v: '"Tredir Sewpaul"' }, { c: 'ide-punc', v: ',' }] },
+      { ind: true, tokens: [{ c: 'ide-prop', v: 'role' }, { c: 'ide-punc', v: ': ' }, { c: 'ide-str', v: '"CS Graduate & AI Engineer"' }, { c: 'ide-punc', v: ',' }] },
+      { ind: true, tokens: [{ c: 'ide-prop', v: 'passion' }, { c: 'ide-punc', v: ': [' }, { c: 'ide-str', v: '"ML"' }, { c: 'ide-punc', v: ', ' }, { c: 'ide-str', v: '"Web"' }, { c: 'ide-punc', v: '],' }] },
+      { tokens: [{ c: 'ide-punc', v: '};' }] },
+      null,
+      { tokens: [{ c: 'ide-kw', v: 'function ' }, { c: 'ide-fn', v: 'greet' }, { c: 'ide-punc', v: '() {' }] },
+    ],
+    greeting: [{ c: 'ide-fn', v: 'console' }, { c: 'ide-punc', v: '.' }, { c: 'ide-fn', v: 'log' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Hello World!"' }, { c: 'ide-punc', v: ');' }],
+    post: [
+      { tokens: [{ c: 'ide-punc', v: '}' }] },
+      null,
+      { tokens: [{ c: 'ide-fn', v: 'greet' }, { c: 'ide-punc', v: '();' }] },
+    ],
+  },
+  // ── Python ──────────────────────────────────────────────────────────────────
+  {
+    lang: 'Python', ext: 'py',
+    pre: [
+      { tokens: [{ c: 'ide-cmt', v: '# portfolio · tredir sewpaul' }] },
+      null,
+      { tokens: [{ c: 'ide-var', v: 'developer' }, { c: 'ide-punc', v: ' = {' }] },
+      { ind: true, tokens: [{ c: 'ide-str', v: '"name"' }, { c: 'ide-punc', v: ': ' }, { c: 'ide-str', v: '"Tredir Sewpaul"' }, { c: 'ide-punc', v: ',' }] },
+      { ind: true, tokens: [{ c: 'ide-str', v: '"role"' }, { c: 'ide-punc', v: ': ' }, { c: 'ide-str', v: '"CS Graduate & AI Engineer"' }, { c: 'ide-punc', v: ',' }] },
+      { ind: true, tokens: [{ c: 'ide-str', v: '"passion"' }, { c: 'ide-punc', v: ': [' }, { c: 'ide-str', v: '"ML"' }, { c: 'ide-punc', v: ', ' }, { c: 'ide-str', v: '"Web"' }, { c: 'ide-punc', v: '],' }] },
+      { tokens: [{ c: 'ide-punc', v: '}' }] },
+      null,
+      { tokens: [{ c: 'ide-kw', v: 'def ' }, { c: 'ide-fn', v: 'greet' }, { c: 'ide-punc', v: '():' }] },
+    ],
+    greeting: [{ c: 'ide-fn', v: 'print' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Hello World!"' }, { c: 'ide-punc', v: ')' }],
+    post: [
+      null,
+      null,
+      { tokens: [{ c: 'ide-fn', v: 'greet' }, { c: 'ide-punc', v: '()' }] },
+    ],
+  },
+  // ── C# ──────────────────────────────────────────────────────────────────────
+  {
+    lang: 'C#', ext: 'cs',
+    pre: [
+      { tokens: [{ c: 'ide-cmt', v: '// portfolio · tredir sewpaul' }] },
+      null,
+      { tokens: [{ c: 'ide-kw', v: 'var ' }, { c: 'ide-var', v: 'developer' }, { c: 'ide-punc', v: ' = new {' }] },
+      { ind: true, tokens: [{ c: 'ide-prop', v: 'Name' }, { c: 'ide-punc', v: ' = ' }, { c: 'ide-str', v: '"Tredir Sewpaul"' }, { c: 'ide-punc', v: ',' }] },
+      { ind: true, tokens: [{ c: 'ide-prop', v: 'Role' }, { c: 'ide-punc', v: ' = ' }, { c: 'ide-str', v: '"CS Graduate & AI Engineer"' }, { c: 'ide-punc', v: ',' }] },
+      { ind: true, tokens: [{ c: 'ide-prop', v: 'Passion' }, { c: 'ide-punc', v: ' = new[] {' }, { c: 'ide-str', v: '"ML"' }, { c: 'ide-punc', v: ', ' }, { c: 'ide-str', v: '"Web"' }, { c: 'ide-punc', v: '},' }] },
+      { tokens: [{ c: 'ide-punc', v: '};' }] },
+      null,
+      { tokens: [{ c: 'ide-kw', v: 'void ' }, { c: 'ide-fn', v: 'Greet' }, { c: 'ide-punc', v: '() {' }] },
+    ],
+    greeting: [{ c: 'ide-prop', v: 'Console' }, { c: 'ide-punc', v: '.' }, { c: 'ide-fn', v: 'WriteLine' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Hello World!"' }, { c: 'ide-punc', v: ');' }],
+    post: [
+      { tokens: [{ c: 'ide-punc', v: '}' }] },
+      null,
+      { tokens: [{ c: 'ide-fn', v: 'Greet' }, { c: 'ide-punc', v: '();' }] },
+    ],
+  },
+  // ── Java ────────────────────────────────────────────────────────────────────
+  {
+    lang: 'Java', ext: 'java',
+    pre: [
+      { tokens: [{ c: 'ide-cmt', v: '// portfolio · tredir sewpaul' }] },
+      null,
+      { tokens: [{ c: 'ide-kw', v: 'var ' }, { c: 'ide-var', v: 'dev' }, { c: 'ide-punc', v: ' = Map.of(' }] },
+      { ind: true, tokens: [{ c: 'ide-str', v: '"name"' }, { c: 'ide-punc', v: ', ' }, { c: 'ide-str', v: '"Tredir Sewpaul"' }, { c: 'ide-punc', v: ',' }] },
+      { ind: true, tokens: [{ c: 'ide-str', v: '"role"' }, { c: 'ide-punc', v: ', ' }, { c: 'ide-str', v: '"CS Graduate & AI Engineer"' }, { c: 'ide-punc', v: ',' }] },
+      { ind: true, tokens: [{ c: 'ide-str', v: '"passion"' }, { c: 'ide-punc', v: ', List.of(' }, { c: 'ide-str', v: '"ML"' }, { c: 'ide-punc', v: ', ' }, { c: 'ide-str', v: '"Web"' }, { c: 'ide-punc', v: ')' }] },
+      { tokens: [{ c: 'ide-punc', v: ');' }] },
+      null,
+      { tokens: [{ c: 'ide-kw', v: 'void ' }, { c: 'ide-fn', v: 'greet' }, { c: 'ide-punc', v: '() {' }] },
+    ],
+    greeting: [{ c: 'ide-prop', v: 'System' }, { c: 'ide-punc', v: '.out.' }, { c: 'ide-fn', v: 'println' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Hello World!"' }, { c: 'ide-punc', v: ');' }],
+    post: [
+      { tokens: [{ c: 'ide-punc', v: '}' }] },
+      null,
+      { tokens: [{ c: 'ide-fn', v: 'greet' }, { c: 'ide-punc', v: '();' }] },
+    ],
+  },
+  // ── Go ──────────────────────────────────────────────────────────────────────
+  {
+    lang: 'Go', ext: 'go',
+    pre: [
+      { tokens: [{ c: 'ide-cmt', v: '// portfolio · tredir sewpaul' }] },
+      null,
+      { tokens: [{ c: 'ide-var', v: 'developer' }, { c: 'ide-punc', v: ' := map[' }, { c: 'ide-kw', v: 'string' }, { c: 'ide-punc', v: ']' }, { c: 'ide-kw', v: 'any' }, { c: 'ide-punc', v: '{' }] },
+      { ind: true, tokens: [{ c: 'ide-str', v: '"name"' }, { c: 'ide-punc', v: ': ' }, { c: 'ide-str', v: '"Tredir Sewpaul"' }, { c: 'ide-punc', v: ',' }] },
+      { ind: true, tokens: [{ c: 'ide-str', v: '"role"' }, { c: 'ide-punc', v: ': ' }, { c: 'ide-str', v: '"CS Graduate & AI Engineer"' }, { c: 'ide-punc', v: ',' }] },
+      { ind: true, tokens: [{ c: 'ide-str', v: '"passion"' }, { c: 'ide-punc', v: ': []' }, { c: 'ide-kw', v: 'string' }, { c: 'ide-punc', v: '{' }, { c: 'ide-str', v: '"ML"' }, { c: 'ide-punc', v: ', ' }, { c: 'ide-str', v: '"Web"' }, { c: 'ide-punc', v: '},' }] },
+      { tokens: [{ c: 'ide-punc', v: '}' }] },
+      null,
+      { tokens: [{ c: 'ide-kw', v: 'func ' }, { c: 'ide-fn', v: 'greet' }, { c: 'ide-punc', v: '() {' }] },
+    ],
+    greeting: [{ c: 'ide-prop', v: 'fmt' }, { c: 'ide-punc', v: '.' }, { c: 'ide-fn', v: 'Println' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Hello World!"' }, { c: 'ide-punc', v: ')' }],
+    post: [
+      { tokens: [{ c: 'ide-punc', v: '}' }] },
+      null,
+      { tokens: [{ c: 'ide-fn', v: 'greet' }, { c: 'ide-punc', v: '()' }] },
+    ],
+  },
+  // ── C++ ─────────────────────────────────────────────────────────────────────
+  {
+    lang: 'C++', ext: 'cpp',
+    pre: [
+      { tokens: [{ c: 'ide-cmt', v: '// portfolio · tredir sewpaul' }] },
+      null,
+      { tokens: [{ c: 'ide-kw', v: 'struct ' }, { c: 'ide-var', v: 'Developer' }, { c: 'ide-punc', v: ' {' }] },
+      { ind: true, tokens: [{ c: 'ide-kw', v: 'string ' }, { c: 'ide-var', v: 'name' }, { c: 'ide-punc', v: ' = ' }, { c: 'ide-str', v: '"Tredir Sewpaul"' }, { c: 'ide-punc', v: ';' }] },
+      { ind: true, tokens: [{ c: 'ide-kw', v: 'string ' }, { c: 'ide-var', v: 'role' }, { c: 'ide-punc', v: ' = ' }, { c: 'ide-str', v: '"CS Graduate & AI Engineer"' }, { c: 'ide-punc', v: ';' }] },
+      { ind: true, tokens: [{ c: 'ide-kw', v: 'vector' }, { c: 'ide-punc', v: '<string> ' }, { c: 'ide-var', v: 'passion' }, { c: 'ide-punc', v: ' = {' }, { c: 'ide-str', v: '"ML"' }, { c: 'ide-punc', v: ', ' }, { c: 'ide-str', v: '"Web"' }, { c: 'ide-punc', v: '};' }] },
+      { tokens: [{ c: 'ide-punc', v: '};' }] },
+      null,
+      { tokens: [{ c: 'ide-kw', v: 'void ' }, { c: 'ide-fn', v: 'greet' }, { c: 'ide-punc', v: '() {' }] },
+    ],
+    greeting: [{ c: 'ide-var', v: 'cout' }, { c: 'ide-punc', v: ' << ' }, { c: 'ide-str', v: '"Hello World!"' }, { c: 'ide-punc', v: ';' }],
+    post: [
+      { tokens: [{ c: 'ide-punc', v: '}' }] },
+      null,
+      { tokens: [{ c: 'ide-fn', v: 'greet' }, { c: 'ide-punc', v: '();' }] },
+    ],
+  },
+  // ── PHP ─────────────────────────────────────────────────────────────────────
+  {
+    lang: 'PHP', ext: 'php',
+    pre: [
+      { tokens: [{ c: 'ide-cmt', v: '// portfolio · tredir sewpaul' }] },
+      null,
+      { tokens: [{ c: 'ide-var', v: '$developer' }, { c: 'ide-punc', v: ' = [' }] },
+      { ind: true, tokens: [{ c: 'ide-str', v: '"name"' }, { c: 'ide-punc', v: ' => ' }, { c: 'ide-str', v: '"Tredir Sewpaul"' }, { c: 'ide-punc', v: ',' }] },
+      { ind: true, tokens: [{ c: 'ide-str', v: '"role"' }, { c: 'ide-punc', v: ' => ' }, { c: 'ide-str', v: '"CS Graduate & AI Engineer"' }, { c: 'ide-punc', v: ',' }] },
+      { ind: true, tokens: [{ c: 'ide-str', v: '"passion"' }, { c: 'ide-punc', v: ' => [' }, { c: 'ide-str', v: '"ML"' }, { c: 'ide-punc', v: ', ' }, { c: 'ide-str', v: '"Web"' }, { c: 'ide-punc', v: '],' }] },
+      { tokens: [{ c: 'ide-punc', v: '];' }] },
+      null,
+      { tokens: [{ c: 'ide-kw', v: 'function ' }, { c: 'ide-fn', v: 'greet' }, { c: 'ide-punc', v: '() {' }] },
+    ],
+    greeting: [{ c: 'ide-kw', v: 'echo ' }, { c: 'ide-str', v: '"Hello World!"' }, { c: 'ide-punc', v: ';' }],
+    post: [
+      { tokens: [{ c: 'ide-punc', v: '}' }] },
+      null,
+      { tokens: [{ c: 'ide-fn', v: 'greet' }, { c: 'ide-punc', v: '();' }] },
+    ],
+  },
+  // ── Rust ────────────────────────────────────────────────────────────────────
+  {
+    lang: 'Rust', ext: 'rs',
+    pre: [
+      { tokens: [{ c: 'ide-cmt', v: '// portfolio · tredir sewpaul' }] },
+      null,
+      { tokens: [{ c: 'ide-kw', v: 'struct ' }, { c: 'ide-var', v: 'Developer' }, { c: 'ide-punc', v: ' {' }] },
+      { ind: true, tokens: [{ c: 'ide-prop', v: 'name' }, { c: 'ide-punc', v: ': ' }, { c: 'ide-kw', v: "&'static str" }, { c: 'ide-punc', v: ',' }] },
+      { ind: true, tokens: [{ c: 'ide-prop', v: 'role' }, { c: 'ide-punc', v: ': ' }, { c: 'ide-kw', v: "&'static str" }, { c: 'ide-punc', v: ',' }] },
+      { ind: true, tokens: [{ c: 'ide-prop', v: 'passion' }, { c: 'ide-punc', v: ': ' }, { c: 'ide-kw', v: 'Vec' }, { c: 'ide-punc', v: '<' }, { c: 'ide-kw', v: "&'static str" }, { c: 'ide-punc', v: '>,' }] },
+      { tokens: [{ c: 'ide-punc', v: '}' }] },
+      null,
+      { tokens: [{ c: 'ide-kw', v: 'fn ' }, { c: 'ide-fn', v: 'greet' }, { c: 'ide-punc', v: '() {' }] },
+    ],
+    greeting: [{ c: 'ide-fn', v: 'println!' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Hello World!"' }, { c: 'ide-punc', v: ');' }],
+    post: [
+      { tokens: [{ c: 'ide-punc', v: '}' }] },
+      null,
+      { tokens: [{ c: 'ide-fn', v: 'greet' }, { c: 'ide-punc', v: '();' }] },
+    ],
+  },
+];
 
 const LoadingScreen = ({ onEnter }) => {
   const [isVisible, setIsVisible]             = useState(true);
   const [currentGreeting, setCurrentGreeting] = useState(0);
   const [cursorOn, setCursorOn]               = useState(true);
-
-  const greetings = [
-    { text: 'console.log("Hello World!");',        lang: 'JavaScript', ext: 'js'   },
-    { text: 'print("Hello World!")',               lang: 'Python',     ext: 'py'   },
-    { text: 'Console.WriteLine("Hello World!");',  lang: 'C#',         ext: 'cs'   },
-    { text: 'System.out.println("Hello World!");', lang: 'Java',       ext: 'java' },
-    { text: 'fmt.Println("Hello World!")',         lang: 'Go',         ext: 'go'   },
-    { text: 'cout << "Hello World!";',             lang: 'C++',        ext: 'cpp'  },
-    { text: 'echo "Hello World!";',                lang: 'PHP',        ext: 'php'  },
-    { text: 'println!("Hello World!");',           lang: 'Rust',       ext: 'rs'   },
-  ];
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -138,93 +303,45 @@ const LoadingScreen = ({ onEnter }) => {
                 </div>
               </div>
 
-              {/* Gutter + code */}
-              <div className="ide-editor">
-                <div className="ide-gutter">
-                  {[1,2,3,4,5,6,7,8,9,10,11,12,13].map(n => (
-                    <div key={n} className={`ide-linenum${n === 10 ? ' ide-linenum-active' : ''}`}>{n}</div>
-                  ))}
-                </div>
+              {/* Gutter + code — whole block crossfades on language change */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentGreeting}
+                  className="ide-editor"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.18 }}
+                >
+                  <div className="ide-gutter">
+                    {[1,2,3,4,5,6,7,8,9,10,11,12,13].map(n => (
+                      <div key={n} className={`ide-linenum${n === 10 ? ' ide-linenum-active' : ''}`}>{n}</div>
+                    ))}
+                  </div>
 
-                <div className="ide-code">
-                  {/* 1 */}
-                  <div className="ide-line">
-                    <span className="ide-cmt">// portfolio · tredir sewpaul</span>
+                  <div className="ide-code">
+                    {/* Lines 1–9: language-specific pre-block */}
+                    {g.pre.map((line, i) => (
+                      <CodeLine key={i} line={line} />
+                    ))}
+
+                    {/* Line 10: active highlighted greeting */}
+                    <div className="ide-line ide-line-ind ide-line-active">
+                      <Tokens tokens={g.greeting} />
+                    </div>
+
+                    {/* Lines 11–13: language-specific post-block */}
+                    {g.post.map((line, i) => (
+                      <CodeLine
+                        key={i}
+                        line={line}
+                        cursor={i === g.post.length - 1}
+                        cursorVisible={cursorOn}
+                      />
+                    ))}
                   </div>
-                  {/* 2 */}
-                  <div className="ide-line ide-line-blank" />
-                  {/* 3 */}
-                  <div className="ide-line">
-                    <span className="ide-kw">const </span>
-                    <span className="ide-var">developer</span>
-                    <span className="ide-punc"> = {'{'}</span>
-                  </div>
-                  {/* 4 */}
-                  <div className="ide-line ide-line-ind">
-                    <span className="ide-prop">name</span>
-                    <span className="ide-punc">: </span>
-                    <span className="ide-str">"Tredir Sewpaul"</span>
-                    <span className="ide-punc">,</span>
-                  </div>
-                  {/* 5 */}
-                  <div className="ide-line ide-line-ind">
-                    <span className="ide-prop">role</span>
-                    <span className="ide-punc">: </span>
-                    <span className="ide-str">"CS Graduate &amp; AI Engineer"</span>
-                    <span className="ide-punc">,</span>
-                  </div>
-                  {/* 6 */}
-                  <div className="ide-line ide-line-ind">
-                    <span className="ide-prop">passion</span>
-                    <span className="ide-punc">: [</span>
-                    <span className="ide-str">"ML"</span>
-                    <span className="ide-punc">, </span>
-                    <span className="ide-str">"Multiplatform"</span>
-                    <span className="ide-punc">, </span>
-                    <span className="ide-str">"Web"</span>
-                    <span className="ide-punc">],</span>
-                  </div>
-                  {/* 7 */}
-                  <div className="ide-line">
-                    <span className="ide-punc">{'};'}</span>
-                  </div>
-                  {/* 8 */}
-                  <div className="ide-line ide-line-blank" />
-                  {/* 9 */}
-                  <div className="ide-line">
-                    <span className="ide-kw">function </span>
-                    <span className="ide-fn">greet</span>
-                    <span className="ide-punc">() {'{'}</span>
-                  </div>
-                  {/* 10 — cycling greeting */}
-                  <div className="ide-line ide-line-ind ide-line-active">
-                    <AnimatePresence mode="wait">
-                      <motion.span
-                        key={currentGreeting}
-                        className="ide-greeting-span"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.25 }}
-                      >
-                        <GreetingCode text={g.text} />
-                      </motion.span>
-                    </AnimatePresence>
-                  </div>
-                  {/* 11 */}
-                  <div className="ide-line">
-                    <span className="ide-punc">{'}'}</span>
-                  </div>
-                  {/* 12 */}
-                  <div className="ide-line ide-line-blank" />
-                  {/* 13 */}
-                  <div className="ide-line">
-                    <span className="ide-fn">greet</span>
-                    <span className="ide-punc">();</span>
-                    <span className={`ide-cursor${cursorOn ? '' : ' ide-cursor-off'}`}>▌</span>
-                  </div>
-                </div>
-              </div>
+                </motion.div>
+              </AnimatePresence>
             </div>
 
             {/* ── Run button ───────────────────────────── */}
