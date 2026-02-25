@@ -1,5 +1,5 @@
 /* ════════════════════════════════════════════════════════
-   IDE-themed splash screen  —  VS Code Dark+ palette
+   IDE-themed splash screen  —  Portfolio dark theme
    ════════════════════════════════════════════════════════ */
 
 /* ── Backdrop ──────────────────────────────────────────── */
@@ -17,7 +17,7 @@
 .ide-window {
   width: 100%;
   height: 100%;
-  background: #1e1e1e;
+  background: #0d1117;
   border-radius: 0;
   overflow: hidden;
   display: flex;
@@ -34,11 +34,12 @@
 .ide-titlebar {
   display: flex;
   align-items: center;
-  background: #323233;
+  background: #161b22;
   height: 36px;
   padding: 0 14px;
   flex-shrink: 0;
   user-select: none;
+  border-bottom: 1px solid rgba(240, 246, 252, 0.08);
 }
 
 .ide-dots {
@@ -62,7 +63,7 @@
 .ide-title {
   flex: 1;
   text-align: center;
-  color: #cccccc;
+  color: #8b949e;
   font-size: 12px;
   letter-spacing: 0.02em;
 }
@@ -72,8 +73,8 @@
 /* ── Tab bar ───────────────────────────────────────────── */
 .ide-tabbar {
   display: flex;
-  background: #2d2d30;
-  border-bottom: 1px solid #252526;
+  background: #161b22;
+  border-bottom: 1px solid rgba(240, 246, 252, 0.08);
   flex-shrink: 0;
   overflow: hidden;
 }
@@ -85,15 +86,15 @@
   padding: 0 16px;
   height: 34px;
   font-size: 12.5px;
-  color: #969696;
+  color: #8b949e;
   white-space: nowrap;
   user-select: none;
 }
 
 .ide-tab-active {
-  background: #1e1e1e;
-  color: #cccccc;
-  border-top: 1px solid #007acc;
+  background: #0d1117;
+  color: #e6edf3;
+  border-top: 1px solid #58a6ff;
   margin-top: 0;
 }
 
@@ -102,7 +103,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #cccccc;
+  background: #8b949e;
   opacity: 0.6;
   flex-shrink: 0;
 }
@@ -126,20 +127,20 @@
   flex-direction: column;
   flex: 0 0 52%;
   overflow: hidden;
-  border-right: 1px solid #252526;
+  border-right: 1px solid rgba(240, 246, 252, 0.08);
 }
 
 /* ── Activity bar ──────────────────────────────────────── */
 .ide-activitybar {
   width: 46px;
-  background: #333333;
+  background: #161b22;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 8px;
   gap: 8px;
   flex-shrink: 0;
-  border-right: 1px solid #252526;
+  border-right: 1px solid rgba(240, 246, 252, 0.08);
 }
 
 .ide-activity-icon {
@@ -148,13 +149,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #858585;
+  color: #8b949e;
   cursor: pointer;
   border-radius: 4px;
   transition: color 0.15s;
 }
-.ide-activity-icon:hover { color: #cccccc; }
-.ide-activity-active { color: #cccccc !important; }
+.ide-activity-icon:hover { color: #e6edf3; }
+.ide-activity-active { color: #e6edf3 !important; border-left: 2px solid #58a6ff; }
 
 /* ── Editor (gutter + code) ────────────────────────────── */
 .ide-editor {
@@ -172,13 +173,13 @@
 }
 
 .ide-linenum {
-  color: #5a5a5a;
+  color: #3d444d;
   font-size: 12px;
   line-height: 1.6;
   height: 1.6em;
 }
 .ide-linenum-active {
-  color: #cccccc;
+  color: #e6edf3;
 }
 
 .ide-code {
@@ -204,7 +205,7 @@
 }
 
 .ide-line-active {
-  background: rgba(255, 255, 255, 0.035);
+  background: rgba(88, 166, 255, 0.07);
   border-radius: 2px;
   margin: 0 -8px;
   padding-left: calc(2ch + 8px);
@@ -218,19 +219,19 @@
   display: inline;
 }
 
-/* ── Syntax colours (VS Code Dark+) ───────────────────── */
-.ide-kw   { color: #569cd6; }   /* keyword  — blue      */
-.ide-fn   { color: #dcdcaa; }   /* function — yellow    */
-.ide-var  { color: #9cdcfe; }   /* variable — light blue*/
-.ide-prop { color: #9cdcfe; }   /* property — light blue*/
-.ide-str  { color: #ce9178; }   /* string   — orange    */
-.ide-cmt  { color: #6a9955; }   /* comment  — green     */
-.ide-punc { color: #d4d4d4; }   /* default text         */
-.ide-txt  { color: #d4d4d4; }
+/* ── Syntax colours (portfolio-themed) ───────────────── */
+.ide-kw   { color: #58a6ff; }   /* keyword  — portfolio accent   */
+.ide-fn   { color: #dcdcaa; }   /* function — yellow             */
+.ide-var  { color: #79c0ff; }   /* variable — lighter blue       */
+.ide-prop { color: #79c0ff; }   /* property — lighter blue       */
+.ide-str  { color: #ce9178; }   /* string   — warm orange        */
+.ide-cmt  { color: #3fb950; }   /* comment  — portfolio success  */
+.ide-punc { color: #e6edf3; }   /* default text                  */
+.ide-txt  { color: #e6edf3; }
 
 /* ── Blinking cursor ───────────────────────────────────── */
 .ide-cursor {
-  color: #d4d4d4;
+  color: #e6edf3;
   opacity: 1;
   transition: opacity 0.1s;
 }
@@ -243,19 +244,19 @@
   display: flex;
   justify-content: center;
   padding: 14px 16px;
-  background: #1e1e1e;
-  border-top: 1px solid #2a2a2a;
+  background: #0d1117;
+  border-top: 1px solid rgba(240, 246, 252, 0.08);
 }
 
 @keyframes ide-btn-pulse {
   0%, 100% {
-    box-shadow: 0 2px 10px rgba(29, 185, 84, 0.35);
+    box-shadow: 0 2px 10px rgba(63, 185, 80, 0.35);
   }
   50% {
     box-shadow:
-      0 0 0 6px rgba(29, 185, 84, 0.12),
-      0 0 28px rgba(29, 185, 84, 0.55),
-      0 2px 10px rgba(29, 185, 84, 0.4);
+      0 0 0 6px rgba(63, 185, 80, 0.12),
+      0 0 28px rgba(63, 185, 80, 0.55),
+      0 2px 10px rgba(63, 185, 80, 0.4);
   }
 }
 
@@ -264,7 +265,7 @@
   align-items: center;
   gap: 8px;
   padding: 9px 26px;
-  background: #1db954;
+  background: #3fb950;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -278,8 +279,8 @@
 }
 
 .ide-run-btn:hover {
-  background: #22d45f;
-  box-shadow: 0 4px 22px rgba(29, 185, 84, 0.6);
+  background: #56d364;
+  box-shadow: 0 4px 22px rgba(63, 185, 80, 0.6);
   animation: none;
   transform: translateY(-1px);
 }
@@ -383,7 +384,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #007acc;
+  background: #1f6feb;
   height: 24px;
   padding: 0 10px;
   flex-shrink: 0;

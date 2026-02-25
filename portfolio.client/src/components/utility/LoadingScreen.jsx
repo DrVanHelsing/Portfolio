@@ -194,7 +194,7 @@ const greetings = [
   },
 ];
 
-const TERM_LINE_COUNT = 12;
+const TERM_LINE_COUNT = 13;
 
 const LoadingScreen = ({ onEnter }) => {
   const [isVisible, setIsVisible]             = useState(true);
@@ -240,8 +240,10 @@ const LoadingScreen = ({ onEnter }) => {
     { t: 'blank' },
     { t: 'dim', v: '  Loading profile...' },
     { t: 'ok',  v: '  ✓  Tredir Sewpaul  ·  CS Graduate & AI Engineer' },
-    { t: 'ok',  v: '  ✓  Projects shipped: 8' },
-    { t: 'ok',  v: '  ✓  Stack: React · Python · TypeScript · ML' },
+    { t: 'ok',  v: '  ✓  Samsung Future Innovation Lab Graduate' },
+    { t: 'ok',  v: '  ✓  Projects shipped: 11' },
+    { t: 'ok',  v: '  ✓  Stack: React · Python · C# · TypeScript · Azure' },
+    { t: 'ok',  v: '  ✓  Cloud: Azure (AI · Functions · Cosmos DB)' },
     { t: 'ok',  v: '  ✓  Status: Open to opportunities' },
     { t: 'blank' },
     { t: 'ctx', v: 'tredir@portfolio  ~/portfolio  (glassomorphism)' },
