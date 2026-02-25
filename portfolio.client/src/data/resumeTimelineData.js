@@ -253,7 +253,7 @@ export const resumeTimelineData = {
     },
     {
       id: 'postgrad-portal',
-      period: 'Feb 2025 - Present',
+      period: 'Feb 2026 - Present',
       title: 'UWC PostGrad Portal',
       description: 'Comprehensive academic administration portal with role-based access and dynamic form builder. Research collaboration with a PhD student — co-authoring a paper on the system.',
       technologies: ['React 19', 'Firebase', 'Cloud Firestore', 'EmailJS'],
@@ -269,7 +269,7 @@ export const resumeTimelineData = {
     },
     {
       id: 'geology-sim',
-      period: 'Feb 2025 - Present',
+      period: 'Feb 2026 - Present',
       title: 'Geology Field Mapping Sim',
       description: '3D structural geology field mapping simulator with procedural terrain and field instruments. Research collaboration with a PhD student — co-authoring a paper on the platform.',
       technologies: ['Three.js', 'React', 'WebGL', 'Simplex Noise'],
@@ -285,7 +285,7 @@ export const resumeTimelineData = {
     },
     {
       id: 'physics-lab',
-      period: 'Feb 2025 - Present',
+      period: 'Feb 2026 - Present',
       title: 'Physics Lab IDE',
       description: 'Visual block-based programming environment for physics simulations',
       technologies: ['React', 'Blockly', 'GlowScript', 'VPython'],
@@ -301,7 +301,7 @@ export const resumeTimelineData = {
     },
     {
       id: 'anti-temu',
-      period: 'Jan 2025',
+      period: 'Jan 2026',
       title: 'Hide Distracting Items',
       description: 'Privacy-preserving Chrome extension to permanently hide ads and distracting elements',
       technologies: ['JavaScript', 'Chrome Extension', 'Manifest V3'],
