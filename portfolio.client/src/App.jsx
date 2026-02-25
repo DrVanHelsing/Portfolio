@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { useState, useEffect, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -8,6 +8,15 @@ import LoadingScreen from './components/utility/LoadingScreen';
 import ScrollToTop from './components/ui/ScrollToTop';
 import SkipLink from './components/layout/SkipLink';
 import './App.css';
+
+// Resets scroll position to top on every route change
+function ScrollReset() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 
 // Lazy load pages for code splitting
 const Home = lazy(() => import('./pages/Home'));
@@ -40,6 +49,7 @@ function App() {
   return (
     <HelmetProvider>
       <Router>
+        <ScrollReset />
         <AnimatePresence mode="wait">
           {isLoading ? (
             <LoadingScreen key="loading" onEnter={handleLoadingComplete} />
