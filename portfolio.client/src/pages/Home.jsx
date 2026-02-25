@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import AnimatedBackground from '../components/sections/AnimatedBackground';
 import SEO from '../components/utility/SEO';
 import { Link } from 'react-router-dom';
-import { Monitor, Globe, Brain, GraduationCap } from 'lucide-react';
+import { Monitor, Brain, GraduationCap } from 'lucide-react';
 import useNoScroll from '../hooks/useNoScroll';
 import './Home.css';
 
@@ -101,15 +101,6 @@ import './Home.css';
  <p>C#, .NET MAUI</p>
  <div className="card-footer">
  <span className="tech-count">Samsung FIL</span>
- </div>
- </div>
- <div className="highlight-card">
- <div className="card-glow"></div>
- <div className="highlight-icon"><Globe size={32} /></div>
- <h3>Web Development</h3>
- <p>HTML, CSS, JavaScript, PHP</p>
- <div className="card-footer">
- <span className="tech-count">Full-stack</span>
  </div>
  </div>
  <div className="highlight-card">

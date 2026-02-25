@@ -160,7 +160,6 @@ const About = () => {
  <div className="interest-tag">.NET MAUI</div>
  <div className="interest-tag">Machine Learning</div>
  <div className="interest-tag">Neural Networks</div>
- <div className="interest-tag">Web Development</div>
  <div className="interest-tag">Database Design</div>
  <div className="interest-tag">Agile & Scrum</div>
  <div className="interest-tag">STEM Education</div>

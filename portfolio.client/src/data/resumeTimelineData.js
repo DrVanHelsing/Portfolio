@@ -347,7 +347,6 @@ export const resumeTimelineData = {
   ],
   skills: {
     programming: ['Python', 'Java', 'Matlab', 'C#', '.NET MAUI'],
-    web: ['HTML', 'CSS', 'JavaScript', 'PHP', 'SQL'],
     tools: ['Git', 'MySQL', 'Microsoft Office Suite'],
     soft: ['Problem-solving', 'Team Collaboration', 'Communication', 'Analytical Thinking']
   }

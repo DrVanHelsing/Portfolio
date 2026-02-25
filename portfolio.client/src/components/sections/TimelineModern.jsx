@@ -200,14 +200,6 @@ export default function TimelineModern() {
             </div>
           </div>
           <div className="skill-category">
-            <h4>Web Development</h4>
-            <div className="skill-tags">
-              {resumeTimelineData.skills.web.map((skill, i) => (
-                <span key={i} className="skill-tag">{skill}</span>
-              ))}
-            </div>
-          </div>
-          <div className="skill-category">
             <h4>Tools & Technologies</h4>
             <div className="skill-tags">
               {resumeTimelineData.skills.tools.map((skill, i) => (

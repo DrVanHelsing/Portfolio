@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import AnimatedBackground from '../components/sections/AnimatedBackground';
 import SEO from '../components/utility/SEO';
-import { Code2, Server, Smartphone, Cloud, Database, Brain, Puzzle, BarChart3, MessageCircle, Users, Target } from 'lucide-react';
+import { Code2, Smartphone, Cloud, Database, Brain, Puzzle, BarChart3, MessageCircle, Users, Target } from 'lucide-react';
 import './Skills.css';
 
 const Skills = () => {
@@ -14,17 +14,6 @@ const Skills = () => {
         { name: "Java", level: 75 },
    { name: "Matlab", level: 70 },
         { name: "C#", level: 80 }
-      ]
-    },
-    {
-category: "Web Development",
-      icon: <Server size={32} />,
-      skills: [
-        { name: "HTML", level: 95 },
-        { name: "CSS", level: 90 },
-        { name: "JavaScript", level: 85 },
-        { name: "PHP", level: 80 },
-        { name: "React", level: 75 }
       ]
     },
     {
