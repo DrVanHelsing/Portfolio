@@ -17,6 +17,17 @@ const Skills = () => {
       ]
     },
     {
+category: "Web Development",
+      icon: <Server size={32} />,
+      skills: [
+        { name: "HTML", level: 95 },
+        { name: "CSS", level: 90 },
+        { name: "JavaScript", level: 85 },
+        { name: "PHP", level: 80 },
+        { name: "React", level: 75 }
+      ]
+    },
+    {
       category: "Database",
       icon: <Database size={32} />,
       skills: [

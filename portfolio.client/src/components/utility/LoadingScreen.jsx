@@ -22,179 +22,179 @@ const CodeLine = ({ line, cursor = false, cursorVisible = true }) => {
   );
 };
 
-// Per-language code blocks: 9 pre-lines, greeting tokens (line 10), 3 post-lines
+// Per-language code blocks: 9 pre-lines, greeting token (line 10 = closing brace), 3 post-lines
 const greetings = [
   // ── JavaScript ──────────────────────────────────────────────────────────────
   {
     lang: 'JavaScript', ext: 'js', termCmd: 'node portfolio.js',
     pre: [
-      { tokens: [{ c: 'ide-cmt', v: '// portfolio · tredir sewpaul' }] },
+      { tokens: [{ c: 'ide-cmt', v: '// portfolio · Tredir Sewpaul' }] },
       null,
-      { tokens: [{ c: 'ide-kw', v: 'const ' }, { c: 'ide-var', v: 'developer' }, { c: 'ide-punc', v: ' = {' }] },
-      { ind: true, tokens: [{ c: 'ide-prop', v: 'name' }, { c: 'ide-punc', v: ': ' }, { c: 'ide-str', v: '"Tredir Sewpaul"' }, { c: 'ide-punc', v: ',' }] },
-      { ind: true, tokens: [{ c: 'ide-prop', v: 'role' }, { c: 'ide-punc', v: ': ' }, { c: 'ide-str', v: '"CS Graduate & AI Engineer"' }, { c: 'ide-punc', v: ',' }] },
-      { ind: true, tokens: [{ c: 'ide-prop', v: 'passion' }, { c: 'ide-punc', v: ': [' }, { c: 'ide-str', v: '"ML"' }, { c: 'ide-punc', v: ', ' }, { c: 'ide-str', v: '"Web"' }, { c: 'ide-punc', v: '],' }] },
-      { tokens: [{ c: 'ide-punc', v: '};' }] },
-      null,
-      { tokens: [{ c: 'ide-kw', v: 'function ' }, { c: 'ide-fn', v: 'greet' }, { c: 'ide-punc', v: '() {' }] },
+      { tokens: [{ c: 'ide-kw', v: 'function ' }, { c: 'ide-fn', v: 'runPortfolio' }, { c: 'ide-punc', v: '() {' }] },
+      { ind: true, tokens: [{ c: 'ide-fn', v: 'console' }, { c: 'ide-punc', v: '.' }, { c: 'ide-fn', v: 'log' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Hello, World!"' }, { c: 'ide-punc', v: ');' }] },
+      { ind: true, tokens: [{ c: 'ide-fn', v: 'console' }, { c: 'ide-punc', v: '.' }, { c: 'ide-fn', v: 'log' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Tredir Sewpaul · CS Graduate & AI Engineer"' }, { c: 'ide-punc', v: ');' }] },
+      { ind: true, tokens: [{ c: 'ide-fn', v: 'console' }, { c: 'ide-punc', v: '.' }, { c: 'ide-fn', v: 'log' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Samsung Future Innovation Lab Graduate"' }, { c: 'ide-punc', v: ');' }] },
+      { ind: true, tokens: [{ c: 'ide-fn', v: 'console' }, { c: 'ide-punc', v: '.' }, { c: 'ide-fn', v: 'log' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Projects shipped: 11"' }, { c: 'ide-punc', v: ');' }] },
+      { ind: true, tokens: [{ c: 'ide-fn', v: 'console' }, { c: 'ide-punc', v: '.' }, { c: 'ide-fn', v: 'log' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Stack: React · C# · Python · Azure"' }, { c: 'ide-punc', v: ');' }] },
+      { ind: true, tokens: [{ c: 'ide-fn', v: 'console' }, { c: 'ide-punc', v: '.' }, { c: 'ide-fn', v: 'log' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Status: Open to opportunities"' }, { c: 'ide-punc', v: ');' }] },
     ],
-    greeting: [{ c: 'ide-fn', v: 'console' }, { c: 'ide-punc', v: '.' }, { c: 'ide-fn', v: 'log' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Hello World!"' }, { c: 'ide-punc', v: ');' }],
+    greeting: [{ c: 'ide-punc', v: '}' }],
     post: [
-      { tokens: [{ c: 'ide-punc', v: '}' }] },
       null,
-      { tokens: [{ c: 'ide-fn', v: 'greet' }, { c: 'ide-punc', v: '();' }] },
+      null,
+      { tokens: [{ c: 'ide-fn', v: 'runPortfolio' }, { c: 'ide-punc', v: '();' }] },
     ],
   },
   // ── Python ──────────────────────────────────────────────────────────────────
   {
     lang: 'Python', ext: 'py', termCmd: 'python3 portfolio.py',
     pre: [
-      { tokens: [{ c: 'ide-cmt', v: '# portfolio · tredir sewpaul' }] },
+      { tokens: [{ c: 'ide-cmt', v: '# portfolio · Tredir Sewpaul' }] },
       null,
-      { tokens: [{ c: 'ide-var', v: 'developer' }, { c: 'ide-punc', v: ' = {' }] },
-      { ind: true, tokens: [{ c: 'ide-str', v: '"name"' }, { c: 'ide-punc', v: ': ' }, { c: 'ide-str', v: '"Tredir Sewpaul"' }, { c: 'ide-punc', v: ',' }] },
-      { ind: true, tokens: [{ c: 'ide-str', v: '"role"' }, { c: 'ide-punc', v: ': ' }, { c: 'ide-str', v: '"CS Graduate & AI Engineer"' }, { c: 'ide-punc', v: ',' }] },
-      { ind: true, tokens: [{ c: 'ide-str', v: '"passion"' }, { c: 'ide-punc', v: ': [' }, { c: 'ide-str', v: '"ML"' }, { c: 'ide-punc', v: ', ' }, { c: 'ide-str', v: '"Web"' }, { c: 'ide-punc', v: '],' }] },
-      { tokens: [{ c: 'ide-punc', v: '}' }] },
-      null,
-      { tokens: [{ c: 'ide-kw', v: 'def ' }, { c: 'ide-fn', v: 'greet' }, { c: 'ide-punc', v: '():' }] },
+      { tokens: [{ c: 'ide-kw', v: 'def ' }, { c: 'ide-fn', v: 'run_portfolio' }, { c: 'ide-punc', v: '():' }] },
+      { ind: true, tokens: [{ c: 'ide-fn', v: 'print' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Hello, World!"' }, { c: 'ide-punc', v: ')' }] },
+      { ind: true, tokens: [{ c: 'ide-fn', v: 'print' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Tredir Sewpaul · CS Graduate & AI Engineer"' }, { c: 'ide-punc', v: ')' }] },
+      { ind: true, tokens: [{ c: 'ide-fn', v: 'print' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Samsung Future Innovation Lab Graduate"' }, { c: 'ide-punc', v: ')' }] },
+      { ind: true, tokens: [{ c: 'ide-fn', v: 'print' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Projects shipped: 11"' }, { c: 'ide-punc', v: ')' }] },
+      { ind: true, tokens: [{ c: 'ide-fn', v: 'print' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Stack: React · C# · Python · Azure"' }, { c: 'ide-punc', v: ')' }] },
+      { ind: true, tokens: [{ c: 'ide-fn', v: 'print' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Status: Open to opportunities"' }, { c: 'ide-punc', v: ')' }] },
     ],
-    greeting: [{ c: 'ide-fn', v: 'print' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Hello World!"' }, { c: 'ide-punc', v: ')' }],
+    greeting: [{ c: 'ide-cmt', v: '# ── end of run_portfolio ──' }],
     post: [
       null,
       null,
-      { tokens: [{ c: 'ide-fn', v: 'greet' }, { c: 'ide-punc', v: '()' }] },
+      { tokens: [{ c: 'ide-fn', v: 'run_portfolio' }, { c: 'ide-punc', v: '()' }] },
     ],
   },
   // ── C# ──────────────────────────────────────────────────────────────────────
   {
     lang: 'C#', ext: 'cs', termCmd: 'dotnet run',
     pre: [
-      { tokens: [{ c: 'ide-cmt', v: '// portfolio · tredir sewpaul' }] },
+      { tokens: [{ c: 'ide-cmt', v: '// portfolio · Tredir Sewpaul' }] },
       null,
-      { tokens: [{ c: 'ide-kw', v: 'var ' }, { c: 'ide-var', v: 'developer' }, { c: 'ide-punc', v: ' = new {' }] },
-      { ind: true, tokens: [{ c: 'ide-prop', v: 'Name' }, { c: 'ide-punc', v: ' = ' }, { c: 'ide-str', v: '"Tredir Sewpaul"' }, { c: 'ide-punc', v: ',' }] },
-      { ind: true, tokens: [{ c: 'ide-prop', v: 'Role' }, { c: 'ide-punc', v: ' = ' }, { c: 'ide-str', v: '"CS Graduate & AI Engineer"' }, { c: 'ide-punc', v: ',' }] },
-      { ind: true, tokens: [{ c: 'ide-prop', v: 'Passion' }, { c: 'ide-punc', v: ' = new[] {' }, { c: 'ide-str', v: '"ML"' }, { c: 'ide-punc', v: ', ' }, { c: 'ide-str', v: '"Web"' }, { c: 'ide-punc', v: '},' }] },
-      { tokens: [{ c: 'ide-punc', v: '};' }] },
-      null,
-      { tokens: [{ c: 'ide-kw', v: 'void ' }, { c: 'ide-fn', v: 'Greet' }, { c: 'ide-punc', v: '() {' }] },
+      { tokens: [{ c: 'ide-kw', v: 'void ' }, { c: 'ide-fn', v: 'RunPortfolio' }, { c: 'ide-punc', v: '() {' }] },
+      { ind: true, tokens: [{ c: 'ide-prop', v: 'Console' }, { c: 'ide-punc', v: '.' }, { c: 'ide-fn', v: 'WriteLine' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Hello, World!"' }, { c: 'ide-punc', v: ');' }] },
+      { ind: true, tokens: [{ c: 'ide-prop', v: 'Console' }, { c: 'ide-punc', v: '.' }, { c: 'ide-fn', v: 'WriteLine' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Tredir Sewpaul · CS Graduate & AI Engineer"' }, { c: 'ide-punc', v: ');' }] },
+      { ind: true, tokens: [{ c: 'ide-prop', v: 'Console' }, { c: 'ide-punc', v: '.' }, { c: 'ide-fn', v: 'WriteLine' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Samsung Future Innovation Lab Graduate"' }, { c: 'ide-punc', v: ');' }] },
+      { ind: true, tokens: [{ c: 'ide-prop', v: 'Console' }, { c: 'ide-punc', v: '.' }, { c: 'ide-fn', v: 'WriteLine' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Projects shipped: 11"' }, { c: 'ide-punc', v: ');' }] },
+      { ind: true, tokens: [{ c: 'ide-prop', v: 'Console' }, { c: 'ide-punc', v: '.' }, { c: 'ide-fn', v: 'WriteLine' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Stack: React · C# · Python · Azure"' }, { c: 'ide-punc', v: ');' }] },
+      { ind: true, tokens: [{ c: 'ide-prop', v: 'Console' }, { c: 'ide-punc', v: '.' }, { c: 'ide-fn', v: 'WriteLine' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Status: Open to opportunities"' }, { c: 'ide-punc', v: ');' }] },
     ],
-    greeting: [{ c: 'ide-prop', v: 'Console' }, { c: 'ide-punc', v: '.' }, { c: 'ide-fn', v: 'WriteLine' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Hello World!"' }, { c: 'ide-punc', v: ');' }],
+    greeting: [{ c: 'ide-punc', v: '}' }],
     post: [
-      { tokens: [{ c: 'ide-punc', v: '}' }] },
       null,
-      { tokens: [{ c: 'ide-fn', v: 'Greet' }, { c: 'ide-punc', v: '();' }] },
+      null,
+      { tokens: [{ c: 'ide-fn', v: 'RunPortfolio' }, { c: 'ide-punc', v: '();' }] },
     ],
   },
   // ── Java ────────────────────────────────────────────────────────────────────
   {
     lang: 'Java', ext: 'java', termCmd: 'java Portfolio',
     pre: [
-      { tokens: [{ c: 'ide-cmt', v: '// portfolio · tredir sewpaul' }] },
+      { tokens: [{ c: 'ide-cmt', v: '// portfolio · Tredir Sewpaul' }] },
       null,
-      { tokens: [{ c: 'ide-kw', v: 'var ' }, { c: 'ide-var', v: 'dev' }, { c: 'ide-punc', v: ' = Map.of(' }] },
-      { ind: true, tokens: [{ c: 'ide-str', v: '"name"' }, { c: 'ide-punc', v: ', ' }, { c: 'ide-str', v: '"Tredir Sewpaul"' }, { c: 'ide-punc', v: ',' }] },
-      { ind: true, tokens: [{ c: 'ide-str', v: '"role"' }, { c: 'ide-punc', v: ', ' }, { c: 'ide-str', v: '"CS Graduate & AI Engineer"' }, { c: 'ide-punc', v: ',' }] },
-      { ind: true, tokens: [{ c: 'ide-str', v: '"passion"' }, { c: 'ide-punc', v: ', List.of(' }, { c: 'ide-str', v: '"ML"' }, { c: 'ide-punc', v: ', ' }, { c: 'ide-str', v: '"Web"' }, { c: 'ide-punc', v: ')' }] },
-      { tokens: [{ c: 'ide-punc', v: ');' }] },
-      null,
-      { tokens: [{ c: 'ide-kw', v: 'void ' }, { c: 'ide-fn', v: 'greet' }, { c: 'ide-punc', v: '() {' }] },
+      { tokens: [{ c: 'ide-kw', v: 'void ' }, { c: 'ide-fn', v: 'runPortfolio' }, { c: 'ide-punc', v: '() {' }] },
+      { ind: true, tokens: [{ c: 'ide-prop', v: 'System' }, { c: 'ide-punc', v: '.out.' }, { c: 'ide-fn', v: 'println' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Hello, World!"' }, { c: 'ide-punc', v: ');' }] },
+      { ind: true, tokens: [{ c: 'ide-prop', v: 'System' }, { c: 'ide-punc', v: '.out.' }, { c: 'ide-fn', v: 'println' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Tredir Sewpaul · CS Graduate & AI Engineer"' }, { c: 'ide-punc', v: ');' }] },
+      { ind: true, tokens: [{ c: 'ide-prop', v: 'System' }, { c: 'ide-punc', v: '.out.' }, { c: 'ide-fn', v: 'println' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Samsung Future Innovation Lab Graduate"' }, { c: 'ide-punc', v: ');' }] },
+      { ind: true, tokens: [{ c: 'ide-prop', v: 'System' }, { c: 'ide-punc', v: '.out.' }, { c: 'ide-fn', v: 'println' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Projects shipped: 11"' }, { c: 'ide-punc', v: ');' }] },
+      { ind: true, tokens: [{ c: 'ide-prop', v: 'System' }, { c: 'ide-punc', v: '.out.' }, { c: 'ide-fn', v: 'println' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Stack: React · C# · Python · Azure"' }, { c: 'ide-punc', v: ');' }] },
+      { ind: true, tokens: [{ c: 'ide-prop', v: 'System' }, { c: 'ide-punc', v: '.out.' }, { c: 'ide-fn', v: 'println' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Status: Open to opportunities"' }, { c: 'ide-punc', v: ');' }] },
     ],
-    greeting: [{ c: 'ide-prop', v: 'System' }, { c: 'ide-punc', v: '.out.' }, { c: 'ide-fn', v: 'println' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Hello World!"' }, { c: 'ide-punc', v: ');' }],
+    greeting: [{ c: 'ide-punc', v: '}' }],
     post: [
-      { tokens: [{ c: 'ide-punc', v: '}' }] },
       null,
-      { tokens: [{ c: 'ide-fn', v: 'greet' }, { c: 'ide-punc', v: '();' }] },
+      null,
+      { tokens: [{ c: 'ide-fn', v: 'runPortfolio' }, { c: 'ide-punc', v: '();' }] },
     ],
   },
   // ── Go ──────────────────────────────────────────────────────────────────────
   {
     lang: 'Go', ext: 'go', termCmd: 'go run portfolio.go',
     pre: [
-      { tokens: [{ c: 'ide-cmt', v: '// portfolio · tredir sewpaul' }] },
+      { tokens: [{ c: 'ide-cmt', v: '// portfolio · Tredir Sewpaul' }] },
       null,
-      { tokens: [{ c: 'ide-var', v: 'developer' }, { c: 'ide-punc', v: ' := map[' }, { c: 'ide-kw', v: 'string' }, { c: 'ide-punc', v: ']' }, { c: 'ide-kw', v: 'any' }, { c: 'ide-punc', v: '{' }] },
-      { ind: true, tokens: [{ c: 'ide-str', v: '"name"' }, { c: 'ide-punc', v: ': ' }, { c: 'ide-str', v: '"Tredir Sewpaul"' }, { c: 'ide-punc', v: ',' }] },
-      { ind: true, tokens: [{ c: 'ide-str', v: '"role"' }, { c: 'ide-punc', v: ': ' }, { c: 'ide-str', v: '"CS Graduate & AI Engineer"' }, { c: 'ide-punc', v: ',' }] },
-      { ind: true, tokens: [{ c: 'ide-str', v: '"passion"' }, { c: 'ide-punc', v: ': []' }, { c: 'ide-kw', v: 'string' }, { c: 'ide-punc', v: '{' }, { c: 'ide-str', v: '"ML"' }, { c: 'ide-punc', v: ', ' }, { c: 'ide-str', v: '"Web"' }, { c: 'ide-punc', v: '},' }] },
-      { tokens: [{ c: 'ide-punc', v: '}' }] },
-      null,
-      { tokens: [{ c: 'ide-kw', v: 'func ' }, { c: 'ide-fn', v: 'greet' }, { c: 'ide-punc', v: '() {' }] },
+      { tokens: [{ c: 'ide-kw', v: 'func ' }, { c: 'ide-fn', v: 'runPortfolio' }, { c: 'ide-punc', v: '() {' }] },
+      { ind: true, tokens: [{ c: 'ide-prop', v: 'fmt' }, { c: 'ide-punc', v: '.' }, { c: 'ide-fn', v: 'Println' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Hello, World!"' }, { c: 'ide-punc', v: ')' }] },
+      { ind: true, tokens: [{ c: 'ide-prop', v: 'fmt' }, { c: 'ide-punc', v: '.' }, { c: 'ide-fn', v: 'Println' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Tredir Sewpaul · CS Graduate & AI Engineer"' }, { c: 'ide-punc', v: ')' }] },
+      { ind: true, tokens: [{ c: 'ide-prop', v: 'fmt' }, { c: 'ide-punc', v: '.' }, { c: 'ide-fn', v: 'Println' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Samsung Future Innovation Lab Graduate"' }, { c: 'ide-punc', v: ')' }] },
+      { ind: true, tokens: [{ c: 'ide-prop', v: 'fmt' }, { c: 'ide-punc', v: '.' }, { c: 'ide-fn', v: 'Println' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Projects shipped: 11"' }, { c: 'ide-punc', v: ')' }] },
+      { ind: true, tokens: [{ c: 'ide-prop', v: 'fmt' }, { c: 'ide-punc', v: '.' }, { c: 'ide-fn', v: 'Println' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Stack: React · C# · Python · Azure"' }, { c: 'ide-punc', v: ')' }] },
+      { ind: true, tokens: [{ c: 'ide-prop', v: 'fmt' }, { c: 'ide-punc', v: '.' }, { c: 'ide-fn', v: 'Println' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Status: Open to opportunities"' }, { c: 'ide-punc', v: ')' }] },
     ],
-    greeting: [{ c: 'ide-prop', v: 'fmt' }, { c: 'ide-punc', v: '.' }, { c: 'ide-fn', v: 'Println' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Hello World!"' }, { c: 'ide-punc', v: ')' }],
+    greeting: [{ c: 'ide-punc', v: '}' }],
     post: [
-      { tokens: [{ c: 'ide-punc', v: '}' }] },
       null,
-      { tokens: [{ c: 'ide-fn', v: 'greet' }, { c: 'ide-punc', v: '()' }] },
+      null,
+      { tokens: [{ c: 'ide-fn', v: 'runPortfolio' }, { c: 'ide-punc', v: '()' }] },
     ],
   },
   // ── C++ ─────────────────────────────────────────────────────────────────────
   {
     lang: 'C++', ext: 'cpp', termCmd: './portfolio',
     pre: [
-      { tokens: [{ c: 'ide-cmt', v: '// portfolio · tredir sewpaul' }] },
+      { tokens: [{ c: 'ide-cmt', v: '// portfolio · Tredir Sewpaul' }] },
       null,
-      { tokens: [{ c: 'ide-kw', v: 'struct ' }, { c: 'ide-var', v: 'Developer' }, { c: 'ide-punc', v: ' {' }] },
-      { ind: true, tokens: [{ c: 'ide-kw', v: 'string ' }, { c: 'ide-var', v: 'name' }, { c: 'ide-punc', v: ' = ' }, { c: 'ide-str', v: '"Tredir Sewpaul"' }, { c: 'ide-punc', v: ';' }] },
-      { ind: true, tokens: [{ c: 'ide-kw', v: 'string ' }, { c: 'ide-var', v: 'role' }, { c: 'ide-punc', v: ' = ' }, { c: 'ide-str', v: '"CS Graduate & AI Engineer"' }, { c: 'ide-punc', v: ';' }] },
-      { ind: true, tokens: [{ c: 'ide-kw', v: 'vector' }, { c: 'ide-punc', v: '<string> ' }, { c: 'ide-var', v: 'passion' }, { c: 'ide-punc', v: ' = {' }, { c: 'ide-str', v: '"ML"' }, { c: 'ide-punc', v: ', ' }, { c: 'ide-str', v: '"Web"' }, { c: 'ide-punc', v: '};' }] },
-      { tokens: [{ c: 'ide-punc', v: '};' }] },
-      null,
-      { tokens: [{ c: 'ide-kw', v: 'void ' }, { c: 'ide-fn', v: 'greet' }, { c: 'ide-punc', v: '() {' }] },
+      { tokens: [{ c: 'ide-kw', v: 'void ' }, { c: 'ide-fn', v: 'runPortfolio' }, { c: 'ide-punc', v: '() {' }] },
+      { ind: true, tokens: [{ c: 'ide-var', v: 'cout' }, { c: 'ide-punc', v: ' << ' }, { c: 'ide-str', v: '"Hello, World!"' }, { c: 'ide-punc', v: ';' }] },
+      { ind: true, tokens: [{ c: 'ide-var', v: 'cout' }, { c: 'ide-punc', v: ' << ' }, { c: 'ide-str', v: '"Tredir Sewpaul · CS Graduate & AI Engineer"' }, { c: 'ide-punc', v: ';' }] },
+      { ind: true, tokens: [{ c: 'ide-var', v: 'cout' }, { c: 'ide-punc', v: ' << ' }, { c: 'ide-str', v: '"Samsung Future Innovation Lab Graduate"' }, { c: 'ide-punc', v: ';' }] },
+      { ind: true, tokens: [{ c: 'ide-var', v: 'cout' }, { c: 'ide-punc', v: ' << ' }, { c: 'ide-str', v: '"Projects shipped: 11"' }, { c: 'ide-punc', v: ';' }] },
+      { ind: true, tokens: [{ c: 'ide-var', v: 'cout' }, { c: 'ide-punc', v: ' << ' }, { c: 'ide-str', v: '"Stack: React · C# · Python · Azure"' }, { c: 'ide-punc', v: ';' }] },
+      { ind: true, tokens: [{ c: 'ide-var', v: 'cout' }, { c: 'ide-punc', v: ' << ' }, { c: 'ide-str', v: '"Status: Open to opportunities"' }, { c: 'ide-punc', v: ';' }] },
     ],
-    greeting: [{ c: 'ide-var', v: 'cout' }, { c: 'ide-punc', v: ' << ' }, { c: 'ide-str', v: '"Hello World!"' }, { c: 'ide-punc', v: ';' }],
+    greeting: [{ c: 'ide-punc', v: '}' }],
     post: [
-      { tokens: [{ c: 'ide-punc', v: '}' }] },
       null,
-      { tokens: [{ c: 'ide-fn', v: 'greet' }, { c: 'ide-punc', v: '();' }] },
+      null,
+      { tokens: [{ c: 'ide-fn', v: 'runPortfolio' }, { c: 'ide-punc', v: '();' }] },
     ],
   },
   // ── PHP ─────────────────────────────────────────────────────────────────────
   {
     lang: 'PHP', ext: 'php', termCmd: 'php portfolio.php',
     pre: [
-      { tokens: [{ c: 'ide-cmt', v: '// portfolio · tredir sewpaul' }] },
+      { tokens: [{ c: 'ide-cmt', v: '// portfolio · Tredir Sewpaul' }] },
       null,
-      { tokens: [{ c: 'ide-var', v: '$developer' }, { c: 'ide-punc', v: ' = [' }] },
-      { ind: true, tokens: [{ c: 'ide-str', v: '"name"' }, { c: 'ide-punc', v: ' => ' }, { c: 'ide-str', v: '"Tredir Sewpaul"' }, { c: 'ide-punc', v: ',' }] },
-      { ind: true, tokens: [{ c: 'ide-str', v: '"role"' }, { c: 'ide-punc', v: ' => ' }, { c: 'ide-str', v: '"CS Graduate & AI Engineer"' }, { c: 'ide-punc', v: ',' }] },
-      { ind: true, tokens: [{ c: 'ide-str', v: '"passion"' }, { c: 'ide-punc', v: ' => [' }, { c: 'ide-str', v: '"ML"' }, { c: 'ide-punc', v: ', ' }, { c: 'ide-str', v: '"Web"' }, { c: 'ide-punc', v: '],' }] },
-      { tokens: [{ c: 'ide-punc', v: '];' }] },
-      null,
-      { tokens: [{ c: 'ide-kw', v: 'function ' }, { c: 'ide-fn', v: 'greet' }, { c: 'ide-punc', v: '() {' }] },
+      { tokens: [{ c: 'ide-kw', v: 'function ' }, { c: 'ide-fn', v: 'runPortfolio' }, { c: 'ide-punc', v: '() {' }] },
+      { ind: true, tokens: [{ c: 'ide-kw', v: 'echo ' }, { c: 'ide-str', v: '"Hello, World!"' }, { c: 'ide-punc', v: ';' }] },
+      { ind: true, tokens: [{ c: 'ide-kw', v: 'echo ' }, { c: 'ide-str', v: '"Tredir Sewpaul · CS Graduate & AI Engineer"' }, { c: 'ide-punc', v: ';' }] },
+      { ind: true, tokens: [{ c: 'ide-kw', v: 'echo ' }, { c: 'ide-str', v: '"Samsung Future Innovation Lab Graduate"' }, { c: 'ide-punc', v: ';' }] },
+      { ind: true, tokens: [{ c: 'ide-kw', v: 'echo ' }, { c: 'ide-str', v: '"Projects shipped: 11"' }, { c: 'ide-punc', v: ';' }] },
+      { ind: true, tokens: [{ c: 'ide-kw', v: 'echo ' }, { c: 'ide-str', v: '"Stack: React · C# · Python · Azure"' }, { c: 'ide-punc', v: ';' }] },
+      { ind: true, tokens: [{ c: 'ide-kw', v: 'echo ' }, { c: 'ide-str', v: '"Status: Open to opportunities"' }, { c: 'ide-punc', v: ';' }] },
     ],
-    greeting: [{ c: 'ide-kw', v: 'echo ' }, { c: 'ide-str', v: '"Hello World!"' }, { c: 'ide-punc', v: ';' }],
+    greeting: [{ c: 'ide-punc', v: '}' }],
     post: [
-      { tokens: [{ c: 'ide-punc', v: '}' }] },
       null,
-      { tokens: [{ c: 'ide-fn', v: 'greet' }, { c: 'ide-punc', v: '();' }] },
+      null,
+      { tokens: [{ c: 'ide-fn', v: 'runPortfolio' }, { c: 'ide-punc', v: '();' }] },
     ],
   },
   // ── Rust ────────────────────────────────────────────────────────────────────
   {
     lang: 'Rust', ext: 'rs', termCmd: 'cargo run',
     pre: [
-      { tokens: [{ c: 'ide-cmt', v: '// portfolio · tredir sewpaul' }] },
+      { tokens: [{ c: 'ide-cmt', v: '// portfolio · Tredir Sewpaul' }] },
       null,
-      { tokens: [{ c: 'ide-kw', v: 'struct ' }, { c: 'ide-var', v: 'Developer' }, { c: 'ide-punc', v: ' {' }] },
-      { ind: true, tokens: [{ c: 'ide-prop', v: 'name' }, { c: 'ide-punc', v: ': ' }, { c: 'ide-kw', v: "&'static str" }, { c: 'ide-punc', v: ',' }] },
-      { ind: true, tokens: [{ c: 'ide-prop', v: 'role' }, { c: 'ide-punc', v: ': ' }, { c: 'ide-kw', v: "&'static str" }, { c: 'ide-punc', v: ',' }] },
-      { ind: true, tokens: [{ c: 'ide-prop', v: 'passion' }, { c: 'ide-punc', v: ': ' }, { c: 'ide-kw', v: 'Vec' }, { c: 'ide-punc', v: '<' }, { c: 'ide-kw', v: "&'static str" }, { c: 'ide-punc', v: '>,' }] },
-      { tokens: [{ c: 'ide-punc', v: '}' }] },
-      null,
-      { tokens: [{ c: 'ide-kw', v: 'fn ' }, { c: 'ide-fn', v: 'greet' }, { c: 'ide-punc', v: '() {' }] },
+      { tokens: [{ c: 'ide-kw', v: 'fn ' }, { c: 'ide-fn', v: 'run_portfolio' }, { c: 'ide-punc', v: '() {' }] },
+      { ind: true, tokens: [{ c: 'ide-fn', v: 'println!' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Hello, World!"' }, { c: 'ide-punc', v: ');' }] },
+      { ind: true, tokens: [{ c: 'ide-fn', v: 'println!' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Tredir Sewpaul · CS Graduate & AI Engineer"' }, { c: 'ide-punc', v: ');' }] },
+      { ind: true, tokens: [{ c: 'ide-fn', v: 'println!' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Samsung Future Innovation Lab Graduate"' }, { c: 'ide-punc', v: ');' }] },
+      { ind: true, tokens: [{ c: 'ide-fn', v: 'println!' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Projects shipped: 11"' }, { c: 'ide-punc', v: ');' }] },
+      { ind: true, tokens: [{ c: 'ide-fn', v: 'println!' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Stack: React · C# · Python · Azure"' }, { c: 'ide-punc', v: ');' }] },
+      { ind: true, tokens: [{ c: 'ide-fn', v: 'println!' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Status: Open to opportunities"' }, { c: 'ide-punc', v: ');' }] },
     ],
-    greeting: [{ c: 'ide-fn', v: 'println!' }, { c: 'ide-punc', v: '(' }, { c: 'ide-str', v: '"Hello World!"' }, { c: 'ide-punc', v: ');' }],
+    greeting: [{ c: 'ide-punc', v: '}' }],
     post: [
-      { tokens: [{ c: 'ide-punc', v: '}' }] },
       null,
-      { tokens: [{ c: 'ide-fn', v: 'greet' }, { c: 'ide-punc', v: '();' }] },
+      null,
+      { tokens: [{ c: 'ide-fn', v: 'run_portfolio' }, { c: 'ide-punc', v: '();' }] },
     ],
   },
 ];
 
-const TERM_LINE_COUNT = 13;
+const TERM_LINE_COUNT = 15;
 
 const LoadingScreen = ({ onEnter }) => {
   const [isVisible, setIsVisible]             = useState(true);
@@ -247,6 +247,8 @@ const LoadingScreen = ({ onEnter }) => {
     { t: 'ok',  v: '  ✓  Status: Open to opportunities' },
     { t: 'blank' },
     { t: 'ctx', v: 'tredir@portfolio  ~/portfolio  (glassomorphism)' },
+    { t: 'blank' },
+    { t: 'rdy', v: '  ▶  Portfolio ready · click "Run Portfolio" below ↓' },
   ];
 
   return (
@@ -356,7 +358,7 @@ const LoadingScreen = ({ onEnter }) => {
                         {g.pre.map((line, i) => (
                           <CodeLine key={i} line={line} />
                         ))}
-                        <div className="ide-line ide-line-ind ide-line-active">
+                        <div className="ide-line ide-line-active">
                           <Tokens tokens={g.greeting} />
                         </div>
                         {g.post.map((line, i) => (

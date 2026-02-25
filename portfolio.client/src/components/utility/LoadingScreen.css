@@ -378,6 +378,7 @@
 .ide-term-dim    { color: #8b949e; font-style: italic; }
 .ide-term-ok     { color: #3fb950; }
 .ide-term-prompt { display: flex; align-items: center; gap: 2px; color: #e6edf3; }
+.ide-term-rdy    { color: #58a6ff; font-weight: 600; letter-spacing: 0.01em; }
 
 /* ── Status bar ────────────────────────────────────────── */
 .ide-statusbar {
