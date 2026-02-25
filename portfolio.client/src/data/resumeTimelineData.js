@@ -63,6 +63,7 @@ export const resumeTimelineData = {
         'Running Azure-based experimentation, ingestion, and model versioning pipelines',
         'Leading weekly technical reviews and cross-team delivery alignment'
       ],
+      technologies: ['Azure OpenAI', 'Python', 'ML.NET', 'Vector Search', 'LLMs', '.NET 9', 'Azure AI Search', 'Application Insights'],
       type: 'work',
       status: 'current'
     },
@@ -77,6 +78,7 @@ export const resumeTimelineData = {
         'Assessment of lab reports and exams',
         'Student mentorship'
       ],
+      technologies: ['Microsoft Word', 'Microsoft Excel', 'LaTeX', 'MATLAB'],
       type: 'work',
       status: 'completed'
     },
@@ -91,6 +93,7 @@ export const resumeTimelineData = {
         'Social media management',
         'Functionality updates'
       ],
+      technologies: ['HTML', 'CSS', 'JavaScript', 'WordPress', 'SEO'],
       type: 'work',
       status: 'completed'
     },
@@ -105,6 +108,7 @@ export const resumeTimelineData = {
         'Catalog creation',
         'Social media management'
       ],
+      technologies: ['HTML', 'CSS', 'JavaScript', 'WooCommerce', 'WordPress', 'cPanel'],
       type: 'work',
       status: 'completed'
     },
@@ -119,6 +123,7 @@ export const resumeTimelineData = {
         'Performance evaluations',
         'Student progress tracking'
       ],
+      technologies: ['Microsoft Word', 'Microsoft Excel', 'Google Classroom'],
       type: 'work',
       status: 'completed'
     },
@@ -133,6 +138,7 @@ export const resumeTimelineData = {
         'Hands-on sessions',
         'STEM advocacy'
       ],
+      technologies: ['Python', 'Scratch', 'Microsoft PowerPoint', 'HTML'],
       type: 'volunteer',
       status: 'current'
     }
