@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import AnimatedBackground from '../components/sections/AnimatedBackground';
 import SEO from '../components/utility/SEO';
-import { Code2, Smartphone, Cloud, Database, Brain, Puzzle, BarChart3, MessageCircle, Users, Target } from 'lucide-react';
+import { Code2, Smartphone, Cloud, Database, Brain, Globe, Puzzle, BarChart3, MessageCircle, Users, Target } from 'lucide-react';
 import './Skills.css';
 
 const Skills = () => {
@@ -45,6 +45,19 @@ const Skills = () => {
   { name: "Word", level: 95 },
         { name: "Excel", level: 90 },
     { name: "PowerPoint", level: 90 }
+      ]
+    },
+    {
+      category: "Azure & Cloud",
+      icon: <Globe size={32} />,
+      skills: [
+        { name: "Azure OpenAI", level: 75 },
+        { name: "Azure Cognitive Services", level: 70 },
+        { name: "Azure Speech", level: 70 },
+        { name: "Azure SQL", level: 70 },
+        { name: "Azure App Service", level: 65 },
+        { name: "Application Insights", level: 65 },
+        { name: "SignalR", level: 75 }
       ]
     },
     {
