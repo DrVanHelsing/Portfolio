@@ -47,7 +47,7 @@ const LoadingScreen = ({ onEnter }) => {
           exit={{ opacity: 0, scale: 1.1 }}
           transition={{ duration: 0.8, ease: [0.43, 0.13, 0.23, 0.96] }}
         >
-          <AnimatedBackground variant="particles" />
+          <AnimatedBackground variant="orbs" />
           
           <div className="welcome-content">
             <AnimatePresence mode="wait">

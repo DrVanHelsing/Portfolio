@@ -2,28 +2,24 @@ import { motion } from 'framer-motion';
 import AnimatedBackground from '../components/sections/AnimatedBackground';
 import SEO from '../components/utility/SEO';
 import { Link } from 'react-router-dom';
-import { MapPin, Monitor, Globe, Brain, GraduationCap } from 'lucide-react';
+import { Monitor, Globe, Brain, GraduationCap } from 'lucide-react';
+import useNoScroll from '../hooks/useNoScroll';
 import './Home.css';
 
  const Home = () => {
+ useNoScroll();
  return (
  <div className="home-page">
- <AnimatedBackground variant="particles" />
+ <AnimatedBackground variant="orbs" />
  
  <div className="home-content">
- {/* Decorative Elements */}
- <div className="floating-orbs">
- <div className="orb orb-1"></div>
- <div className="orb orb-2"></div>
- <div className="orb orb-3"></div>
- </div>
-
  <motion.div 
  className="hero-section"
  initial={{ opacity:0, y:50 }}
  animate={{ opacity:1, y:0 }}
  transition={{ duration:0.8 }}
  >
+ <div className="hero-title-row">
  <motion.h1 
  className="hero-title"
  initial={{ opacity:0, x: -50 }}
@@ -32,6 +28,15 @@ import './Home.css';
  >
  Hi, I'm <span className="highlight">Tredir Sewpaul</span>
  </motion.h1>
+ <motion.img
+ src="/memojis/memoji-star-struck.png"
+ alt="Star struck memoji"
+ className="memoji-name-accent"
+ initial={{ opacity:0, scale:0.5, rotate:-15 }}
+ animate={{ opacity:1, scale:1, rotate:0 }}
+ transition={{ delay:0.4, duration:0.5, type:'spring', stiffness:180 }}
+ />
+ </div>
  
  <motion.h2 
  className="hero-subtitle"
@@ -134,48 +139,36 @@ import './Home.css';
  animate={{ opacity:1 }}
  transition={{ delay:1.2, duration:0.8 }}
  >
- <div className="marquee-content">
- <span>Python</span>
- <span>•</span>
- <span>Java</span>
- <span>•</span>
- <span>C#</span>
- <span>•</span>
- <span>.NET MAUI</span>
- <span>•</span>
- <span>HTML/CSS</span>
- <span>•</span>
- <span>JavaScript</span>
- <span>•</span>
- <span>PHP</span>
- <span>•</span>
- <span>SQL</span>
- <span>•</span>
- <span>MySQL</span>
- <span>•</span>
- <span>Matlab</span>
- <span>•</span>
- <span>Python</span>
- <span>•</span>
- <span>Java</span>
- <span>•</span>
- <span>C#</span>
- <span>•</span>
- <span>.NET MAUI</span>
- <span>•</span>
+ <div className="marquee-content" aria-hidden="false">
+ {/* First copy */}
+ <span>Python</span><span>•</span>
+ <span>Java</span><span>•</span>
+ <span>C#</span><span>•</span>
+ <span>.NET MAUI</span><span>•</span>
+ <span>HTML/CSS</span><span>•</span>
+ <span>JavaScript</span><span>•</span>
+ <span>PHP</span><span>•</span>
+ <span>SQL</span><span>•</span>
+ <span>MySQL</span><span>•</span>
+ <span>Matlab</span><span>•</span>
+ <span>React</span><span>•</span>
+ <span>Python</span><span>•</span>
+ {/* Exact duplicate — makes translateX(-50%) a perfect loop */}
+ <span>Python</span><span>•</span>
+ <span>Java</span><span>•</span>
+ <span>C#</span><span>•</span>
+ <span>.NET MAUI</span><span>•</span>
+ <span>HTML/CSS</span><span>•</span>
+ <span>JavaScript</span><span>•</span>
+ <span>PHP</span><span>•</span>
+ <span>SQL</span><span>•</span>
+ <span>MySQL</span><span>•</span>
+ <span>Matlab</span><span>•</span>
+ <span>React</span><span>•</span>
+ <span>Python</span><span>•</span>
  </div>
  </motion.div>
  
- {/* Availability Badge - Bottom Right */}
- <motion.div 
- className="hero-label availability-badge"
- initial={{ opacity:0, scale:0.8 }}
- animate={{ opacity:1, scale:1 }}
- transition={{ delay:0.1, duration:0.6 }}
- >
- <span className="status-dot"></span>
- Available for opportunities
- </motion.div>
  </div>
  </div>
  );

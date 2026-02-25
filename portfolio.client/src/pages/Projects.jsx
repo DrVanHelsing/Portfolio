@@ -81,6 +81,47 @@ const Projects = () => {
       color: "blue",
       link: "/projects/tictactoe",
       github: "https://github.com/DrVanHelsing/TicTacToe"
+    },
+    {
+      title: "UWC PostGrad Portal",
+      date: "2025 - Present",
+      description: "Comprehensive academic administration portal for postgraduate students with role-based access, dynamic form builder, PDF annotations, digital signatures, and automated email workflows.",
+      technologies: ["React 19", "Firebase", "Cloud Firestore", "EmailJS"],
+      category: "Full-Stack",
+      impact: "6 user roles · 20+ dynamic forms",
+      color: "purple",
+      link: "/projects/postgrad-portal"
+    },
+    {
+      title: "Geology Field Mapping Sim",
+      date: "2025 - Present",
+      description: "3D structural geology field mapping simulator with procedural terrain generation, real-time water dynamics, PBR shading, and interactive field instruments for geological education.",
+      technologies: ["Three.js", "React", "WebGL", "Simplex Noise"],
+      category: "3D Simulation",
+      impact: "2 km² terrain · 148K vertices",
+      color: "indigo",
+      link: "/projects/geology-sim"
+    },
+    {
+      title: "Physics Lab IDE",
+      date: "2025 - Present",
+      description: "Visual block-based programming environment for physics simulations. Drag-and-drop Blockly editor with live 3D preview, code generation, and experiment templates.",
+      technologies: ["React", "Blockly", "GlowScript", "VPython"],
+      category: "Education",
+      impact: "23 custom blocks · 5 templates",
+      color: "blue",
+      link: "/projects/physics-lab"
+    },
+    {
+      title: "Hide Distracting Items",
+      date: "2025",
+      description: "Privacy-preserving Chrome extension to permanently hide ads, pop-ups, and distracting elements with smart ad container detection, per-site persistence, and zero network requests.",
+      technologies: ["JavaScript", "Chrome Extension", "Manifest V3", "CSS"],
+      category: "Browser Extension",
+      impact: "Zero network requests · 100% local",
+      color: "purple",
+      link: "/projects/anti-temu",
+      github: "https://github.com/DrVanHelsing/AntiTemu"
     }
   ];
   const containerVariants = {
@@ -106,7 +147,7 @@ const Projects = () => {
         keywords="portfolio projects, web development projects, mobile apps, cloud architecture, react projects"
         path="/projects"
       />
-      <AnimatedBackground variant="particles" />
+      <AnimatedBackground variant="orbs" />
       
  <motion.div 
         className="projects-container"
@@ -114,9 +155,16 @@ const Projects = () => {
    animate="visible"
       variants={containerVariants}
   >
-        <motion.h1 className="page-title" variants={cardVariants}>
-          Projects & Portfolio
-        </motion.h1>
+        <div className="page-title-row">
+          <motion.h1 className="page-title" variants={cardVariants}>
+            Projects & Portfolio
+          </motion.h1>
+          <img
+            src="/memojis/memoji-peeking-fingers.png"
+            alt="Peeking memoji"
+            className="memoji-page-float"
+          />
+        </div>
         
         <motion.p className="page-subtitle" variants={cardVariants}>
      A showcase of my recent work and technical achievements

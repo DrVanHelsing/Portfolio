@@ -16,7 +16,7 @@ const GodsEye = () => {
   return (
     <div className="project-detail-page">
       <SEO title="GodsEye - Gesture Control | Tredir Sewpaul" description="Experimental gesture-controlled gaming mouse using facial gestures and eye tracking" path="/projects/godseye" />
-      <AnimatedBackground variant="particles" />
+      <AnimatedBackground variant="orbs" />
       
       <motion.div className="project-detail-container" initial={{opacity:0}} animate={{opacity:1}}>
         <Link to="/projects" className="back-link" style={{display:'inline-flex',alignItems:'center',gap:'8px',color:'var(--apple-blue)',marginBottom:'var(--spacing-xl)',textDecoration:'none'}}>

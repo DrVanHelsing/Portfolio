@@ -99,7 +99,7 @@ category: "Web Development",
         keywords="technical skills, react, javascript, .net, cloud computing, azure, devops, web development skills"
         path="/skills"
       />
-      <AnimatedBackground variant="particles" />
+      <AnimatedBackground variant="orbs" />
       
       <motion.div 
   className="skills-container"
@@ -107,9 +107,16 @@ category: "Web Development",
      animate="visible"
         variants={containerVariants}
       >
-        <motion.h1 className="page-title" variants={categoryVariants}>
-          Skills & Expertise
-        </motion.h1>
+        <div className="page-title-row">
+          <motion.h1 className="page-title" variants={categoryVariants}>
+            Skills & Expertise
+          </motion.h1>
+          <img
+            src="/memojis/memoji-tada-pose.png"
+            alt="Ta-da"
+            className="memoji-page-float"
+          />
+        </div>
         
       <motion.p className="page-subtitle" variants={categoryVariants}>
      Technologies and tools I work with to build amazing solutions

@@ -250,6 +250,71 @@ export const resumeTimelineData = {
       status: 'completed',
       github: 'https://github.com/DrVanHelsing/TicTacToe',
       link: '/projects/tictactoe'
+    },
+    {
+      id: 'postgrad-portal',
+      period: '2025 - Present',
+      title: 'UWC PostGrad Portal',
+      description: 'Comprehensive academic administration portal with role-based access and dynamic form builder',
+      technologies: ['React 19', 'Firebase', 'Cloud Firestore', 'EmailJS'],
+      highlights: [
+        '6 user roles with granular permissions',
+        '20+ dynamic forms with drag-and-drop builder',
+        'PDF annotations and digital signatures',
+        'Automated email workflows'
+      ],
+      type: 'project',
+      status: 'ongoing',
+      link: '/projects/postgrad-portal'
+    },
+    {
+      id: 'geology-sim',
+      period: '2025 - Present',
+      title: 'Geology Field Mapping Sim',
+      description: '3D structural geology field mapping simulator with procedural terrain and field instruments',
+      technologies: ['Three.js', 'React', 'WebGL', 'Simplex Noise'],
+      highlights: [
+        '2 km² procedural terrain with 148K vertices',
+        '6 stratigraphic rock layers with PBR shading',
+        'Real-time water dynamics and vegetation',
+        '5 interactive field instruments'
+      ],
+      type: 'project',
+      status: 'ongoing',
+      link: '/projects/geology-sim'
+    },
+    {
+      id: 'physics-lab',
+      period: '2025 - Present',
+      title: 'Physics Lab IDE',
+      description: 'Visual block-based programming environment for physics simulations',
+      technologies: ['React', 'Blockly', 'GlowScript', 'VPython'],
+      highlights: [
+        '23 custom Blockly blocks for physics',
+        '5 experiment templates with guided mode',
+        'Live 3D simulation preview',
+        '4 export formats (Python, JS, PDF, JSON)'
+      ],
+      type: 'project',
+      status: 'ongoing',
+      link: '/projects/physics-lab'
+    },
+    {
+      id: 'anti-temu',
+      period: '2025',
+      title: 'Hide Distracting Items',
+      description: 'Privacy-preserving Chrome extension to permanently hide ads and distracting elements',
+      technologies: ['JavaScript', 'Chrome Extension', 'Manifest V3'],
+      highlights: [
+        'Smart ad container detection with heuristic scoring',
+        'Per-site persistence via chrome.storage.local',
+        'Zero network requests — 100% local',
+        'Two themes: Default and Tactical Sniper'
+      ],
+      type: 'project',
+      status: 'completed',
+      github: 'https://github.com/DrVanHelsing/AntiTemu',
+      link: '/projects/anti-temu'
     }
   ],
   achievements: [

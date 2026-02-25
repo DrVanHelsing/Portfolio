@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useForm, ValidationError } from '@formspree/react';
 import { motion } from 'framer-motion';
 import AnimatedBackground from '../components/sections/AnimatedBackground';
 import SEO from '../components/utility/SEO';
@@ -6,6 +7,8 @@ import { Mail, User, MessageSquare, Send, CheckCircle, AlertCircle, Phone, MapPi
 import './Contact.css';
 
 const Contact = () => {
+  const [state, formspreeSubmit] = useForm('mbdaqvqn');
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -13,9 +16,7 @@ const Contact = () => {
     message: ''
   });
 
-  const [formStatus, setFormStatus] = useState('');
   const [errors, setErrors] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validateForm = () => {
     const newErrors = {};
@@ -59,36 +60,10 @@ const Contact = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    
-    if (!validateForm()) {
-      return;
-    }
-    
-    setIsSubmitting(true);
-    setFormStatus('sending');
-    
-    try {
-      // TODO: Replace with actual backend integration
-      // Example: FormSpree, EmailJS, or Azure Functions
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      setFormStatus('success');
-      setFormData({ name: '', email: '', subject: '', message: '' });
-      setErrors({});
-      
-      setTimeout(() => {
-        setFormStatus('');
-      }, 5000);
-    } catch (_error) {
-      setFormStatus('error');
-      setTimeout(() => {
-        setFormStatus('');
-      }, 5000);
-    } finally {
-      setIsSubmitting(false);
-    }
+    if (!validateForm()) return;
+    formspreeSubmit(formData);
   };
 
   const containerVariants = {
@@ -114,7 +89,7 @@ const Contact = () => {
         keywords="contact developer, hire developer, collaboration, project inquiry, get in touch"
         path="/contact"
       />
-      <AnimatedBackground variant="particles" />
+      <AnimatedBackground variant="orbs" />
       
       <motion.div 
         className="contact-container"
@@ -122,9 +97,16 @@ const Contact = () => {
         animate="visible"
         variants={containerVariants}
     >
-  <motion.h1 className="page-title" variants={itemVariants}>
-          Get In Touch
-      </motion.h1>
+  <div className="contact-title-row">
+      <motion.h1 className="page-title" variants={itemVariants}>
+            Get In Touch
+          </motion.h1>
+          <img
+            src="/memojis/memoji-heart-eyes.png"
+            alt="Heart eyes memoji"
+            className="memoji-title-accent"
+          />
+        </div>
   
    <motion.p className="page-subtitle" variants={itemVariants}>
 Let's discuss your next project or opportunity
@@ -199,6 +181,7 @@ Let's discuss your next project or opportunity
           placeholder="Your name"
       />
               {errors.name && <span className="error-message">{errors.name}</span>}
+              <ValidationError prefix="Name" field="name" errors={state.errors} className="error-message" />
             </div>
 
        <div className={`form-group ${errors.email ? 'error' : ''}`}>
@@ -215,6 +198,7 @@ Let's discuss your next project or opportunity
           placeholder="your.email@example.com"
      />
               {errors.email && <span className="error-message">{errors.email}</span>}
+              <ValidationError prefix="Email" field="email" errors={state.errors} className="error-message" />
             </div>
 
             <div className={`form-group ${errors.subject ? 'error' : ''}`}>
@@ -231,6 +215,7 @@ Let's discuss your next project or opportunity
      placeholder="What's this about?"
               />
               {errors.subject && <span className="error-message">{errors.subject}</span>}
+              <ValidationError prefix="Subject" field="subject" errors={state.errors} className="error-message" />
         </div>
 
          <div className={`form-group ${errors.message ? 'error' : ''}`}>
@@ -247,14 +232,15 @@ Let's discuss your next project or opportunity
                 placeholder="Tell me about your project..."
       ></textarea>
               {errors.message && <span className="error-message">{errors.message}</span>}
+              <ValidationError prefix="Message" field="message" errors={state.errors} className="error-message" />
           </div>
 
             <button 
               type="submit" 
-     className="submit-button"
-            disabled={isSubmitting}
-      >
-              {isSubmitting ? (
+              className="submit-button"
+              disabled={state.submitting}
+            >
+              {state.submitting ? (
                 <>
                   <span className="spinner"></span>
                   Sending...
@@ -267,14 +253,15 @@ Let's discuss your next project or opportunity
               )}
             </button>
 
-    {formStatus === 'success' && (
-            <div className="form-message success">
-              <CheckCircle size={20} />
-              Message sent successfully! I'll get back to you soon.
-       </div>
+            {state.succeeded && (
+              <div className="form-message success">
+                <img src="/memojis/memoji-thumbs-up.png" alt="Thumbs up" className="memoji-success" />
+                <CheckCircle size={20} />
+                <span>Message sent successfully! I&apos;ll get back to you soon.</span>
+              </div>
             )}
-            
-            {formStatus === 'error' && (
+
+            {state.errors && state.errors.length > 0 && (
               <div className="form-message error">
                 <AlertCircle size={20} />
                 Failed to send message. Please try again or email me directly.

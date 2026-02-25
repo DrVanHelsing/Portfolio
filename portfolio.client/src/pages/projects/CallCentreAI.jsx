@@ -35,7 +35,7 @@ const CallCentreAI = () => {
   return (
     <div className="project-detail-page">
       <SEO title="Telkom AI Call Centre | Tredir Sewpaul" description="AI-assisted customer engagement platform with real-time supervision and cross-platform support" path="/projects/callcentre-ai" />
-      <AnimatedBackground variant="particles" />
+      <AnimatedBackground variant="orbs" />
       
       <motion.div className="project-detail-container" initial={{opacity:0}} animate={{opacity:1}}>
         <Link to="/projects" className="back-link" style={{display:'inline-flex',alignItems:'center',gap:'8px',color:'var(--apple-blue)',marginBottom:'var(--spacing-xl)',textDecoration:'none'}}>

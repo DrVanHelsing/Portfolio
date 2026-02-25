@@ -209,7 +209,7 @@ const StudentLink = () => {
         description="Comprehensive AI-powered career readiness platform with CV analysis, mock interviews, and job recommendations" 
         path="/projects/studentlink" 
       />
-      <AnimatedBackground variant="particles" />
+      <AnimatedBackground variant="orbs" />
       
       <motion.div 
         className="project-detail-container" 

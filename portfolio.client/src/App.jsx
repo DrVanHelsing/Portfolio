@@ -25,6 +25,10 @@ const CallCentreAI = lazy(() => import('./pages/projects/CallCentreAI'));
 const GodsEye = lazy(() => import('./pages/projects/GodsEye'));
 const Hangman = lazy(() => import('./pages/projects/Hangman'));
 const TicTacToe = lazy(() => import('./pages/projects/TicTacToe'));
+const PostGradPortal = lazy(() => import('./pages/projects/PostGradPortal'));
+const GeologyFieldSim = lazy(() => import('./pages/projects/GeologyFieldSim'));
+const PhysicsLab = lazy(() => import('./pages/projects/PhysicsLab'));
+const AntiTemu = lazy(() => import('./pages/projects/AntiTemu'));
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -65,6 +69,10 @@ function App() {
                     <Route path="/projects/godseye" element={<GodsEye />} />
                     <Route path="/projects/hangman" element={<Hangman />} />
                     <Route path="/projects/tictactoe" element={<TicTacToe />} />
+                    <Route path="/projects/postgrad-portal" element={<PostGradPortal />} />
+                    <Route path="/projects/geology-sim" element={<GeologyFieldSim />} />
+                    <Route path="/projects/physics-lab" element={<PhysicsLab />} />
+                    <Route path="/projects/anti-temu" element={<AntiTemu />} />
                     <Route path="/skills" element={<Skills />} />
                     <Route path="/resume" element={<Resume />} />
                     <Route path="/experience" element={<Resume />} />

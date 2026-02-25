@@ -11,7 +11,8 @@ export default function AnimatedChart({
   showLabels = true,
   showValues = false,
   animate = true,
-  colorMap = null // For pie/donut charts
+  colorMap = null, // For pie/donut/bar charts
+  title = null // Optional chart title
 }) {
   const maxValue = max ?? Math.max(...data.map(d => d.value), 1);
   
@@ -19,6 +20,7 @@ export default function AnimatedChart({
   const pieData = useMemo(() => {
     if (type !== 'pie' && type !== 'donut') return null;
     const total = data.reduce((sum, d) => sum + d.value, 0);
+    if (total === 0) return [];
     let currentAngle = -90; // Start at top
     return data.map((d, i) => {
       const percentage = (d.value / total) * 100;
@@ -53,7 +55,8 @@ export default function AnimatedChart({
   }, [data, maxValue, type]);
 
   return (
-    <div className="animated-chart-root" style={{ height }}>
+    <div className="animated-chart-root" style={{ height: title ? height + 32 : height }}>
+      {title && <div className="animated-chart-title">{title}</div>}
       {/* Bar Chart */}
       {type === 'bar' && (
         <div className="animated-chart-bars">
@@ -65,7 +68,9 @@ export default function AnimatedChart({
                 animate={{ height: `${(d.value / maxValue) * 100}%`, opacity: 1 }}
                 transition={{ delay: i * 0.05, duration: 0.6, type: 'spring' }}
                 style={{
-                  background: `linear-gradient(180deg, ${gradient[0]}, ${gradient[1]})`
+                  background: colorMap?.[d.label]
+                    ? colorMap[d.label]
+                    : `linear-gradient(180deg, ${gradient[0]}, ${gradient[1]})`
                 }}
                 title={`${d.label}: ${d.value}`}
               />

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import AnimatedBackground from '../components/sections/AnimatedBackground';
 import SEO from '../components/utility/SEO';
-import { Lightbulb, Zap, Users, BookOpen } from 'lucide-react';
+import { Zap, Users, BookOpen, Lightbulb } from 'lucide-react';
 import './About.css';
 
 const About = () => {
@@ -27,7 +27,7 @@ const About = () => {
    path="/about"
  />
  {/* Background is rendered visually and now explicitly used */}
- <AnimatedBackground variant="particles" />
+ <AnimatedBackground variant="orbs" />
 
  <motion.div
  className="about-container"
@@ -40,7 +40,7 @@ const About = () => {
  </motion.h1>
 
  <div className="about-content">
- <motion.div className="about-intro" variants={itemVariants}>
+ <motion.div className="about-intro about-intro--with-memoji" variants={itemVariants}>
  <div className="intro-text">
  <h2>Hello! I'm Tredir Sewpaul</h2>
  <p>
@@ -54,8 +54,11 @@ const About = () => {
  I completed a university-certified Continuing Education programme with the Samsung Future Innovation Lab (Mar–Dec 2025), covering multi-platform solutions, .NET/C#, AI-assisted development (GitHub Copilot, ChatGPT), cloud integration, Design Thinking, and SDG-aligned innovation through industry-moderated projects.
  Currently, I’m an AI Engineering Intern and Technical Lead, guiding architecture across supervised ML, LLM reasoning/summarisation, vector search, and Azure-based pipelines, while driving explainability, governance, and cross-team delivery.
  </p>
- </div>
- </motion.div>
+ </div> <img
+ src="/memojis/memoji-party-time.png"
+ alt="Tredir celebrating"
+ className="memoji-intro"
+ /> </motion.div>
 
          <motion.div className="education-section" variants={itemVariants}>
  <h2>Education</h2>

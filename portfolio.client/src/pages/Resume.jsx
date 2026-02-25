@@ -17,9 +17,16 @@ const Resume = () => {
         path="/resume"
       />
       
-      {/* Animated background particles */}
-      <AnimatedBackground variant="particles" />
+      {/* Animated background */}
+      <AnimatedBackground variant="orbs" />
       
+      {/* Thumbs-up memoji accent */}
+      <img
+        src="/memojis/memoji-thumbs-up.png"
+        alt="Thumbs up"
+        className="memoji-resume-float"
+      />
+
       {/* Modern timeline with resume data */}
       <TimelineModern />
     </div>
