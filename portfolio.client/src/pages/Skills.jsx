@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import AnimatedBackground from '../components/sections/AnimatedBackground';
 import SEO from '../components/utility/SEO';
-import { Code2, Smartphone, Cloud, Database, Brain, Globe, Puzzle, BarChart3, MessageCircle, Users, Target } from 'lucide-react';
+import { Code2, Server, Smartphone, Cloud, Database, Brain, Globe, Puzzle, BarChart3, MessageCircle, Users, Target } from 'lucide-react';
 import './Skills.css';
 
 const Skills = () => {
