@@ -380,11 +380,12 @@ export function getTimelineEntries() {
   
   // Add projects
   resumeTimelineData.projects.forEach(proj => {
+    const hasDash = proj.period.includes(' - ');
     entries.push({
       ...proj,
       category: 'project',
-      startDate: proj.period,
-      endDate: proj.period
+      startDate: hasDash ? proj.period.split(' - ')[0] : proj.period,
+      endDate:   hasDash ? (proj.period.includes('Present') ? 'Present' : proj.period.split(' - ')[1]) : proj.period
     });
   });
   
