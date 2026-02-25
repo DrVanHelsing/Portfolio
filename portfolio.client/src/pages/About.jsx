@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
-import AnimatedBackground from '../components/AnimatedBackground';
-import SEO from '../components/SEO';
+import AnimatedBackground from '../components/sections/AnimatedBackground';
+import SEO from '../components/utility/SEO';
 import { Lightbulb, Zap, Users, BookOpen } from 'lucide-react';
 import './About.css';
 

@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import AnimatedBackground from '../../components/AnimatedBackground';
-import AnimatedChart from '../../components/AnimatedChart';
-import TechIconChip from '../../components/TechIconChip';
-import ArchitectureDiagram from '../../components/ArchitectureDiagram';
-import SEO from '../../components/SEO';
+import AnimatedBackground from '../../components/sections/AnimatedBackground';
+import AnimatedChart from '../../components/sections/AnimatedChart';
+import TechIconChip from '../../components/ui/TechIconChip';
+import ArchitectureDiagram from '../../components/sections/ArchitectureDiagram';
+import SEO from '../../components/utility/SEO';
 import { 
   ArrowLeft, Eye, AlertTriangle, Calendar, Zap, Target, Camera, 
   Crosshair, MousePointer2, Hand, Users, TrendingUp, Sparkles,

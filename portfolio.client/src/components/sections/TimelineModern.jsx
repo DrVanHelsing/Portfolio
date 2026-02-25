@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { resumeTimelineData } from '../data/resumeTimelineData';
+import { resumeTimelineData } from '../../data/resumeTimelineData';
 import './TimelineModern.css';
 
 /**

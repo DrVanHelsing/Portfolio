@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import AnimatedBackground from '../../components/AnimatedBackground';
-import SEO from '../../components/SEO';
-import AnimatedChart from '../../components/AnimatedChart';
-import TechIconChip from '../../components/TechIconChip';
-import ArchitectureDiagram from '../../components/ArchitectureDiagram';
+import AnimatedBackground from '../../components/sections/AnimatedBackground';
+import SEO from '../../components/utility/SEO';
+import AnimatedChart from '../../components/sections/AnimatedChart';
+import TechIconChip from '../../components/ui/TechIconChip';
+import ArchitectureDiagram from '../../components/sections/ArchitectureDiagram';
 import { ArrowLeft, Phone, Lock, Zap, Calendar, BarChart3, MessageCircle, Eye, Users, Bell, FileText, Headphones, Smartphone, Settings, TrendingUp, Hash, MapPin, Languages, BookOpen, AlertTriangle, Server, Database, GitBranch, Brain, Globe, Activity } from 'lucide-react';
 import './ProjectDetail.css';
 

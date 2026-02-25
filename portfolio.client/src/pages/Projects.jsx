@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import AnimatedBackground from '../components/AnimatedBackground';
-import SEO from '../components/SEO';
+import AnimatedBackground from '../components/sections/AnimatedBackground';
+import SEO from '../components/utility/SEO';
 import { Sparkles } from 'lucide-react';
 import './Projects.css';
 

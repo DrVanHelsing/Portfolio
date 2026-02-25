@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import AnimatedBackground from '../components/AnimatedBackground';
-import SEO from '../components/SEO';
+import AnimatedBackground from '../components/sections/AnimatedBackground';
+import SEO from '../components/utility/SEO';
 import { Mail, User, MessageSquare, Send, CheckCircle, AlertCircle, Phone, MapPin } from 'lucide-react';
 import './Contact.css';
 

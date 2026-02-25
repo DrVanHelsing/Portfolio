@@ -1,14 +1,14 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import AnimatedBackground from '../../components/AnimatedBackground';
-import TechIconChip from '../../components/TechIconChip';
-import SEO from '../../components/SEO';
+import AnimatedBackground from '../../components/sections/AnimatedBackground';
+import TechIconChip from '../../components/ui/TechIconChip';
+import SEO from '../../components/utility/SEO';
 import { 
   ArrowLeft, Brain, Code2, CheckCircle2, BookOpen, TrendingUp, BarChart3, 
   Zap, Target, Calendar, GitBranch, Layers, Activity, Sparkles, FolderTree
 } from 'lucide-react';
 import './ProjectDetail.css';
-import '../../components/ArchitectureDiagram.css';
+import '../../components/sections/ArchitectureDiagram.css';
 
 const MachineLearning = () => {
   const containerVariants = {

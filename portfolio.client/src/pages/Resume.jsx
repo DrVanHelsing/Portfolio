@@ -1,6 +1,6 @@
-import SEO from '../components/SEO';
-import AnimatedBackground from '../components/AnimatedBackground';
-import TimelineModern from '../components/TimelineModern';
+import SEO from '../components/utility/SEO';
+import AnimatedBackground from '../components/sections/AnimatedBackground';
+import TimelineModern from '../components/sections/TimelineModern';
 import './Resume.css';
 
 /**

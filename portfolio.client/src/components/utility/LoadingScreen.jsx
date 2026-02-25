@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
-import AnimatedBackground from './AnimatedBackground';
+import AnimatedBackground from '../sections/AnimatedBackground';
 import './LoadingScreen.css';
 
 const LoadingScreen = ({ onEnter }) => {

@@ -2,11 +2,11 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { useState, useEffect, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Navigation from './components/Navigation';
-import Footer from './components/Footer';
-import LoadingScreen from './components/LoadingScreen';
-import ScrollToTop from './components/ScrollToTop';
-import SkipLink from './components/SkipLink';
+import Navigation from './components/layout/Navigation';
+import Footer from './components/layout/Footer';
+import LoadingScreen from './components/utility/LoadingScreen';
+import ScrollToTop from './components/ui/ScrollToTop';
+import SkipLink from './components/layout/SkipLink';
 import './App.css';
 
 // Lazy load pages for code splitting

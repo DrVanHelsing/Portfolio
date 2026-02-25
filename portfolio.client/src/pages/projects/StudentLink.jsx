@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import AnimatedBackground from '../../components/AnimatedBackground';
-import TechIconChip from '../../components/TechIconChip';
-import ArchitectureDiagram from '../../components/ArchitectureDiagram';
-import SEO from '../../components/SEO';
+import AnimatedBackground from '../../components/sections/AnimatedBackground';
+import TechIconChip from '../../components/ui/TechIconChip';
+import ArchitectureDiagram from '../../components/sections/ArchitectureDiagram';
+import SEO from '../../components/utility/SEO';
 import { 
   ArrowLeft, Users, Lock, Briefcase, Calendar, BarChart3, TrendingUp, Zap, Target,
   Brain, FileText, Search, Shield, Cloud, Smartphone, Monitor, Server,
@@ -13,7 +13,7 @@ import {
   User, Building2, GraduationCap, Mic, Video, CheckCircle2, Image
 } from 'lucide-react';
 import './ProjectDetail.css';
-import '../../components/ArchitectureDiagram.css';
+import '../../components/sections/ArchitectureDiagram.css';
 
 // Screenshot data for galleries
 const STUDENT_WEB_SCREENSHOTS = [

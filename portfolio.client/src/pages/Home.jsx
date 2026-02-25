@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
-import AnimatedBackground from '../components/AnimatedBackground';
-import SEO from '../components/SEO';
+import AnimatedBackground from '../components/sections/AnimatedBackground';
+import SEO from '../components/utility/SEO';
 import { Link } from 'react-router-dom';
 import { MapPin, Monitor, Globe, Brain, GraduationCap } from 'lucide-react';
 import './Home.css';

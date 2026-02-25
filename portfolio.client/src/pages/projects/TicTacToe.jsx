@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import AnimatedBackground from '../../components/AnimatedBackground';
-import TechIconChip from '../../components/TechIconChip';
-import SEO from '../../components/SEO';
+import AnimatedBackground from '../../components/sections/AnimatedBackground';
+import TechIconChip from '../../components/ui/TechIconChip';
+import SEO from '../../components/utility/SEO';
 import { ArrowLeft, Grid3x3, Calendar, Users, Cpu, BookOpen } from 'lucide-react';
 import './ProjectDetail.css';
 
