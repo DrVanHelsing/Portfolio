@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import AnimatedBackground from '../components/sections/AnimatedBackground';
 import SEO from '../components/utility/SEO';
 import { Zap, Users, BookOpen, Lightbulb, Award, GraduationCap, Trophy } from 'lucide-react';
 import './About.css';
@@ -27,7 +26,6 @@ const About = () => {
    path="/about"
  />
  {/* Background is rendered visually and now explicitly used */}
- <AnimatedBackground variant="orbs" />
 
  <motion.div
  className="about-container"

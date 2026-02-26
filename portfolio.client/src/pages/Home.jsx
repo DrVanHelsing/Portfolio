@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import AnimatedBackground from '../components/sections/AnimatedBackground';
 import SEO from '../components/utility/SEO';
 import { Link } from 'react-router-dom';
 import { Monitor, Brain, GraduationCap, Cloud } from 'lucide-react';
@@ -10,7 +9,6 @@ import './Home.css';
  useNoScroll();
  return (
  <div className="home-page">
- <AnimatedBackground variant="orbs" />
  
  <div className="home-content">
  <motion.div 

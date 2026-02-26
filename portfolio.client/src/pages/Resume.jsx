@@ -1,5 +1,4 @@
 import SEO from '../components/utility/SEO';
-import AnimatedBackground from '../components/sections/AnimatedBackground';
 import TimelineModern from '../components/sections/TimelineModern';
 import './Resume.css';
 
@@ -17,8 +16,7 @@ const Resume = () => {
         path="/resume"
       />
       
-      {/* Animated background */}
-      <AnimatedBackground variant="orbs" />
+      {/* Animated background rendered at App level */}
       
       {/* Thumbs-up memoji accent */}
       <img

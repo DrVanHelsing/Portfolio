@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useForm, ValidationError } from '@formspree/react';
 import { motion } from 'framer-motion';
-import AnimatedBackground from '../components/sections/AnimatedBackground';
 import SEO from '../components/utility/SEO';
 import { Mail, User, MessageSquare, Send, CheckCircle, AlertCircle, Phone, MapPin } from 'lucide-react';
 import './Contact.css';
@@ -89,7 +88,6 @@ const Contact = () => {
         keywords="contact developer, hire developer, collaboration, project inquiry, get in touch"
         path="/contact"
       />
-      <AnimatedBackground variant="orbs" />
       
       <motion.div 
         className="contact-container"

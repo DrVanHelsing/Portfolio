@@ -4,6 +4,7 @@ import { useState, useEffect, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navigation from './components/layout/Navigation';
 import Footer from './components/layout/Footer';
+import AnimatedBackground from './components/sections/AnimatedBackground';
 import LoadingScreen from './components/utility/LoadingScreen';
 import ScrollToTop from './components/ui/ScrollToTop';
 import SkipLink from './components/layout/SkipLink';
@@ -64,6 +65,7 @@ function App() {
                 ease: [0.43, 0.13, 0.23, 0.96]
               }}
             >
+              <AnimatedBackground variant="orbs" />
               <SkipLink />
               <Navigation />
               <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>

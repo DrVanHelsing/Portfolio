@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import AnimatedBackground from '../components/sections/AnimatedBackground';
 import SEO from '../components/utility/SEO';
 import { Code2, Server, Smartphone, Cloud, Database, Brain, Globe, Puzzle, BarChart3, MessageCircle, Users, Target } from 'lucide-react';
 import './Skills.css';
@@ -112,7 +111,6 @@ category: "Web Development",
         keywords="technical skills, react, javascript, .net, cloud computing, azure, devops, web development skills"
         path="/skills"
       />
-      <AnimatedBackground variant="orbs" />
       
       <motion.div 
   className="skills-container"

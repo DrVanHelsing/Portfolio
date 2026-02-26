@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import AnimatedBackground from '../../components/sections/AnimatedBackground';
 import AnimatedChart from '../../components/sections/AnimatedChart';
 import TechIconChip from '../../components/ui/TechIconChip';
 import ArchitectureDiagram from '../../components/sections/ArchitectureDiagram';
@@ -64,7 +63,6 @@ const FinanceBuddy = () => {
         keywords="financial app, .NET MAUI, Azure OpenAI, gamification, hackathon project"
         path="/projects/financebuddy"
       />
-      <AnimatedBackground variant="orbs" />
       
       <motion.div
         className="project-detail-container"

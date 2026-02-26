@@ -195,6 +195,11 @@
   align-items: stretch;
 }
 
+/* Override sibling margin inside grid so cards are equal height */
+.awards-grid > .education-card + .education-card {
+  margin-top: 0;
+}
+
 .highlight-badge {
   background: var(--accent-bg);
   border: 1px solid var(--accent-border);

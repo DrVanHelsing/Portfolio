@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import AnimatedBackground from '../../components/sections/AnimatedBackground';
 import TechIconChip from '../../components/ui/TechIconChip';
 import ArchitectureDiagram from '../../components/sections/ArchitectureDiagram';
 import SEO from '../../components/utility/SEO';
@@ -209,7 +208,6 @@ const StudentLink = () => {
         description="Comprehensive AI-powered career readiness platform with CV analysis, mock interviews, and job recommendations" 
         path="/projects/studentlink" 
       />
-      <AnimatedBackground variant="orbs" />
       
       <motion.div 
         className="project-detail-container" 

@@ -1,7 +1,6 @@
 import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import AnimatedBackground from '../components/sections/AnimatedBackground';
 import SEO from '../components/utility/SEO';
 import { Sparkles, Search, X } from 'lucide-react';
 import './Projects.css';
@@ -172,8 +171,8 @@ const Projects = () => {
         keywords="portfolio projects, web development projects, mobile apps, cloud architecture, react projects"
         path="/projects"
       />
-      <AnimatedBackground variant="orbs" />
       
+ 
  <motion.div 
         className="projects-container"
    initial="hidden"

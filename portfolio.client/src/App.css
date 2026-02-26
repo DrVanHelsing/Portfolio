@@ -20,7 +20,8 @@ body {
 .app {
   min-height: 100vh;
   position: relative;
-  overflow-x: hidden;
+  overflow-x: clip;   /* clip instead of hidden — prevents scroll containers */
+  overflow-y: visible; /* allow normal vertical scroll */
 }
 
 .main-content {

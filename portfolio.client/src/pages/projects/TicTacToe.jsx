@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import AnimatedBackground from '../../components/sections/AnimatedBackground';
 import TechIconChip from '../../components/ui/TechIconChip';
 import SEO from '../../components/utility/SEO';
 import { ArrowLeft, Grid3x3, Calendar, Users, Cpu, BookOpen } from 'lucide-react';
@@ -10,7 +9,6 @@ const TicTacToe = () => {
   return (
     <div className="project-detail-page">
       <SEO title="Tic Tac Toe | Tredir Sewpaul" description="Classic Tic Tac Toe game with two-player and AI opponent modes" path="/projects/tictactoe" />
-      <AnimatedBackground variant="orbs" />
       
       <motion.div className="project-detail-container" initial={{opacity:0}} animate={{opacity:1}}>
         <Link to="/projects" className="back-link" style={{display:'inline-flex',alignItems:'center',gap:'8px',color:'var(--apple-blue)',marginBottom:'var(--spacing-xl)',textDecoration:'none'}}>

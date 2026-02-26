@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import AnimatedBackground from '../../components/sections/AnimatedBackground';
 import AnimatedChart from '../../components/sections/AnimatedChart';
 import TechIconChip from '../../components/ui/TechIconChip';
 import ArchitectureDiagram from '../../components/sections/ArchitectureDiagram';
@@ -61,7 +60,6 @@ const GeologyFieldSim = () => {
         keywords="geology simulator, Three.js, WebGL, procedural terrain, PBR rendering, field mapping, 3D"
         path="/projects/geology-sim"
       />
-      <AnimatedBackground variant="orbs" />
 
       <motion.div className="project-detail-container" initial="hidden" animate="visible" variants={containerVariants}>
         <Link to="/projects" className="back-link" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--apple-blue)', marginBottom: 'var(--spacing-xl)', textDecoration: 'none' }}>
