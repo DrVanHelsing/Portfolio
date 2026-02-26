@@ -1,11 +1,15 @@
+import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import AnimatedBackground from '../components/sections/AnimatedBackground';
 import SEO from '../components/utility/SEO';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Search, X } from 'lucide-react';
 import './Projects.css';
 
 const Projects = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeCategory, setActiveCategory] = useState('All');
+
   const projects = [
     {
       title: "FinanceBuddy",
@@ -139,6 +143,27 @@ const Projects = () => {
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
   };
 
+  // Derive unique categories for filter pills
+  const categories = useMemo(() => {
+    const cats = ['All', ...new Set(projects.map(p => p.category))];
+    return cats;
+  }, [projects]);
+
+  // Filter projects by category and search query
+  const filteredProjects = useMemo(() => {
+    return projects.filter(p => {
+      const matchesCategory = activeCategory === 'All' || p.category === activeCategory;
+      const q = searchQuery.toLowerCase();
+      const matchesSearch =
+        !q ||
+        p.title.toLowerCase().includes(q) ||
+        p.description.toLowerCase().includes(q) ||
+        p.technologies.some(t => t.toLowerCase().includes(q)) ||
+        p.category.toLowerCase().includes(q);
+      return matchesCategory && matchesSearch;
+    });
+  }, [projects, activeCategory, searchQuery]);
+
   return (
     <div className="projects-page">
       <SEO 
@@ -170,8 +195,58 @@ const Projects = () => {
      A showcase of my recent work and technical achievements
         </motion.p>
 
+        {/* ── Search & Filter bar ───────────────────────── */}
+        <motion.div className="projects-filter-bar" variants={cardVariants}>
+          {/* Search input */}
+          <div className="projects-search-wrap">
+            <Search size={16} className="projects-search-icon" />
+            <input
+              type="text"
+              className="projects-search-input"
+              placeholder="Search projects, technologies…"
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+              aria-label="Search projects"
+            />
+            {searchQuery && (
+              <button
+                className="projects-search-clear"
+                onClick={() => setSearchQuery('')}
+                aria-label="Clear search"
+              >
+                <X size={14} />
+              </button>
+            )}
+          </div>
+
+          {/* Category pills */}
+          <div className="projects-filter-pills" role="group" aria-label="Filter by category">
+            {categories.map(cat => (
+              <button
+                key={cat}
+                className={`filter-pill${activeCategory === cat ? ' filter-pill--active' : ''}`}
+                onClick={() => setActiveCategory(cat)}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Results count */}
+        <motion.p className="projects-results-count" variants={cardVariants}>
+          {filteredProjects.length === projects.length
+            ? `${projects.length} projects`
+            : `${filteredProjects.length} of ${projects.length} projects`}
+        </motion.p>
+
         <div className="projects-grid">
-      {projects.map((project, index) => {
+      {filteredProjects.length === 0 ? (
+        <motion.div className="projects-empty" variants={cardVariants}>
+          <p>No projects match your search.</p>
+          <button onClick={() => { setSearchQuery(''); setActiveCategory('All'); }} className="filter-pill filter-pill--active">Clear filters</button>
+        </motion.div>
+      ) : filteredProjects.map((project, index) => {
         const CardWrapper = project.link ? Link : 'div';
         const wrapperProps = project.link 
           ? { to: project.link }

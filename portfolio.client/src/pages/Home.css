@@ -285,9 +285,14 @@
   position: relative;
   flex-shrink: 0;
   padding-bottom: var(--spacing-sm);
-  /* Break out of .home-content max-width to span full viewport */
+  /* Break out of .home-content max-width to span full viewport
+     Use 100cqw / 100dvw where supported; fall back to a clamp that
+     avoids scrollbar-width overflow on Windows */
   width: 100vw;
+  max-width: 100vw;
   margin-left: calc(-50vw + 50%);
+  /* Clip any fraction of px overflow caused by scrollbar-width */
+  overflow: clip;
 }
 
 .tech-marquee::before,

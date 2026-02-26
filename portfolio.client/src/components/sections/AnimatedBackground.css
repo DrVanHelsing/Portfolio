@@ -50,6 +50,8 @@
   z-index: -1;
   background: var(--bg-dark);
   overflow: hidden;
+  overflow: clip; /* Safari/iOS: prevent orbs from contributing to page scroll */
+  contain: paint;  /* modern containment — prevents children spilling layout */
 }
 
 .orbs-bg .orb {

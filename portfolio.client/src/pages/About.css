@@ -111,6 +111,10 @@
   position: relative;
   overflow: hidden;
   transition: all var(--transition-slow);
+  /* Flex column so all cards in a grid row stretch to equal height,
+     and the description expands to fill remaining space */
+  display: flex;
+  flex-direction: column;
 }
 
 .education-card + .education-card {
@@ -173,6 +177,7 @@
   color: var(--apple-gray);
   line-height: 1.6;
   margin-bottom: var(--spacing-md);
+  flex-grow: 1; /* pushes highlights to bottom in flex-column cards */
 }
 
 .education-highlights {
@@ -180,6 +185,14 @@
   flex-wrap: wrap;
   gap: var(--spacing-xs);
   margin-top: var(--spacing-md);
+}
+
+/* Awards & Achievements grid */
+.awards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--spacing-md);
+  align-items: stretch;
 }
 
 .highlight-badge {
@@ -415,5 +428,13 @@ display: flex;
 
   .education-header {
     flex-direction: column;
+  }
+
+  .awards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-container {
+    padding: 0;
   }
 }

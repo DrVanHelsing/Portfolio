@@ -421,13 +421,47 @@
     display: none;
   }
 
-  .ide-terminal-panel {
-    display: none;
+  /* Stack editor & terminal vertically on mobile */
+  .ide-content-split {
+    flex-direction: column;
   }
 
+  /* Editor pane: top ~58% */
   .ide-editor-wrap {
-    flex: 1;
+    flex: 0 0 58%;
     border-right: none;
+    border-bottom: 1px solid rgba(240, 246, 252, 0.08);
+    overflow: hidden;
+  }
+
+  /* Show compact terminal below editor (~42% of remaining space) */
+  .ide-terminal-panel {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+    max-height: 200px;
+    overflow: hidden;
+  }
+
+  /* Compact terminal body — 2 lines visible, scrollable */
+  .ide-term-body {
+    padding: 10px 14px 12px;
+  }
+
+  .ide-term-line {
+    font-size: 11px;
+    line-height: 1.65;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+
+  .ide-term-tab {
+    font-size: 9px;
+    padding: 0 10px;
+  }
+
+  .ide-term-action {
+    font-size: 12px;
   }
 
   .ide-titlebar {

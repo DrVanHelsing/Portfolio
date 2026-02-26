@@ -447,22 +447,15 @@
     margin-bottom: var(--spacing-sm);
   }
 
-  /* HIDE ELEMENTS THAT DON'T FIT ON MOBILE - NO HORIZONTAL SCROLLING */
+  /* CONTAIN wide content inside its section — scroll within, not page-wide */
   
-  /* Hide mermaid diagrams - too complex for mobile */
-  .content-section > div:has(> svg[id*="mermaid"]),
-  .content-section .mermaid,
-  .content-section svg[id*="mermaid"] {
-    display: none !important;
-  }
-
-  /* Tables - make horizontally scrollable instead of hiding */
+  /* Tables - responsive block layout, no horizontal scroll */
   .content-section table {
     display: block !important;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    width: 100% !important;
     max-width: 100%;
     font-size: 0.8rem;
+    overflow-x: hidden;
   }
 
   .content-section table thead,
@@ -474,21 +467,32 @@
   .content-section table th,
   .content-section table td {
     padding: var(--spacing-sm) var(--spacing-xs);
-    white-space: nowrap;
+    white-space: normal;  /* allow wrapping so rows don't blow out width */
     font-size: 0.8rem;
+    word-break: break-word;
   }
 
-  /* Hide wide chart grids with multiple charts side-by-side */
-  .content-section > div[style*="display:flex"][style*="maxWidth:'1400px"],
-  .content-section > div[style*="display: flex"][style*="maxWidth: '1400px"],
-  .content-section > div[style*="display:'flex'"][style*="maxWidth:'1400px"] {
-    display: none !important;
+  /* Table wrapper divs: clamp to container, no horizontal scroll */
+  .content-section > div,
+  .content-section > section {
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow-x: hidden !important;
   }
 
-  /* Hide grids with minmax > 300px (too wide for mobile) */
-  .content-section > div[style*="minmax(400px"],
-  .content-section > div[style*="minmax(350px"] {
-    display: none !important;
+  /* chart-grid-section: collapse to single column on mobile */
+  .chart-grid-section {
+    grid-template-columns: 1fr !important;
+    max-width: 100% !important;
+  }
+
+  /* Hide wide chart grids with multiple charts side-by-side only when they have no class-based responsive handling */
+  /* (chart-grid-section is now handled with collapsed single-column above) */
+
+  /* Grids with minmax(400px/350px) that are NOT .chart-grid-section: collapse them */
+  .content-section > div:not(.chart-grid-section)[style*="minmax(400px"],
+  .content-section > div:not(.chart-grid-section)[style*="minmax(350px"] {
+    grid-template-columns: 1fr !important;
   }
 
   /* Feature cards - responsive via grid auto-fit */
@@ -550,7 +554,7 @@
   .content-section > div[style*="display:flex"] {
     flex-wrap: wrap !important;
     gap: var(--spacing-sm) !important;
-    overflow-x: visible !important;
+    overflow-x: hidden !important;
   }
 
   /* Code blocks - allow minimal horizontal scroll only for code */
@@ -560,80 +564,6 @@
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     max-width: 100%;
-  }
-
-  /* Status badges */
-  .status-badge {
-    font-size: 0.75rem;
-    padding: 4px var(--spacing-sm);
-  }
-
-  /* Metric cards in grids */
-  .content-section .metric-card,
-  .content-section div[style*="flex: '1 1 200px"],
-  .content-section div[style*="flex:'1 1 200px"] {
-    flex: 1 1 auto !important;
-    min-width: unset !important;
-    max-width: unset !important;
-    width: 100%;
-    padding: var(--spacing-sm) !important;
-    font-size: 0.85rem !important;
-  }
-
-  /* Platform/feature cards in flex containers */
-  .content-section div[style*="display: flex"] > div,
-  .content-section div[style*="display:flex"] > div {
-    flex: 1 1 auto !important;
-    min-width: 120px !important;
-    max-width: unset !important;
-    padding: var(--spacing-sm) !important;
-    font-size: 0.85rem !important;
-  }
-
-  /* Icons in mobile view */
-  .content-section svg[data-lucide],
-  .content-section svg[id*="lucide"] {
-    width: 18px !important;
-    height: 18px !important;
-  }
-
-  /* Headings in cards */
-  .content-section h3,
-  .content-section h4 {
-    font-size: 0.9rem !important;
-  }
-
-  /* Paragraphs in cards */
-  .content-section div[style*="padding"] > p {
-    font-size: 0.8rem !important;
-    line-height: 1.4 !important;
-  }
-
-  /* Make all fixed-width containers responsive */
-  .content-section div[style*="width:"],
-  .content-section div[style*="minWidth:"],
-  .content-section div[style*="maxWidth:"] {
-    max-width: 100% !important;
-    min-width: unset !important;
-  }
-
-  /* Remove all horizontal overflow */
-  .content-section,
-  .content-section > div,
-  .content-section > section {
-    overflow-x: visible !important;
-  }
-
-  /* Ensure proper spacing */
-  .content-section > div[style] {
-    margin-bottom: var(--spacing-md) !important;
-  }
-
-  /* If a section contains hidden-only content, hide the entire card */
-  .content-section:has(.diagram-section),
-  .content-section:has(.hide-mobile),
-  .content-section:has(.mobile-hide) {
-    display: none !important;
   }
 }
 

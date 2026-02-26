@@ -22,7 +22,7 @@
   gap: var(--spacing-lg);
   margin-top: var(--spacing-lg);
   flex: 1;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .contact-info {

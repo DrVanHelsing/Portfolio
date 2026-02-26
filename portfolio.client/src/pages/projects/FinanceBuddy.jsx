@@ -541,7 +541,7 @@ const FinanceBuddy = () => {
             </h2>
             <div className="features-grid">
               <div className="feature-card">
-                <h3 className="feature-title">🤖 AI Money Mentor</h3>
+                <h3 className="feature-title"><Brain size={20} style={{display:'inline',marginRight:'8px',verticalAlign:'middle',color:'var(--apple-blue)'}} />AI Money Mentor</h3>
                 <p className="feature-description">
                   Powered by Azure OpenAI GPT-4, provides personalized financial advice through natural language chat with voice input support and multi-language capabilities via Azure Translator.
                 </p>

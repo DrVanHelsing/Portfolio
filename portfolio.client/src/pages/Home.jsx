@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import AnimatedBackground from '../components/sections/AnimatedBackground';
 import SEO from '../components/utility/SEO';
 import { Link } from 'react-router-dom';
-import { Monitor, Brain, GraduationCap } from 'lucide-react';
+import { Monitor, Brain, GraduationCap, Cloud } from 'lucide-react';
 import useNoScroll from '../hooks/useNoScroll';
 import './Home.css';
 
@@ -121,6 +121,15 @@ import './Home.css';
  <span className="tech-count">UWC 2024</span>
  </div>
  </div>
+ <div className="highlight-card">
+ <div className="card-glow"></div>
+ <div className="highlight-icon"><Cloud size={32} /></div>
+ <h3>Cloud &amp; AI</h3>
+ <p>Azure OpenAI · Firebase</p>
+ <div className="card-footer">
+ <span className="tech-count">AI Intern</span>
+ </div>
+ </div>
  </motion.div>
 
  {/* Tech Stack Marquee */}
@@ -143,6 +152,8 @@ import './Home.css';
  <span>MySQL</span><span>•</span>
  <span>Matlab</span><span>•</span>
  <span>React</span><span>•</span>
+ <span>Azure</span><span>•</span>
+ <span>Firebase</span><span>•</span>
  <span>Python</span><span>•</span>
  {/* Exact duplicate — makes translateX(-50%) a perfect loop */}
  <span>Python</span><span>•</span>
@@ -156,6 +167,8 @@ import './Home.css';
  <span>MySQL</span><span>•</span>
  <span>Matlab</span><span>•</span>
  <span>React</span><span>•</span>
+ <span>Azure</span><span>•</span>
+ <span>Firebase</span><span>•</span>
  <span>Python</span><span>•</span>
  </div>
  </motion.div>
