@@ -95,7 +95,7 @@ const GeologyFieldSim = () => {
           </div>
 
           <div className="project-links">
-            <a href="https://github.com/DrVanHelsing/GeologyFieldSim" target="_blank" rel="noopener noreferrer" className="project-link-btn">
+            <a href="https://github.com/DrVanHelsing/Geology-Sim" target="_blank" rel="noopener noreferrer" className="project-link-btn">
               <Code2 size={20} />
               View on GitHub
             </a>

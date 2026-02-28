@@ -82,7 +82,7 @@ const AntiTemu = () => {
           </div>
 
           <div className="project-links">
-            <a href="https://github.com/DrVanHelsing/AntiTemu" target="_blank" rel="noopener noreferrer" className="project-link-btn">
+            <a href="https://github.com/DrVanHelsing/Anti-Temu" target="_blank" rel="noopener noreferrer" className="project-link-btn">
               <Code2 size={20} />
               View on GitHub
             </a>

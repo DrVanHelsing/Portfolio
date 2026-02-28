@@ -2,22 +2,22 @@
 
 A personal portfolio site built with React 19 and Vite, showcasing projects, skills, and experience. Deployed to Vercel with a CI/CD pipeline and aggressive asset caching.
 
-**Live site:** [tredirsewpaul.vercel.app](https://tredirsewpaul.vercel.app) *(update with your live URL)*
+**Live site:** iamtredir.com
 
 ---
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Framework | React 19 + Vite 7 |
-| Routing | React Router DOM 7 |
-| Animation | Framer Motion 12, GSAP 3 |
-| Diagrams | Mermaid 11 |
-| Icons | Lucide React |
-| Forms | Formspree |
-| SEO | React Helmet Async |
-| Analytics | Vercel Analytics |
+| Layer      | Technology                                     |
+| ---------- | ---------------------------------------------- |
+| Framework  | React 19 + Vite 7                              |
+| Routing    | React Router DOM 7                             |
+| Animation  | Framer Motion 12, GSAP 3                       |
+| Diagrams   | Mermaid 11                                     |
+| Icons      | Lucide React                                   |
+| Forms      | Formspree                                      |
+| SEO        | React Helmet Async                             |
+| Analytics  | Vercel Analytics                               |
 | Deployment | Vercel (SPA rewrites, immutable asset caching) |
 
 ---
@@ -38,14 +38,14 @@ A personal portfolio site built with React 19 and Vite, showcasing projects, ski
 
 ## Pages
 
-| Route | Page |
-|---|---|
-| `/` | Home — hero, intro, CTA |
-| `/about` | About — education, awards, values |
-| `/projects` | Projects — filterable project gallery |
-| `/skills` | Skills — tech chips grouped by category |
-| `/experience` | Experience — career timeline |
-| `/contact` | Contact — Formspree-backed contact form |
+| Route           | Page                                     |
+| --------------- | ---------------------------------------- |
+| `/`           | Home — hero, intro, CTA                 |
+| `/about`      | About — education, awards, values       |
+| `/projects`   | Projects — filterable project gallery   |
+| `/skills`     | Skills — tech chips grouped by category |
+| `/experience` | Experience — career timeline            |
+| `/contact`    | Contact — Formspree-backed contact form |
 
 ### Project detail pages
 
@@ -118,4 +118,3 @@ vercel --prod --cwd "path/to/portfolio.client"
 ## License
 
 MIT — feel free to use as a template. Attribution appreciated but not required.
-

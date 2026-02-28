@@ -80,7 +80,7 @@ const PhysicsLab = () => {
           </div>
 
           <div className="project-links">
-            <a href="https://github.com/DrVanHelsing/PhysicsLab" target="_blank" rel="noopener noreferrer" className="project-link-btn">
+            <a href="https://github.com/DrVanHelsing/physics-ide" target="_blank" rel="noopener noreferrer" className="project-link-btn">
               <Code2 size={20} />
               View on GitHub
             </a>
