@@ -98,21 +98,6 @@ export const resumeTimelineData = {
       status: 'completed'
     },
     {
-      id: 'cuban-connection',
-      period: 'Nov 2022 - Dec 2023',
-      title: 'Website Admin & Developer',
-      company: 'Cuban Connection / Goodwood',
-      description: 'Created and managed e-commerce platform',
-      highlights: [
-        'IT support',
-        'Catalog creation',
-        'Social media management'
-      ],
-      technologies: ['HTML', 'CSS', 'JavaScript', 'WooCommerce', 'WordPress', 'cPanel'],
-      type: 'work',
-      status: 'completed'
-    },
-    {
       id: 'lm-tutoring',
       period: 'Jun 2023 - Dec 2024',
       title: 'Mathematics & English Tutor',
