@@ -1,2 +1,6 @@
 .vercel
 .env*.local
+
+# Local documents not for version control
+portfolio.client/Documents/
+portfolio.client/docs/projects/
