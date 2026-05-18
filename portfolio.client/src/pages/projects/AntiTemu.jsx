@@ -7,7 +7,7 @@ import SEO from '../../components/utility/SEO';
 import {
   ArrowLeft, Sparkles, Code2, CheckCircle2, Calendar, Shield, Eye, EyeOff,
   MousePointer2, Undo2, Palette, Settings, Monitor, Zap, BarChart3,
-  Chrome, FileCode, Database, Globe, Target, Crosshair, Lock
+  Chrome, FileCode, Database, Globe, Target, Crosshair, Lock, Play
 } from 'lucide-react';
 import './ProjectDetail.css';
 
@@ -279,6 +279,21 @@ const AntiTemu = () => {
                   ))}
                 </tbody>
               </table>
+            </div>
+          </motion.div>
+
+          {/* Demo Video */}
+          <motion.div className="content-section" variants={itemVariants}>
+            <h2 className="section-title"><Play size={24} />Demo Video</h2>
+            <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, borderRadius: 'var(--radius-lg)', overflow: 'hidden', background: 'var(--bg-secondary)' }}>
+              <iframe
+                src="https://www.youtube.com/embed/_5ktMoHslwQ"
+                title="Anti-Temu Chrome Extension Demo"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', borderRadius: 'var(--radius-lg)' }}
+              />
             </div>
           </motion.div>
 

@@ -165,6 +165,26 @@
   text-align: center;
 }
 
+.project-demo-chip {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: var(--spacing-lg);
+  margin-left: auto;
+  margin-right: auto;
+  background: rgba(52, 199, 89, 0.15);
+  border: 1px solid rgba(52, 199, 89, 0.4);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #34C759;
+  width: fit-content;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
 .project-title {
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-semibold);

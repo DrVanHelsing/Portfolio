@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import SEO from '../components/utility/SEO';
-import { Sparkles, Search, X } from 'lucide-react';
+import { Sparkles, Search, X, Play } from 'lucide-react';
 import './Projects.css';
 
 const Projects = () => {
@@ -39,7 +39,8 @@ const Projects = () => {
       category: "Enterprise",
       impact: "Real-time AI-powered customer engagement",
       color: "indigo",
-      link: "/projects/callcentre-ai"
+      link: "/projects/callcentre-ai",
+      hasDemo: true
     },
     {
       title: "Machine Learning Basics",
@@ -103,7 +104,8 @@ const Projects = () => {
       category: "3D Simulation",
       impact: "2 km² terrain · 148K vertices",
       color: "indigo",
-      link: "/projects/geology-sim"
+      link: "/projects/geology-sim",
+      hasDemo: true
     },
     {
       title: "Physics Lab IDE",
@@ -113,7 +115,8 @@ const Projects = () => {
       category: "Education",
       impact: "23 custom blocks · 5 templates",
       color: "blue",
-      link: "/projects/physics-lab"
+      link: "/projects/physics-lab",
+      hasDemo: true
     },
     {
       title: "Hide Distracting Items",
@@ -124,6 +127,7 @@ const Projects = () => {
       impact: "Zero network requests · 100% local",
       color: "purple",
       link: "/projects/anti-temu",
+      hasDemo: true,
       github: "https://github.com/DrVanHelsing/AntiTemu"
     }
   ];
@@ -266,6 +270,9 @@ const Projects = () => {
               <div className="project-category">{project.category}</div>
               {project.date && (
                 <div className="project-date-chip">{project.date}</div>
+              )}
+              {project.hasDemo && (
+                <div className="project-demo-chip"><Play size={12} />Demo</div>
               )}
               <h3 className="project-title">{project.title}</h3>
        <p className="project-description">{project.description}</p>
