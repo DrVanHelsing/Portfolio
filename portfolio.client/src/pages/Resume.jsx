@@ -19,15 +19,13 @@ const Resume = () => {
       
       {/* Animated background rendered at App level */}
       
-      {/* Thumbs-up memoji accent */}
-      <img
-        src="/memojis/memoji-thumbs-up.png"
-        alt="Thumbs up"
-        className="memoji-resume-float"
-      />
-
-      {/* CV Download */}
-      <div className="resume-download-wrap">
+      {/* Thumbs-up memoji + Download button, stacked and centered */}
+      <div className="resume-header-aside">
+        <img
+          src="/memojis/memoji-thumbs-up.png"
+          alt="Thumbs up"
+          className="memoji-resume-float"
+        />
         <a
           href="/TredirSewpaul_CV.pdf"
           download="TredirSewpaul_CV.pdf"

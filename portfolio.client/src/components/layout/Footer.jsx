@@ -9,7 +9,6 @@ import {
   Cpu,
   Briefcase,
   MessageCircle,
-  Heart,
   Code2,
   Terminal,
   ArrowUpRight,
@@ -113,9 +112,6 @@ const Footer = () => {
 
       <div className="footer-bottom">
         <p>&copy; {currentYear} Tredir Sewpaul. All rights reserved.</p>
-        <p className="footer-built">
-          Built with <Heart size={13} className="footer-heart" /> using React &amp; .NET Core
-        </p>
       </div>
     </footer>
   );

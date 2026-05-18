@@ -15,27 +15,25 @@
   box-sizing: border-box;
 }
 
-/* ── Thumbs-up memoji accent ─────────────────────────── */
-.memoji-resume-float {
+/* ── Memoji + Download aside (top-right) ────────────── */
+.resume-header-aside {
   position: absolute;
   top: 90px;
   right: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+  z-index: 5;
+}
+
+.memoji-resume-float {
   width: 130px;
   height: 130px;
   object-fit: contain;
   filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.15));
   pointer-events: none;
   user-select: none;
-  z-index: 5;
-}
-
-/* ── CV Download button ──────────────────────────────── */
-.resume-download-wrap {
-  display: flex;
-  justify-content: flex-end;
-  padding: 0 var(--spacing-xl) var(--spacing-md);
-  max-width: 1400px;
-  margin: 0 auto;
 }
 
 .resume-download-btn {
@@ -61,15 +59,12 @@
 }
 
 @media (max-width: 768px) {
-  .resume-download-wrap {
-    justify-content: center;
-    padding: 0 var(--spacing-md) var(--spacing-md);
+  .resume-header-aside {
+    position: static;
+    margin: 80px auto var(--spacing-md);
   }
 
   .memoji-resume-float {
-    position: static;
-    display: block;
-    margin: 80px auto var(--spacing-md);
     width: 90px;
     height: 90px;
   }

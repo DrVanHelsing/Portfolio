@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import SEO from '../components/utility/SEO';
 import TechIconChip from '../components/ui/TechIconChip';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, User } from 'lucide-react';
 import useNoScroll from '../hooks/useNoScroll';
 import { useCountUp } from '../hooks/useCountUp';
 import './Home.css';
@@ -55,6 +55,16 @@ const Home = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
+          <motion.div
+            className="hero-label"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.5 }}
+          >
+            <span className="hero-label-dot" />
+            Available for opportunities
+          </motion.div>
+
           <div className="hero-title-row">
             <motion.h1
               className="hero-title"
@@ -80,7 +90,7 @@ const Home = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
           >
-            I am a Computer Science Graduate, that is passionate about software development, teamwork, and continuous learning. Specializing in machine learning, and multiplatform development with C# and .NET MAUI.
+            Full-Stack Developer &amp; AI Engineer — building production-ready intelligent applications.
           </motion.h2>
 
           <motion.div
@@ -89,11 +99,9 @@ const Home = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.8 }}
           >
-            <Link to="/projects" className="cta-button primary">
-              <span>View My Work</span>
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M4 10h12m0 0l-4-4m4 4l-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-              </svg>
+            <Link to="/about" className="cta-button primary">
+              <User size={16} />
+              <span>About Me</span>
             </Link>
             <Link to="/contact" className="cta-button secondary">
               <span>Get In Touch</span>
