@@ -29,7 +29,43 @@
   z-index: 5;
 }
 
+/* ── CV Download button ──────────────────────────────── */
+.resume-download-wrap {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 var(--spacing-xl) var(--spacing-md);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.resume-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--apple-blue);
+  color: #fff;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+  box-shadow: var(--shadow-blue-sm);
+  white-space: nowrap;
+}
+
+.resume-download-btn:hover {
+  background: var(--apple-blue-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-blue-md);
+}
+
 @media (max-width: 768px) {
+  .resume-download-wrap {
+    justify-content: center;
+    padding: 0 var(--spacing-md) var(--spacing-md);
+  }
+
   .memoji-resume-float {
     position: static;
     display: block;

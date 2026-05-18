@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import SEO from '../components/utility/SEO';
-import { Code2, Server, Smartphone, Cloud, Database, Brain, Globe, Puzzle, BarChart3, MessageCircle, Users, Target } from 'lucide-react';
+import TechIconChip from '../components/ui/TechIconChip';
+import { Code2, Server, Smartphone, Cloud, Database, Brain, Globe, Puzzle, BarChart3, MessageCircle, Users, Target, Lightbulb, Mic, HeartHandshake } from 'lucide-react';
 import './Skills.css';
 
 const Skills = () => {
@@ -149,14 +150,15 @@ key={index}
           {category.skills.map((skill, idx) => (
     <div key={idx} className="skill-item">
  <div className="skill-info">
-          <span className="skill-name">{skill.name}</span>
+          <TechIconChip name={skill.name} />
      <span className="skill-level">{skill.level}%</span>
          </div>
    <div className="skill-bar">
-      <motion.div 
+      <motion.div
     className="skill-progress"
    initial={{ width: 0 }}
- animate={{ width: `${skill.level}%` }}
+ whileInView={{ width: `${skill.level}%` }}
+ viewport={{ once: true }}
                  transition={{ duration: 1, delay: 0.2 * idx }}
         />
        </div>
@@ -168,33 +170,24 @@ key={index}
         </div>
 
         <motion.div className="additional-skills" variants={categoryVariants}>
- <h2>Additional Competencies</h2>
+          <h2>Soft Skills</h2>
           <div className="competencies-grid">
-            <div className="competency">
-        <span className="competency-icon"><Puzzle size={20} /></span>
-    <span>Problem-Solving</span>
-    </div>
-     <div className="competency">
-              <span className="competency-icon"><BarChart3 size={20} /></span>
-      <span>Analytical Thinking</span>
-            </div>
-            <div className="competency">
-     <span className="competency-icon"><MessageCircle size={20} /></span>
-              <span>Communication</span>
-         </div>
-    <div className="competency">
-      <span className="competency-icon"><Users size={20} /></span>
-    <span>Team Collaboration</span>
-            </div>
-            <div className="competency">
-    <span className="competency-icon"><Smartphone size={20} /></span>
-   <span>UI Development</span>
-            </div>
-       <div className="competency">
-  <span className="competency-icon"><Target size={20} /></span>
-          <span>Project Management</span>
-            </div>
-       </div>
+            {[
+              { icon: <Puzzle size={22} />, label: 'Problem-Solving' },
+              { icon: <BarChart3 size={22} />, label: 'Analytical Thinking' },
+              { icon: <MessageCircle size={22} />, label: 'Communication' },
+              { icon: <Users size={22} />, label: 'Team Collaboration' },
+              { icon: <Lightbulb size={22} />, label: 'Adaptability' },
+              { icon: <HeartHandshake size={22} />, label: 'Mentorship' },
+              { icon: <Mic size={22} />, label: 'Public Speaking' },
+              { icon: <Target size={22} />, label: 'Project Management' },
+            ].map(({ icon, label }) => (
+              <div className="competency" key={label}>
+                <span className="competency-icon">{icon}</span>
+                <span>{label}</span>
+              </div>
+            ))}
+          </div>
         </motion.div>
       </motion.div>
     </div>

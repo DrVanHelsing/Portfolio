@@ -105,6 +105,28 @@ const PostGradPortal = () => {
           </div>
         </motion.div>
 
+        {/* Research Callout */}
+        <motion.div className="research-callout" variants={itemVariants} style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 'var(--spacing-md)',
+          background: 'linear-gradient(135deg, rgba(0,113,227,0.10), rgba(90,86,214,0.08))',
+          border: '1.5px solid var(--accent-border)',
+          borderRadius: 'var(--radius-xl)',
+          padding: 'var(--spacing-lg)',
+          marginBottom: 'var(--spacing-xl)',
+        }}>
+          <BookOpen size={28} style={{ color: 'var(--apple-blue)', flexShrink: 0 }} />
+          <div>
+            <div style={{ fontWeight: 700, color: 'var(--text-1)', fontSize: 'var(--font-size-lg)', marginBottom: 2 }}>
+              Research Collaboration · UWC Postgraduate Studies
+            </div>
+            <div style={{ color: 'var(--apple-gray)', fontSize: 'var(--font-size-sm)' }}>
+              Role: Lead Developer &mdash; Co-authoring an academic paper on the system with a PhD student in the Postgraduate Studies office.
+            </div>
+          </div>
+        </motion.div>
+
         <div className="project-content">
           {/* Impact Metrics */}
           <motion.div className="content-section" variants={itemVariants}>

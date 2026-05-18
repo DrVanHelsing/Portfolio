@@ -143,15 +143,6 @@
         "github": "https://github.com/DrVanHelsing/MachineLearning"
       }
     },
-    {
-      "name": "Fitness Center Management System",
-      "description": "Designed and implemented a relational database in MySQL with a PHP, HTML, and JavaScript front-end. Built CRUD functionality and an interactive user interface for managing fitness center operations.",
-      "technologies": ["MySQL", "PHP", "HTML", "JavaScript", "SQL"],
-      "links": {
-        "report": "https://docs.google.com/document/d/1WEo1Ck0GH5kEc6svQBJdpA9RMet8qqQ_/edit?usp=drive_link",
-        "demo": "https://drive.google.com/file/d/184Qs5spXZD6FkkyxEl9HJgEIXkFTTL5E/view?usp=drive_link"
-      }
-    }
   ],
   "awards": [
     "TelkomXHackathon Winner",

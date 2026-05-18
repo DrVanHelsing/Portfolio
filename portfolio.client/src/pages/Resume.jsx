@@ -1,5 +1,6 @@
 import SEO from '../components/utility/SEO';
 import TimelineModern from '../components/sections/TimelineModern';
+import { Download } from 'lucide-react';
 import './Resume.css';
 
 /**
@@ -24,6 +25,18 @@ const Resume = () => {
         alt="Thumbs up"
         className="memoji-resume-float"
       />
+
+      {/* CV Download */}
+      <div className="resume-download-wrap">
+        <a
+          href="/TredirSewpaul_CV.pdf"
+          download="TredirSewpaul_CV.pdf"
+          className="resume-download-btn"
+        >
+          <Download size={18} />
+          Download CV
+        </a>
+      </div>
 
       {/* Modern timeline with resume data */}
       <TimelineModern />

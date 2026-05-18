@@ -124,6 +124,22 @@ const About = () => {
  <p className="institution">Samsung Future Innovation Lab</p>
  <p className="description" style={{ marginBottom: 0 }}>Achieved a Distinction in the Multiplatform Software Development course and placed 2nd overall in the cohort.</p>
  </div>
+ <div className="education-card" style={{ borderLeftColor: '#FF9F0A' }}>
+ <div className="education-header">
+ <h3 style={{ fontSize: 'var(--font-size-lg)', display:'flex', alignItems:'center', gap:'8px' }}><Trophy size={18} style={{ color:'#FF9F0A', flexShrink:0 }} />Telkom 10X Hack — 1st Place</h3>
+ <span className="year">Aug 2025</span>
+ </div>
+ <p className="institution">Telkom 10X Hackathon Competition</p>
+ <p className="description" style={{ marginBottom: 0 }}>Won first place building an autonomous call centre prototype using React, Python FastAPI, and OpenAI Whisper.</p>
+ </div>
+ <div className="education-card" style={{ borderLeftColor: '#34C759' }}>
+ <div className="education-header">
+ <h3 style={{ fontSize: 'var(--font-size-lg)', display:'flex', alignItems:'center', gap:'8px' }}><Trophy size={18} style={{ color:'#34C759', flexShrink:0 }} />SA Intervarsity Hackathon — 3rd Place (AI)</h3>
+ <span className="year">Aug 2025</span>
+ </div>
+ <p className="institution">SA Intervarsity Hackathon 2025</p>
+ <p className="description" style={{ marginBottom: 0 }}>3rd place in the AI category with FinanceBuddy — a cross-platform financial wellness app built with .NET MAUI and Azure OpenAI GPT-4.</p>
+ </div>
  </div>
  </motion.div> <motion.div className="values-section" variants={itemVariants}>
  <h2>What Drives Me</h2>

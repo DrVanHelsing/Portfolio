@@ -74,7 +74,22 @@ const TECH_MAP = {
   'Machine Learning': { icon: Brain, color: '#FF6F00' },
   'TensorBoard': { icon: BarChart3, color: '#FF6F00' },
   'XGBoost': { icon: Layers, color: '#FF6600' },
-  'LightGBM': { icon: Layers, color: '#02A8EF' }
+  'LightGBM': { icon: Layers, color: '#02A8EF' },
+
+  // Skills page extras
+  'Java': { icon: Code2, color: '#B07219' },
+  'Matlab': { icon: BarChart3, color: '#e16737' },
+  'HTML': { icon: Globe, color: '#E34F26' },
+  'CSS': { icon: Braces, color: '#1572B6' },
+  'PHP': { icon: FileCode, color: '#8892BF' },
+  'SQL': { icon: Database, color: '#CC2927' },
+  'MySQL': { icon: Database, color: '#4479A1' },
+  'Git': { icon: GitBranch, color: '#F05032' },
+  'GitHub': { icon: GitBranch, color: '#6e5494' },
+  'Neural Networks': { icon: Brain, color: '#FF6F00' },
+  'Word': { icon: FileCode, color: '#2B579A' },
+  'Excel': { icon: BarChart3, color: '#217346' },
+  'PowerPoint': { icon: Monitor, color: '#B7472A' }
 };
 
 export default function TechIconChip({ name, technology, label }) {

@@ -311,10 +311,19 @@ export const resumeTimelineData = {
   achievements: [
     {
       id: 'telkom-hackathon',
-      period: '2024',
-      title: 'TelkomXHackathon Winner',
-      event: 'TelkomX Hackathon Competition',
-      description: 'Won first place at the TelkomX Hackathon',
+      period: 'Aug 2025',
+      title: 'Telkom 10X Hack — 1st Place',
+      event: 'Telkom 10X Hackathon Competition',
+      description: 'Won first place at the Telkom 10X Hackathon. Built an autonomous call centre prototype using React, Python FastAPI, and OpenAI Whisper for real-time voice transcription and AI-assisted agent support.',
+      type: 'achievement',
+      status: 'completed'
+    },
+    {
+      id: 'sa-intervarsity-hack',
+      period: 'Aug 2025',
+      title: 'SA Intervarsity Hackathon — 3rd Place (AI)',
+      event: 'SA Intervarsity Hackathon 2025',
+      description: 'Placed 3rd in the AI category with FinanceBuddy, a cross-platform financial wellness app built with .NET MAUI and Azure OpenAI GPT-4, featuring a plant gamification system and AI Money Mentor.',
       type: 'achievement',
       status: 'completed'
     },

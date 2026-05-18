@@ -96,7 +96,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  gap: var(--spacing-sm);
+}
+
+.skill-info .tech-chip {
+  font-size: 0.75rem;
+  padding: 2px 7px;
+  gap: 4px;
 }
 
 .skill-name {

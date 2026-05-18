@@ -78,7 +78,7 @@ const location = useLocation();
      className={location.pathname === path ? 'active' : ''}
   onClick={() => setIsMobileMenuOpen(false)}
   >
-          {label}
+          {label}{label === 'Contact' && <span className="nav-availability-dot" aria-hidden="true" />}
               </Link>
        </li>
           ))}

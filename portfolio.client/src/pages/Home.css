@@ -275,6 +275,68 @@
   letter-spacing: 0.05em;
 }
 
+/* Featured project cards */
+.featured-project-card {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.project-card-category {
+  font-size: 0.65rem;
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--apple-blue);
+  margin-bottom: 6px;
+}
+
+.featured-project-techs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: auto;
+  padding-top: var(--spacing-sm);
+}
+
+.featured-project-techs .tech-chip {
+  font-size: 0.65rem;
+  padding: 2px 6px;
+}
+
+.featured-view-all-card {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-style: dashed;
+  opacity: 0.75;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+  cursor: pointer;
+}
+
+.featured-view-all-card:hover {
+  opacity: 1;
+  transform: translateY(-4px) scale(1.01);
+}
+
+.view-all-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: var(--apple-blue);
+}
+
+.view-all-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.02em;
+}
+
 /* Tech Marquee */
 .tech-marquee {
   margin-top: auto;

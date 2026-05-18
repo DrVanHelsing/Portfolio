@@ -7,7 +7,8 @@ import SEO from '../../components/utility/SEO';
 import {
   ArrowLeft, Sparkles, Code2, Lock, Calendar, Mountain, Layers, Droplets,
   TreePine, Eye, Settings, Monitor, Cpu, MapPin, Compass, Ruler,
-  Database, Globe, BarChart3, Zap, Sun, Wind, Waves, Pickaxe, Play
+  Database, Globe, BarChart3, Zap, Sun, Wind, Waves, Pickaxe, Play,
+  BookOpen, FlaskConical, Navigation
 } from 'lucide-react';
 import './ProjectDetail.css';
 
@@ -99,6 +100,28 @@ const GeologyFieldSim = () => {
               <Code2 size={20} />
               View on GitHub
             </a>
+          </div>
+        </motion.div>
+
+        {/* Research Callout */}
+        <motion.div className="research-callout" variants={itemVariants} style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 'var(--spacing-md)',
+          background: 'linear-gradient(135deg, rgba(0,113,227,0.10), rgba(90,86,214,0.08))',
+          border: '1.5px solid var(--accent-border)',
+          borderRadius: 'var(--radius-xl)',
+          padding: 'var(--spacing-lg)',
+          marginBottom: 'var(--spacing-xl)',
+        }}>
+          <BookOpen size={28} style={{ color: 'var(--apple-blue)', flexShrink: 0 }} />
+          <div>
+            <div style={{ fontWeight: 700, color: 'var(--text-1)', fontSize: 'var(--font-size-lg)', marginBottom: 2 }}>
+              Research Collaboration · UWC Earth Sciences Department
+            </div>
+            <div style={{ color: 'var(--apple-gray)', fontSize: 'var(--font-size-sm)' }}>
+              Role: Lead Developer &mdash; Co-authoring an academic paper on the platform with a PhD student from UWC Earth Sciences.
+            </div>
           </div>
         </motion.div>
 
@@ -335,6 +358,38 @@ const GeologyFieldSim = () => {
             </div>
           </motion.div>
 
+
+          {/* V2.1 Future Development */}
+          <motion.div className="content-section" variants={itemVariants}>
+            <h2 className="section-title"><FlaskConical size={24} />Future Development — V2.1 (Unity)</h2>
+            <div className="section-content" style={{ marginBottom: 'var(--spacing-lg)' }}>
+              <p>
+                V2.1 is the next evolution of the simulator, moving from the browser to the Unity 6 engine with LiDAR-scanned terrain
+                from the Paternoster field site (Western Cape). It is currently in active development, pending geology team field data validation.
+              </p>
+              <p style={{ marginTop: 'var(--spacing-sm)', color: 'var(--apple-gray)', fontSize: 'var(--font-size-sm)' }}>
+                Note: the demo shown above is V1 (browser-based React/Three.js). V2.1 is built in Unity 6 with real LiDAR terrain.
+              </p>
+            </div>
+            <div className="feature-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'var(--spacing-lg)' }}>
+              {[
+                { icon: <Navigation size={20} />, title: 'Navigate', desc: 'First-person and free-fly camera modes with GPS-style coordinate overlay and minimap.' },
+                { icon: <Eye size={20} />, title: 'Identify', desc: 'Click any surface to query the LiDAR-accurate rock layer — returns lithology, age, and formation metadata.' },
+                { icon: <Pickaxe size={20} />, title: 'Drill', desc: 'Animated borehole rig with configurable depth, inclination, and azimuth — renders a stratified core column.' },
+                { icon: <Ruler size={20} />, title: 'Measure', desc: '3D two-point measurement with elevation diff, horizontal distance, bearing, and slope angle readout.' },
+                { icon: <Compass size={20} />, title: 'Strike & Dip', desc: 'Click-and-drag bedding plane tool with tilted disc visualisation and Wulff net stereonet export.' },
+                { icon: <Layers size={20} />, title: 'Cross-Section', desc: 'Two-point geological cross-section profile with PBR-accurate layer colours, legend, and PDF export.' },
+              ].map((item, i) => (
+                <div key={i} className="info-card" style={{ padding: 'var(--spacing-lg)' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-sm)', marginBottom: 'var(--spacing-sm)' }}>
+                    <span style={{ color: 'var(--apple-blue)' }}>{item.icon}</span>
+                    <h3 style={{ fontSize: 'var(--font-size-md)', fontWeight: 600, margin: 0, color: 'var(--text-1)' }}>{item.title}</h3>
+                  </div>
+                  <p style={{ fontSize: 'var(--font-size-sm)', color: 'var(--text-2)', lineHeight: 1.5, margin: 0 }}>{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
 
         </div>
       </motion.div>

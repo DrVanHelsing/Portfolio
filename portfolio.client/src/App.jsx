@@ -19,6 +19,48 @@ function ScrollReset() {
   return null;
 }
 
+const pageTransition = {
+  initial: { opacity: 0, y: 8 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -8 },
+  transition: { duration: 0.25, ease: 'easeInOut' },
+};
+
+function AnimatedRoutes() {
+  const location = useLocation();
+  return (
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={location.pathname}
+        {...pageTransition}
+        style={{ width: '100%' }}
+      >
+        <Routes location={location}>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/projects/financebuddy" element={<FinanceBuddy />} />
+          <Route path="/projects/machine-learning" element={<MachineLearning />} />
+          <Route path="/projects/studentlink" element={<StudentLink />} />
+          <Route path="/projects/callcentre-ai" element={<CallCentreAI />} />
+          <Route path="/projects/godseye" element={<GodsEye />} />
+          <Route path="/projects/hangman" element={<Hangman />} />
+          <Route path="/projects/tictactoe" element={<TicTacToe />} />
+          <Route path="/projects/postgrad-portal" element={<PostGradPortal />} />
+          <Route path="/projects/geology-sim" element={<GeologyFieldSim />} />
+          <Route path="/projects/physics-lab" element={<PhysicsLab />} />
+          <Route path="/projects/anti-temu" element={<AntiTemu />} />
+          <Route path="/skills" element={<Skills />} />
+          <Route path="/resume" element={<Resume />} />
+          <Route path="/experience" element={<Resume />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
 // Lazy load pages for code splitting
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
@@ -39,6 +81,7 @@ const PostGradPortal = lazy(() => import('./pages/projects/PostGradPortal'));
 const GeologyFieldSim = lazy(() => import('./pages/projects/GeologyFieldSim'));
 const PhysicsLab = lazy(() => import('./pages/projects/PhysicsLab'));
 const AntiTemu = lazy(() => import('./pages/projects/AntiTemu'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -70,26 +113,7 @@ function App() {
               <Navigation />
               <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
                 <main id="main-content" className="main-content">
-                  <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/projects" element={<Projects />} />
-                    <Route path="/projects/financebuddy" element={<FinanceBuddy />} />
-                    <Route path="/projects/machine-learning" element={<MachineLearning />} />
-                    <Route path="/projects/studentlink" element={<StudentLink />} />
-                    <Route path="/projects/callcentre-ai" element={<CallCentreAI />} />
-                    <Route path="/projects/godseye" element={<GodsEye />} />
-                    <Route path="/projects/hangman" element={<Hangman />} />
-                    <Route path="/projects/tictactoe" element={<TicTacToe />} />
-                    <Route path="/projects/postgrad-portal" element={<PostGradPortal />} />
-                    <Route path="/projects/geology-sim" element={<GeologyFieldSim />} />
-                    <Route path="/projects/physics-lab" element={<PhysicsLab />} />
-                    <Route path="/projects/anti-temu" element={<AntiTemu />} />
-                    <Route path="/skills" element={<Skills />} />
-                    <Route path="/resume" element={<Resume />} />
-                    <Route path="/experience" element={<Resume />} />
-                    <Route path="/contact" element={<Contact />} />
-                  </Routes>
+                  <AnimatedRoutes />
                 </main>
               </Suspense>
               <Footer />

@@ -163,6 +163,26 @@
   transform: translateY(-6px) rotate(-45deg);
 }
 
+/* ── Availability dot next to Contact ──────────────────── */
+.nav-availability-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background: #34C759;
+  border-radius: 50%;
+  margin-left: 5px;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+  animation: nav-dot-pulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes nav-dot-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(52, 199, 89, 0.6); }
+  50%       { box-shadow: 0 0 0 5px rgba(52, 199, 89, 0); }
+}
+
 @media (max-width: 768px) {
   .mobile-menu-toggle {
     display: flex;
