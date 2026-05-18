@@ -103,7 +103,7 @@ const PhysicsLab = () => {
         </motion.div>
 
         <div className="project-content">
-          {/* Impact Metrics */
+          {/* Impact Metrics */}
           <motion.div className="content-section" variants={itemVariants}>
             <h2 className="section-title"><BarChart3 size={24} />At a Glance</h2>
             <div className="metrics-grid" style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--spacing-lg)', marginBottom: 'var(--spacing-xl)', justifyContent: 'center' }}>

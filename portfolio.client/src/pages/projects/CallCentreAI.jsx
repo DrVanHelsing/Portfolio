@@ -82,7 +82,7 @@ const CallCentreAI = () => {
         </div>
 
         <div className="project-content">
-          {/* Overview */
+          {/* Overview */}
           <div className="content-section">
             <h2 className="section-title"><Phone size={24} />Overview</h2>
             <div className="section-content">
