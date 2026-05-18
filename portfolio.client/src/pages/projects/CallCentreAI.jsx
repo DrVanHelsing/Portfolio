@@ -66,8 +66,23 @@ const CallCentreAI = () => {
           </div>
         </div>
 
+        {/* Demo Video */}
+        <div className="demo-video-hero">
+          <h2 className="section-title"><Play size={24} />Demo Video</h2>
+          <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, borderRadius: 'var(--radius-lg)', overflow: 'hidden', background: 'var(--bg-secondary)' }}>
+            <iframe
+              src="https://www.youtube.com/embed/ywyslOxT714"
+              title="CallCentre AI Demo"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', borderRadius: 'var(--radius-lg)' }}
+            />
+          </div>
+        </div>
+
         <div className="project-content">
-          {/* Overview */}
+          {/* Overview */
           <div className="content-section">
             <h2 className="section-title"><Phone size={24} />Overview</h2>
             <div className="section-content">
@@ -510,20 +525,6 @@ const CallCentreAI = () => {
             </div>
           </div>
 
-          {/* Demo Video */}
-          <div className="content-section">
-            <h2 className="section-title"><Play size={24} />Demo Video</h2>
-            <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, borderRadius: 'var(--radius-lg)', overflow: 'hidden', background: 'var(--bg-secondary)' }}>
-              <iframe
-                src="https://www.youtube.com/embed/ywyslOxT714"
-                title="CallCentre AI Demo"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', borderRadius: 'var(--radius-lg)' }}
-              />
-            </div>
-          </div>
         </div>
       </motion.div>
     </div>

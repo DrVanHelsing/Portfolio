@@ -123,6 +123,18 @@
   gap: var(--spacing-xl);
 }
 
+.demo-video-hero {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-2xl);
+  border: 1px solid rgba(0, 122, 255, 0.3);
+  box-shadow: 0 0 40px rgba(0, 122, 255, 0.08);
+  margin-bottom: var(--spacing-xl);
+  width: 100%;
+}
+
 .content-section {
   background: var(--glass-bg);
   backdrop-filter: blur(var(--glass-blur));
