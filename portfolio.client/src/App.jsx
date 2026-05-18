@@ -19,6 +19,14 @@ function ScrollReset() {
   return null;
 }
 
+const KNOWN_PATHS = new Set([
+  '/', '/about', '/projects', '/skills', '/resume', '/experience', '/contact',
+]);
+
+function isKnownRoute(pathname) {
+  return KNOWN_PATHS.has(pathname) || pathname.startsWith('/projects/');
+}
+
 const pageTransition = {
   initial: { opacity: 0, y: 8 },
   animate: { opacity: 1, y: 0 },
@@ -83,44 +91,46 @@ const PhysicsLab = lazy(() => import('./pages/projects/PhysicsLab'));
 const AntiTemu = lazy(() => import('./pages/projects/AntiTemu'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
+// Inner shell — lives inside <Router> so useLocation is available
+function AppShell() {
+  const location = useLocation();
+  // Skip the loading splash on 404 routes
+  const [isLoading, setIsLoading] = useState(() => isKnownRoute(location.pathname));
+
+  return (
+    <AnimatePresence mode="wait">
+      {isLoading ? (
+        <LoadingScreen key="loading" onEnter={() => setIsLoading(false)} />
+      ) : (
+        <motion.div
+          key="app"
+          className="app"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, ease: [0.43, 0.13, 0.23, 0.96] }}
+        >
+          <AnimatedBackground variant="orbs" />
+          <SkipLink />
+          <Navigation />
+          <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
+            <main id="main-content" className="main-content">
+              <AnimatedRoutes />
+            </main>
+          </Suspense>
+          <Footer />
+          <ScrollToTop />
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  const handleLoadingComplete = () => {
-    setIsLoading(false);
-  };
-
   return (
     <HelmetProvider>
       <Router>
         <ScrollReset />
-        <AnimatePresence mode="wait">
-          {isLoading ? (
-            <LoadingScreen key="loading" onEnter={handleLoadingComplete} />
-          ) : (
-            <motion.div
-              key="app"
-              className="app"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ 
-                duration: 0.5,
-                ease: [0.43, 0.13, 0.23, 0.96]
-              }}
-            >
-              <AnimatedBackground variant="orbs" />
-              <SkipLink />
-              <Navigation />
-              <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
-                <main id="main-content" className="main-content">
-                  <AnimatedRoutes />
-                </main>
-              </Suspense>
-              <Footer />
-              <ScrollToTop />
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <AppShell />
       </Router>
     </HelmetProvider>
   );
