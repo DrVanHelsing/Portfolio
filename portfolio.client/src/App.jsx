@@ -7,6 +7,7 @@ import Footer from './components/layout/Footer';
 import AnimatedBackground from './components/sections/AnimatedBackground';
 import LoadingScreen from './components/utility/LoadingScreen';
 import ScrollToTop from './components/ui/ScrollToTop';
+import TerminalWidget from './components/ui/TerminalWidget';
 import SkipLink from './components/layout/SkipLink';
 import './App.css';
 
@@ -94,6 +95,7 @@ const NotFound = lazy(() => import('./pages/NotFound'));
 // Inner shell — lives inside <Router> so useLocation is available
 function AppShell() {
   const location = useLocation();
+  const isContact = location.pathname === '/contact';
   // Skip the loading splash on 404 routes
   const [isLoading, setIsLoading] = useState(() => isKnownRoute(location.pathname));
 
@@ -117,8 +119,9 @@ function AppShell() {
               <AnimatedRoutes />
             </main>
           </Suspense>
-          <Footer />
+          {!isContact && <Footer />}
           <ScrollToTop />
+          <TerminalWidget />
         </motion.div>
       )}
     </AnimatePresence>
