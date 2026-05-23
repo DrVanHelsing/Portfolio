@@ -14,7 +14,7 @@ export default function TerminalWidget() {
   const [isExpanded,   setIsExpanded]   = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isMinimized,  setIsMinimized]  = useState(false);
-  const [mode,         setMode]         = useState('dev'); // 'dev' | 'recruiter'
+  const [mode,         setMode]         = useState('recruiter'); // 'dev' | 'recruiter'
 
   const currentPage = derivePageKey(location.pathname);
 
@@ -87,7 +87,7 @@ export default function TerminalWidget() {
               {!isMinimized && (
                 <button
                   className="tw-mode-toggle"
-                  title={mode === 'dev' ? 'Switch to Recruiter mode' : 'Switch to Dev mode'}
+                  title={mode === 'dev' ? 'Switch to AI Chat' : 'Switch to Dev Terminal'}
                   onClick={(e) => {
                     e.stopPropagation();
                     setMode(m => m === 'dev' ? 'recruiter' : 'dev');
@@ -95,8 +95,8 @@ export default function TerminalWidget() {
                   aria-label="Toggle terminal mode"
                 >
                   {mode === 'dev'
-                    ? <Users size={13} />
-                    : <Terminal size={13} />}
+                    ? <><Users size={12} /><span className="tw-mode-toggle-label">AI Chat</span></>
+                    : <><Terminal size={12} /><span className="tw-mode-toggle-label">Dev Mode</span></>}
                 </button>
               )}
             </div>
@@ -128,17 +128,24 @@ export default function TerminalWidget() {
         )}
       </AnimatePresence>
 
-      {/* ── Bubble button ── */}
-      <motion.button
-        className="tw-bubble"
-        onClick={() => setIsExpanded(prev => !prev)}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-        aria-label="Toggle terminal"
-        aria-expanded={isExpanded}
-      >
-        <Terminal size={20} />
-      </motion.button>
+      {/* ── Bubble button + mode label ── */}
+      <div className="tw-bubble-group">
+        <motion.button
+          className={`tw-bubble tw-bubble-${mode}`}
+          onClick={() => setIsExpanded(prev => !prev)}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          aria-label={`Open ${mode === 'recruiter' ? 'AI Chat' : 'Terminal'}`}
+          aria-expanded={isExpanded}
+        >
+          {mode === 'recruiter' ? <Users size={20} /> : <Terminal size={20} />}
+        </motion.button>
+        {!isExpanded && (
+          <span className={`tw-bubble-label tw-bubble-label-${mode}`}>
+            {mode === 'recruiter' ? 'AI Chat' : 'Terminal'}
+          </span>
+        )}
+      </div>
     </div>
   );
 }

@@ -6,6 +6,27 @@ All notable changes to this project are documented here.
 
 ## [Unreleased]
 
+## [3.0.1] — 2026-05-23
+
+### Terminal Widget UX — Mode Guidance & Fullscreen Polish
+
+#### UX Improvements
+- **Default mode: Recruiter** — widget now opens in AI Chat mode by default to welcome non-technical visitors first
+- **Mode label under collapsed bubble** — purple "AI Chat" or blue "Terminal" pill label visible beneath the floating button so users know what they'll open before clicking
+- **Mode-aware bubble icon** — collapsed button shows `Users` icon in recruiter mode, `Terminal` icon in dev mode, reinforcing the current mode visually
+- **Purple pulse on recruiter bubble** — separate `@keyframes tw-pulse-recruiter` gives the recruiter-mode bubble a purple glow matching the chat theme
+- **Mode toggle button now shows text** — header toggle changed from icon-only to icon + label ("AI Chat" / "Dev Mode") so the action is always readable without hovering
+- **Label hides when panel is expanded** — the bubble label auto-hides when the panel is open to reduce visual clutter
+
+#### Testing
+- Playwright test suite extended to cover both recruiter and dev fullscreen flows
+- Viewport pinned to 1440×900 via `context({ viewport })` for reproducible screenshots
+- Recruiter fullscreen: verifies panel class, chat body/input visible at full viewport
+- Dev fullscreen: verifies terminal body/input visible, mode toggle accessible in fullscreen header
+- Added `waitForRCIdle` helper for recruiter AI streaming detection (distinct from dev terminal wait)
+
+---
+
 ## [3.0.0] — 2026-05-23
 
 ### Terminal Widget v3 — Complete Overhaul
