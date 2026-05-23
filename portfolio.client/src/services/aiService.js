@@ -4,6 +4,25 @@ const OPENROUTER_KEY = import.meta.env.VITE_OPENROUTER_KEY ?? '';
 const MODEL = 'openai/gpt-oss-120b:free';
 const API_URL = 'https://openrouter.ai/api/v1/chat/completions';
 
+// ── Markdown stripper (applied at render-time to AI output) ───────────────────
+
+export function cleanMarkdown(text) {
+  if (!text) return text;
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '$1')            // **bold**
+    .replace(/__(.*?)__/g, '$1')                 // __bold__
+    .replace(/\*([^*\n]+)\*/g, '$1')             // *italic* (not **)
+    .replace(/_([^_\n]+)_/g, '$1')               // _italic_ (not __)
+    .replace(/^#{1,6}\s+(.+)$/gm, '$1')          // ## Header → Header
+    .replace(/^[-*+]\s+/gm, '')                  // - * + bullet prefix
+    .replace(/^\d+\.\s+/gm, '')                  // 1. numbered list prefix
+    .replace(/`([^`\n]+)`/g, '$1')               // `inline code`
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')     // [link](url) → link text
+    .replace(/^>\s*/gm, '')                      // > blockquotes
+    .replace(/\n{3,}/g, '\n\n')                  // collapse extra blank lines
+    .trim();
+}
+
 // ── System prompt builders ────────────────────────────────────────────────────
 
 export function buildSystemPrompt(mode, currentPage = null) {

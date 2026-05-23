@@ -97,6 +97,17 @@
   cursor: not-allowed;
 }
 
+/* ── Streaming bubble ─────────────────────────────────────── */
+.rc-bubble-ai.rc-streaming {
+  border-left: 2px solid rgba(163, 113, 247, 0.6);
+  animation: rc-stream-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes rc-stream-pulse {
+  0%, 100% { border-left-color: rgba(163, 113, 247, 0.3); }
+  50%       { border-left-color: rgba(163, 113, 247, 0.9); }
+}
+
 /* ── Input row ───────────────────────────────────────────── */
 .rc-input-row {
   display: flex;
@@ -106,6 +117,34 @@
   border-top: 1px solid #3d2060;
   background: #160d2a;
   flex-shrink: 0;
+  position: relative;
+}
+
+/* Loading sweep bar — appears above the input row */
+.rc-loading-bar {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  overflow: hidden;
+  background: rgba(163, 113, 247, 0.1);
+}
+
+.rc-loading-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -55%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, #a371f7, #c084fc, transparent);
+  animation: rc-bar-sweep 1.3s ease-in-out infinite;
+}
+
+@keyframes rc-bar-sweep {
+  0%   { left: -55%; }
+  100% { left: 160%; }
 }
 
 .rc-input {

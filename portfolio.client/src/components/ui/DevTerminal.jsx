@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { WELCOME_LINES } from '../../data/portfolioKnowledge.js';
+import { cleanMarkdown } from '../../services/aiService.js';
 import { useTerminalCommands, buildPrompt, getCompletions } from '../../hooks/useTerminalCommands.js';
 
 const LINE_CLASS = {
@@ -100,12 +101,13 @@ export default function DevTerminal({ navigate, setMode, currentPage }) {
             {line.type === 'blank'
               ? ' '
               : line.type === 'ai'
-                ? (line.text === '' && line.id ? '▋' : line.text)
+                ? (line.text === '' && line.id ? '▋' : cleanMarkdown(line.text))
                 : line.text}
           </div>
         ))}
       </div>
 
+      {isAILoading && <div className="tw-loading-bar" aria-hidden="true" />}
       <div className="tw-input-row">
         <span className="tw-prompt" style={inChatSession ? { color: '#a371f7' } : undefined}>
           {prompt}

@@ -1,13 +1,44 @@
+# ── Vercel ────────────────────────────────────────────────
 .vercel
+
+# ── Environment variables ─────────────────────────────────
+.env
+.env.*
 .env*.local
+!.env.example
 
-# Local documents not for version control
-portfolio.client/Documents/
-portfolio.client/docs/projects/
+# ── Node / npm ────────────────────────────────────────────
+node_modules/
+package-lock.json
+package.json
 
-# Test artifacts
+# ── Test artifacts (root-level) ───────────────────────────
 test-terminal.mjs
 test-screenshots/
-node_modules/
-package.json
-package-lock.json
+
+# ── Claude Code IDE settings ──────────────────────────────
+.claude/
+
+# ── Personal / generated files ────────────────────────────
+TredirSewpaul_Profile.md
+TredirSewpaul_Profile.pdf
+TredirSewpaul_Profile_debug.html
+email_signature.gif
+generate_email_signature.py
+generate_profile_pdf.py
+
+# ── Portfolio client — not for version control ────────────
+portfolio.client/Documents/
+portfolio.client/docs/projects/
+portfolio.client/MOBILE_OPTIMIZATION_SUMMARY.md
+
+# Raw Memoji source images (web app uses /public/memojis/ PNGs)
+portfolio.client/Memoji's/
+
+# Visual Studio build artifacts
+portfolio.client/obj/
+portfolio.client/*.esproj.user
+portfolio.client/.vs/
+
+# Build output
+portfolio.client/dist/

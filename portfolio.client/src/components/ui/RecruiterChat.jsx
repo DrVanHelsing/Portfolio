@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { SendHorizontal } from 'lucide-react';
-import { buildSystemPrompt, streamChat } from '../../services/aiService.js';
+import { buildSystemPrompt, streamChat, cleanMarkdown } from '../../services/aiService.js';
 import './RecruiterChat.css';
 
 const STARTER_QUESTIONS = [
@@ -96,11 +96,15 @@ export default function RecruiterChat({ currentPage }) {
         {messages.map((msg, i) => (
           <div
             key={i}
-            className={`rc-bubble ${msg.role === 'user' ? 'rc-bubble-user' : 'rc-bubble-ai'}`}
+            className={[
+              'rc-bubble',
+              msg.role === 'user' ? 'rc-bubble-user' : 'rc-bubble-ai',
+              msg.role === 'assistant' && msg.id ? 'rc-streaming' : '',
+            ].filter(Boolean).join(' ')}
           >
             {msg.content === '' && msg.id
               ? <span className="rc-typing"><span /><span /><span /></span>
-              : msg.content}
+              : cleanMarkdown(msg.content)}
           </div>
         ))}
 
@@ -120,7 +124,8 @@ export default function RecruiterChat({ currentPage }) {
         )}
       </div>
 
-      <div className="rc-input-row">
+      <div className={`rc-input-row${isLoading ? ' rc-input-row-loading' : ''}`}>
+        {isLoading && <div className="rc-loading-bar" aria-hidden="true" />}
         <input
           ref={inputRef}
           className="rc-input"

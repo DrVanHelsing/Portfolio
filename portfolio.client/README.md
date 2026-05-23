@@ -2,7 +2,7 @@
 
 A personal portfolio site built with React 19 and Vite, showcasing projects, skills, and experience. Deployed to Vercel with a CI/CD pipeline and aggressive asset caching.
 
-**Live site:** iamtredir.com
+**Live site:** [iamtredir.com](https://iamtredir.com)
 
 ---
 
@@ -12,10 +12,10 @@ A personal portfolio site built with React 19 and Vite, showcasing projects, ski
 | ---------- | ---------------------------------------------- |
 | Framework  | React 19 + Vite 7                              |
 | Routing    | React Router DOM 7                             |
-| Animation  | Framer Motion 12, GSAP 3                       |
-| Diagrams   | Mermaid 11                                     |
+| Animation  | Framer Motion 12                               |
 | Icons      | Lucide React                                   |
 | Forms      | Formspree                                      |
+| AI         | OpenRouter (`openai/gpt-oss-120b:free`) + SSE  |
 | SEO        | React Helmet Async                             |
 | Analytics  | Vercel Analytics                               |
 | Deployment | Vercel (SPA rewrites, immutable asset caching) |
@@ -24,13 +24,35 @@ A personal portfolio site built with React 19 and Vite, showcasing projects, ski
 
 ## Features
 
-- **Animated orbs background** — single centralised instance, `contain: strict`, viewport-units sizing to prevent overflow on any page
-- **Animated charts & architecture diagrams** — custom `AnimatedChart` and `ArchitectureDiagram` components with Mermaid integration
-- **IDE-themed UI** — GitHub-inspired dark/light theme via CSS custom properties (`--accent`, `--text-*`, `--glass-*`)
-- **Theme toggle** — dark / light mode persisted via `data-theme` attribute
-- **Timeline** — interactive career/education timeline (`TimelineModern`)
-- **Lazy-loaded pages** — every page and project detail is code-split via `React.lazy` + `Suspense`
-- **Manual Rollup chunks** — `react-vendor`, `animation-vendor`, `icons-vendor` for optimised cache hits
+### Terminal Widget v3
+A floating terminal widget in the bottom-right corner with two modes:
+
+**AI Chat (Recruiter Mode)** — default mode
+- ChatGPT-style chat bubble UI with purple accent theme
+- Portfolio-aware AI using context-stuffing RAG (no backend, no vector DB)
+- 5 clickable starter questions for quick onboarding
+- Typing indicator and streaming responses with markdown stripped to plain text
+- Animated loading sweep bar while AI is processing
+
+**Dev Terminal Mode**
+- Unix-like CLI with virtual filesystem (`ls`, `cat`, `cd`, `pwd`, `grep`, `man`, `env`, `history`, `whoami`)
+- Virtual filesystem: `~/projects/`, `~/pages/`, `~/resume.md`, `~/skills.txt`, `~/README.md`
+- Tab completion for commands and paths
+- `grep <pattern>` — searches full portfolio knowledge base
+- Unrecognized input falls through to AI (Claude CLI pattern)
+- `/chat` — persistent multi-turn AI session with history
+- Dynamic prompt reflecting current virtual directory
+
+Both modes support fullscreen (green traffic light), minimize (yellow), and close (red).
+
+### Other Features
+- **VS Code-style IDE splash screen** — dismissable on first load
+- **Animated particle background** — GPU-friendly, `contain: strict`
+- **IDE-themed UI** — GitHub-inspired dark/light theme via CSS custom properties
+- **Theme toggle** — dark/light mode persisted via `data-theme` attribute
+- **Interactive timeline** — career and education timeline (`TimelineModern`)
+- **Animated charts & architecture diagrams** — custom components
+- **Lazy-loaded pages** — every page and project detail code-split via `React.lazy`
 - **Accessibility** — skip-link, keyboard-navigable nav, ARIA labels throughout
 - **Responsive** — mobile-first layout, tested down to 320 px
 
@@ -40,16 +62,14 @@ A personal portfolio site built with React 19 and Vite, showcasing projects, ski
 
 | Route           | Page                                     |
 | --------------- | ---------------------------------------- |
-| `/`           | Home — hero, intro, CTA                 |
-| `/about`      | About — education, awards, values       |
-| `/projects`   | Projects — filterable project gallery   |
-| `/skills`     | Skills — tech chips grouped by category |
-| `/experience` | Experience — career timeline            |
-| `/contact`    | Contact — Formspree-backed contact form |
+| `/`             | Home — hero, intro, CTA                 |
+| `/about`        | About — education, awards, values       |
+| `/projects`     | Projects — filterable project gallery   |
+| `/skills`       | Skills — tech chips grouped by category |
+| `/resume`       | Resume — career timeline, CV download   |
+| `/contact`      | Contact — Formspree-backed contact form |
 
-### Project detail pages
-
-`/projects/finance-buddy` · `/projects/student-link` · `/projects/gods-eye` · `/projects/call-centre-ai` · `/projects/machine-learning` · `/projects/geology-field-sim` · `/projects/physics-lab` · `/projects/postgrad-portal` · `/projects/hangman` · `/projects/tic-tac-toe` · `/projects/anti-temu`
+**Project detail pages:** `/projects/financebuddy` · `/projects/studentlink` · `/projects/callcentre-ai` · `/projects/godseye` · `/projects/machine-learning` · `/projects/geology-sim` · `/projects/physics-lab` · `/projects/postgrad-portal` · `/projects/hangman` · `/projects/tictactoe` · `/projects/anti-temu`
 
 ---
 
@@ -59,7 +79,13 @@ A personal portfolio site built with React 19 and Vite, showcasing projects, ski
 
 ```bash
 # Install dependencies
-npm install --legacy-peer-deps
+cd portfolio.client
+npm install
+
+# Set up environment variables
+cp .env.example .env.local
+# Add your OpenRouter API key to .env.local:
+# VITE_OPENROUTER_KEY=sk-or-...
 
 # Start dev server (http://localhost:5173)
 npm run dev
@@ -69,9 +95,6 @@ npm run build
 
 # Preview production build locally
 npm run preview
-
-# Lint
-npm run lint
 ```
 
 ---
@@ -79,39 +102,51 @@ npm run lint
 ## Project Structure
 
 ```
-src/
-├── App.jsx               # Root — routing, AnimatePresence, lazy loading
+portfolio.client/src/
+├── App.jsx                     # Root — routing, AnimatePresence, lazy loading
 ├── components/
-│   ├── layout/           # Navigation, Footer, SkipLink
-│   ├── sections/         # AnimatedBackground, AnimatedChart, MermaidDiagram,
-│   │                     #   ArchitectureDiagram, TimelineModern
-│   ├── ui/               # ScrollToTop, ThemeToggle, TechIconChip
-│   └── utility/          # LoadingScreen, SEO
+│   ├── layout/                 # Navigation, Footer, SkipLink
+│   ├── sections/               # AnimatedBackground, AnimatedChart, TimelineModern,
+│   │                           #   MermaidDiagram, ArchitectureDiagram
+│   ├── ui/                     # TerminalWidget, DevTerminal, RecruiterChat,
+│   │                           #   ScrollToTop, ThemeToggle, TechIconChip
+│   └── utility/                # LoadingScreen, SEO
 ├── data/
-│   └── resumeTimelineData.js
+│   ├── resumeTimelineData.js   # Single source of truth for all portfolio content
+│   └── portfolioKnowledge.js   # Virtual FS, knowledge base, page contexts (derived)
 ├── hooks/
+│   ├── useTerminalCommands.js  # Command registry, dispatch loop, tab completion
 │   └── useNoScroll.js
+├── services/
+│   └── aiService.js            # SSE streaming, system prompt builder, cleanMarkdown
 └── pages/
-    ├── Home / About / Projects / Skills / Contact / Resume
-    └── projects/         # 11 individual project detail pages
+    ├── Home / About / Projects / Skills / Resume / Contact
+    └── projects/               # 11 individual project detail pages
 ```
+
+---
+
+## AI Configuration
+
+The terminal widget uses OpenRouter for AI responses. The AI is powered by context-stuffing RAG — the full portfolio knowledge base (~4 KB) is injected as the system prompt on every request. No backend, vector database, or extra infrastructure required.
+
+Set `VITE_OPENROUTER_KEY` in `.env.local`:
+```
+VITE_OPENROUTER_KEY=sk-or-v1-...
+```
+
+Get a free key at [openrouter.ai](https://openrouter.ai). The free `openai/gpt-oss-120b:free` model is used by default.
 
 ---
 
 ## Deployment
 
-The project is deployed on **Vercel**. The `vercel.json` in `portfolio.client/` configures:
+Deployed on **Vercel**. `portfolio.client/vercel.json` configures:
 
 - **Build command:** `npm run build`
 - **Output directory:** `dist`
 - **SPA rewrites:** all routes → `index.html`
 - **Asset caching:** `Cache-Control: public, max-age=31536000, immutable` on `/assets/**`
-
-To deploy manually:
-
-```bash
-vercel --prod --cwd "path/to/portfolio.client"
-```
 
 ---
 
