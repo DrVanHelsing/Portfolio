@@ -5,6 +5,7 @@ import { Terminal, Users } from 'lucide-react';
 import { derivePageKey } from '../../data/portfolioKnowledge.js';
 import DevTerminal from './DevTerminal.jsx';
 import RecruiterChat from './RecruiterChat.jsx';
+import HelpModal from './HelpModal.jsx';
 import './TerminalWidget.css';
 
 export default function TerminalWidget() {
@@ -14,6 +15,7 @@ export default function TerminalWidget() {
   const [isExpanded,   setIsExpanded]   = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isMinimized,  setIsMinimized]  = useState(false);
+  const [isHelpOpen,   setIsHelpOpen]   = useState(false);
   const [mode,         setMode]         = useState('recruiter'); // 'dev' | 'recruiter'
 
   const currentPage = derivePageKey(location.pathname);
@@ -83,21 +85,29 @@ export default function TerminalWidget() {
                 </span>
               </span>
 
-              {/* Mode toggle button */}
+              {/* Header right controls */}
               {!isMinimized && (
-                <button
-                  className="tw-mode-toggle"
-                  title={mode === 'dev' ? 'Switch to AI Chat' : 'Switch to Dev Terminal'}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setMode(m => m === 'dev' ? 'recruiter' : 'dev');
-                  }}
-                  aria-label="Toggle terminal mode"
-                >
-                  {mode === 'dev'
-                    ? <><Users size={12} /><span className="tw-mode-toggle-label">AI Chat</span></>
-                    : <><Terminal size={12} /><span className="tw-mode-toggle-label">Dev Mode</span></>}
-                </button>
+                <div className="tw-header-right">
+                  <button
+                    className="tw-help-btn"
+                    title="Widget help"
+                    onClick={(e) => { e.stopPropagation(); setIsHelpOpen(true); }}
+                    aria-label="Open widget help"
+                  >?</button>
+                  <button
+                    className="tw-mode-toggle"
+                    title={mode === 'dev' ? 'Switch to AI Chat' : 'Switch to Dev Terminal'}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setMode(m => m === 'dev' ? 'recruiter' : 'dev');
+                    }}
+                    aria-label="Toggle terminal mode"
+                  >
+                    {mode === 'dev'
+                      ? <><Users size={12} /><span className="tw-mode-toggle-label">AI Chat</span></>
+                      : <><Terminal size={12} /><span className="tw-mode-toggle-label">Dev Mode</span></>}
+                  </button>
+                </div>
               )}
             </div>
 
@@ -146,6 +156,12 @@ export default function TerminalWidget() {
           </span>
         )}
       </div>
+
+      <HelpModal
+        isOpen={isHelpOpen}
+        onClose={() => setIsHelpOpen(false)}
+        initialTab={mode}
+      />
     </div>
   );
 }

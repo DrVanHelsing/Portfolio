@@ -192,3 +192,60 @@
   opacity: 0.3 !important;
   cursor: not-allowed !important;
 }
+
+/* ── Light mode ──────────────────────────────────────────── */
+[data-theme="light"] .rc-body {
+  background: #f6f8fa;
+}
+[data-theme="light"] .rc-body::-webkit-scrollbar-track { background: #f6f8fa; }
+[data-theme="light"] .rc-body::-webkit-scrollbar-thumb { background: #d0d7de; }
+
+[data-theme="light"] .rc-bubble-user {
+  background: #0969da;
+  color: #ffffff;
+}
+
+[data-theme="light"] .rc-bubble-ai {
+  background: #f0ebfa;
+  border-color: rgba(130, 80, 223, 0.2);
+  color: #1f2328;
+}
+
+[data-theme="light"] .rc-typing span { background: #8250df; }
+
+[data-theme="light"] .rc-starter-btn {
+  background: rgba(130, 80, 223, 0.06);
+  border-color: rgba(130, 80, 223, 0.2);
+  color: #6e40c9;
+}
+[data-theme="light"] .rc-starter-btn:hover:not(:disabled) {
+  background: rgba(130, 80, 223, 0.12);
+  border-color: rgba(130, 80, 223, 0.4);
+  color: #5a32a3;
+}
+
+[data-theme="light"] .rc-bubble-ai.rc-streaming {
+  border-left-color: rgba(130, 80, 223, 0.5);
+}
+
+[data-theme="light"] .rc-input-row {
+  background: #f0ebfa;
+  border-top-color: #c9b3f0;
+}
+
+[data-theme="light"] .rc-loading-bar { background: rgba(130, 80, 223, 0.08); }
+[data-theme="light"] .rc-loading-bar::after {
+  background: linear-gradient(90deg, transparent, #8250df, #a371f7, transparent);
+}
+
+[data-theme="light"] .rc-input   { color: #1f2328; caret-color: #8250df; }
+[data-theme="light"] .rc-input::placeholder { color: #8c6dbd; }
+
+[data-theme="light"] .rc-send-btn {
+  background: rgba(130, 80, 223, 0.1) !important;
+  border-color: rgba(130, 80, 223, 0.3) !important;
+  color: #8250df !important;
+}
+[data-theme="light"] .rc-send-btn:hover:not(:disabled) {
+  background: rgba(130, 80, 223, 0.2) !important;
+}
