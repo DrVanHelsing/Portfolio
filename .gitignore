@@ -4,3 +4,10 @@
 # Local documents not for version control
 portfolio.client/Documents/
 portfolio.client/docs/projects/
+
+# Test artifacts
+test-terminal.mjs
+test-screenshots/
+node_modules/
+package.json
+package-lock.json
