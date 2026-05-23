@@ -502,25 +502,9 @@
     height: 22px;
   }
 
-  /* 2x3 grid on mobile */
+  /* Hide featured projects on mobile — too much vertical space */
   .hero-highlights {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-sm);
-    flex: none;
-    min-height: unset;
-  }
-
-  .highlight-card {
-    padding: var(--spacing-sm);
-    border-radius: var(--radius-lg);
-  }
-
-  .highlight-card h3 {
-    font-size: 0.82rem;
-  }
-
-  .highlight-card p {
-    font-size: 0.7rem;
+    display: none;
   }
 
   /* Marquee back to normal flow on mobile */
@@ -535,10 +519,6 @@
 @media (max-width: 480px) {
   .home-content {
     padding: 70px var(--spacing-sm) var(--spacing-md);
-  }
-
-  .hero-highlights {
-    gap: 8px;
   }
 
   .marquee-content span {

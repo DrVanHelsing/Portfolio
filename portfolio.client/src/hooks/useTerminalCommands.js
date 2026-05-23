@@ -3,7 +3,13 @@ import {
   VIRTUAL_FS, ROUTE_MAP, PROJECT_ALIASES, PAGE_CONTEXTS,
   resolvePath, getKnowledgeBase, WELCOME_LINES,
 } from '../data/portfolioKnowledge.js';
-import { streamDevAnswer, streamSummarize } from '../services/aiService.js';
+import {
+  streamDevAnswer, streamSummarize,
+  detectMisuse, MAX_INPUT_LENGTH, MAX_SESSION_MESSAGES,
+} from '../services/aiService.js';
+
+const MISUSE_REPLY =
+  "I'm only able to discuss Tredir's portfolio, background, and skills. What would you like to know?";
 
 // ── Prompt builder ─────────────────────────────────────────────────────────────
 
@@ -274,13 +280,18 @@ function cmdMan({ args, addLines }) {
 }
 
 async function cmdAsk({ args, currentPage, chatMessages, addLines, setIsAILoading, onStreamChunk, onStreamDone, onStreamError }) {
-  const question = args.join(' ').trim();
+  const question = args.join(' ').trim().slice(0, MAX_INPUT_LENGTH);
   if (!question) {
     addLines([
       { type: 'dim', text: 'Usage: ask <question>' },
       { type: 'dim', text: '  e.g. ask what projects involve AI?' },
       { type: 'blank' },
     ]);
+    return;
+  }
+
+  if (detectMisuse(question)) {
+    addLines([{ type: 'dim', text: MISUSE_REPLY }, { type: 'blank' }]);
     return;
   }
 
@@ -661,11 +672,28 @@ export function useTerminalCommands({ navigate, setMode, setIsAILoading, setHist
 
     // in chat session — send everything to AI
     if (inChatSession) {
+      if (chatMessages.length >= MAX_SESSION_MESSAGES) {
+        addLines([
+          { type: 'dim', text: 'Session limit reached. Type exit then reopen /chat to start fresh.' },
+          { type: 'blank' },
+        ]);
+        setCmdHistory(prev => [raw, ...prev]);
+        setHistoryIdx(-1);
+        return;
+      }
+
+      if (detectMisuse(trimmed)) {
+        addLines([{ type: 'dim', text: MISUSE_REPLY }, { type: 'blank' }]);
+        setCmdHistory(prev => [raw, ...prev]);
+        setHistoryIdx(-1);
+        return;
+      }
+
       const streamId = `ai-${Date.now()}`;
       setIsAILoading(true);
       addLines([{ type: 'dim', text: '(AI)' }, { type: 'ai', text: '', id: streamId }]);
 
-      const updatedMessages = [...chatMessages, { role: 'user', content: trimmed }];
+      const updatedMessages = [...chatMessages, { role: 'user', content: trimmed.slice(0, MAX_INPUT_LENGTH) }];
 
       await streamDevAnswer({
         question: trimmed,
@@ -711,18 +739,22 @@ export function useTerminalCommands({ navigate, setMode, setIsAILoading, setHist
       await cmd.handler(ctx);
     } else {
       // Unrecognized input → AI (Claude CLI pattern)
-      const streamId = `ai-${Date.now()}`;
-      setIsAILoading(true);
-      addLines([{ type: 'ai', text: '', id: streamId }]);
+      if (detectMisuse(trimmed)) {
+        addLines([{ type: 'dim', text: MISUSE_REPLY }, { type: 'blank' }]);
+      } else {
+        const streamId = `ai-${Date.now()}`;
+        setIsAILoading(true);
+        addLines([{ type: 'ai', text: '', id: streamId }]);
 
-      await streamDevAnswer({
-        question: trimmed,
-        currentPage,
-        chatMessages: [],
-        onChunk:  (c) => onStreamChunk(streamId, c),
-        onDone:   () => { onStreamDone(streamId); setIsAILoading(false); },
-        onError:  (m) => { onStreamError(streamId, m); setIsAILoading(false); },
-      });
+        await streamDevAnswer({
+          question: trimmed.slice(0, MAX_INPUT_LENGTH),
+          currentPage,
+          chatMessages: [],
+          onChunk:  (c) => onStreamChunk(streamId, c),
+          onDone:   () => { onStreamDone(streamId); setIsAILoading(false); },
+          onError:  (m) => { onStreamError(streamId, m); setIsAILoading(false); },
+        });
+      }
     }
 
     setCmdHistory(prev => [raw, ...prev]);

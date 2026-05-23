@@ -1,7 +1,15 @@
 import { useState, useRef, useEffect } from 'react';
 import { SendHorizontal } from 'lucide-react';
-import { buildSystemPrompt, streamChat, cleanMarkdown } from '../../services/aiService.js';
+import {
+  buildSystemPrompt, streamChat, cleanMarkdown,
+  detectMisuse, MAX_INPUT_LENGTH, MAX_SESSION_MESSAGES,
+} from '../../services/aiService.js';
 import './RecruiterChat.css';
+
+const MISUSE_RESPONSE =
+  "I'm only able to discuss Tredir Sewpaul's portfolio, background, and skills. What would you like to know about Tredir?";
+const LIMIT_RESPONSE =
+  "You've reached the session message limit. Please refresh the page to start a new conversation.";
 
 const STARTER_QUESTIONS = [
   "What is Tredir's current role?",
@@ -36,8 +44,27 @@ export default function RecruiterChat({ currentPage }) {
   const hasUserMessages = messages.some(m => m.role === 'user');
 
   async function sendMessage(text) {
-    const question = text.trim();
+    const question = text.trim().slice(0, MAX_INPUT_LENGTH);
     if (!question || isLoading) return;
+
+    const userCount = messages.filter(m => m.role === 'user').length;
+    if (userCount >= MAX_SESSION_MESSAGES) {
+      setMessages(prev => [...prev,
+        { role: 'user', content: question },
+        { role: 'assistant', content: LIMIT_RESPONSE },
+      ]);
+      setInputValue('');
+      return;
+    }
+
+    if (detectMisuse(question)) {
+      setMessages(prev => [...prev,
+        { role: 'user', content: question },
+        { role: 'assistant', content: MISUSE_RESPONSE },
+      ]);
+      setInputValue('');
+      return;
+    }
 
     const userMsg = { role: 'user', content: question };
     const streamId = `rc-${Date.now()}`;
@@ -136,6 +163,7 @@ export default function RecruiterChat({ currentPage }) {
           disabled={isLoading}
           autoComplete="off"
           spellCheck={false}
+          maxLength={MAX_INPUT_LENGTH}
           placeholder={isLoading ? 'Thinking…' : 'Ask me anything about Tredir…'}
           aria-label="Recruiter chat input"
         />

@@ -3,7 +3,7 @@
   position: fixed;
   bottom: 80px;
   right: 2rem;
-  z-index: 1001;
+  z-index: 999;
   pointer-events: none;
   display: flex;
   flex-direction: column;

@@ -80,7 +80,7 @@
   right: 20px;
   font-size: 3rem;
   font-weight: var(--font-weight-bold);
-  color: rgba(88, 166, 255, 0.28);
+  color: var(--accent-bg-hover);
   line-height: 1;
   z-index: 2;
   transition: all var(--transition-slow);
@@ -89,7 +89,7 @@
 }
 
 .project-card:hover .project-number {
-  color: rgba(88, 166, 255, 0.55);
+  color: var(--accent-border-hover);
   transform: scale(1.1);
 }
 
@@ -352,7 +352,7 @@
 
 .projects-search-input:focus {
   border-color: var(--apple-blue);
-  box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.15);
+  box-shadow: 0 0 0 3px var(--accent-bg);
 }
 
 .projects-search-clear {
