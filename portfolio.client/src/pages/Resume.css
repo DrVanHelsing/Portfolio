@@ -15,3 +15,58 @@
   box-sizing: border-box;
 }
 
+/* ── Memoji + Download aside (top-right) ────────────── */
+.resume-header-aside {
+  position: absolute;
+  top: 90px;
+  right: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+  z-index: 5;
+}
+
+.memoji-resume-float {
+  width: 130px;
+  height: 130px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.15));
+  pointer-events: none;
+  user-select: none;
+}
+
+.resume-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--apple-blue);
+  color: #fff;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+  box-shadow: var(--shadow-blue-sm);
+  white-space: nowrap;
+}
+
+.resume-download-btn:hover {
+  background: var(--apple-blue-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-blue-md);
+}
+
+@media (max-width: 768px) {
+  .resume-header-aside {
+    position: static;
+    margin: 80px auto var(--spacing-md);
+  }
+
+  .memoji-resume-float {
+    width: 90px;
+    height: 90px;
+  }
+}
+

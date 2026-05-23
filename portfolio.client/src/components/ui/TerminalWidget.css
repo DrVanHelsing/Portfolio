@@ -1,0 +1,544 @@
+/* ── Container ─────────────────────────────────────────── */
+.tw-container {
+  position: fixed;
+  bottom: 80px;
+  right: 2rem;
+  z-index: 1001;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+/* Raise above everything else when fullscreen is active */
+.tw-container:has(.tw-fullscreen) {
+  z-index: 99999;
+}
+
+.tw-container > * {
+  pointer-events: all;
+}
+
+/* ── Bubble group (button + label) ─────────────────────── */
+.tw-bubble-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ── Bubble button ──────────────────────────────────────── */
+.tw-bubble {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 50% !important;
+  background-color: #161b22 !important;
+  color: #58a6ff !important;
+  border: 1px solid #30363d !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5) !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  animation: tw-pulse 3s ease-in-out infinite;
+}
+
+/* Recruiter mode bubble — purple accent */
+.tw-bubble.tw-bubble-recruiter {
+  color: #a371f7 !important;
+  border-color: rgba(163, 113, 247, 0.35) !important;
+  animation: tw-pulse-recruiter 3s ease-in-out infinite;
+}
+
+.tw-bubble:hover {
+  transform: none !important;
+  background-color: #1f2937 !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5) !important;
+}
+
+@keyframes tw-pulse {
+  0%,
+  100% {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), 0 0 0 0 rgba(88, 166, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), 0 0 0 6px rgba(88, 166, 255, 0);
+  }
+}
+
+@keyframes tw-pulse-recruiter {
+  0%,
+  100% {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), 0 0 0 0 rgba(163, 113, 247, 0.35);
+  }
+  50% {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), 0 0 0 7px rgba(163, 113, 247, 0);
+  }
+}
+
+/* ── Bubble mode label ───────────────────────────────────── */
+.tw-bubble-label {
+  font-size: 9px;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, 'Courier New', monospace;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 10px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.tw-bubble-label-dev {
+  background: rgba(88, 166, 255, 0.1);
+  color: #58a6ff;
+  border: 1px solid rgba(88, 166, 255, 0.2);
+}
+
+.tw-bubble-label-recruiter {
+  background: rgba(163, 113, 247, 0.1);
+  color: #a371f7;
+  border: 1px solid rgba(163, 113, 247, 0.25);
+}
+
+/* ── Panel ──────────────────────────────────────────────── */
+.tw-panel {
+  width: 420px;
+  height: 380px;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, 'Courier New', monospace;
+  font-size: 12px;
+}
+
+/* ── Header ─────────────────────────────────────────────── */
+.tw-header {
+  height: 34px;
+  background: #161b22;
+  border-bottom: 1px solid #30363d;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  flex-shrink: 0;
+}
+
+.tw-traffic-lights {
+  display: flex;
+  gap: 6px;
+}
+
+.tw-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.tw-dot:hover {
+  opacity: 0.7;
+}
+
+.tw-dot-red    { background: #ff5f57; }
+.tw-dot-yellow { background: #febc2e; }
+.tw-dot-green  { background: #28c840; }
+
+.tw-title {
+  flex: 1;
+  text-align: center;
+  color: #8b949e;
+  font-size: 12px;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, 'Courier New', monospace;
+}
+
+.tw-close-btn {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: #8b949e !important;
+  cursor: pointer !important;
+  font-size: 18px !important;
+  line-height: 1 !important;
+  padding: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.tw-close-btn:hover {
+  color: #e6edf3 !important;
+  transform: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* ── Tab bar ─────────────────────────────────────────────── */
+.tw-tabbar {
+  height: 28px;
+  background: #161b22;
+  border-bottom: 1px solid #30363d;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 12px;
+  flex-shrink: 0;
+}
+
+.tw-tab {
+  color: #8b949e;
+  font-size: 11px;
+  padding: 4px 8px;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, 'Courier New', monospace;
+}
+
+.tw-tab-active {
+  color: #e6edf3;
+  border-bottom: 2px solid #58a6ff;
+}
+
+/* ── Body (output) ──────────────────────────────────────── */
+.tw-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.tw-body::-webkit-scrollbar       { width: 4px; }
+.tw-body::-webkit-scrollbar-track { background: #0d1117; }
+.tw-body::-webkit-scrollbar-thumb { background: #30363d; border-radius: 2px; }
+
+/* ── Line types ──────────────────────────────────────────── */
+.tw-line-ctx   { color: rgba(88, 166, 255, 0.7); white-space: pre-wrap; word-break: break-all; }
+.tw-line-cmd   { color: #e6edf3; white-space: pre-wrap; word-break: break-all; }
+.tw-line-sym   { color: #3fb950; font-weight: bold; white-space: pre-wrap; }
+.tw-line-ok    { color: #3fb950; white-space: pre-wrap; }
+.tw-line-dim   { color: #8b949e; font-style: italic; white-space: pre-wrap; }
+.tw-line-rdy   { color: #58a6ff; font-weight: bold; white-space: pre-wrap; }
+.tw-line-blank { height: 0.7em; }
+
+/* ── Dev terminal AI loading bar ────────────────────────── */
+.tw-loading-bar {
+  height: 2px;
+  position: relative;
+  overflow: hidden;
+  background: rgba(88, 166, 255, 0.08);
+  flex-shrink: 0;
+}
+
+.tw-loading-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -55%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, #58a6ff, #79c0ff, transparent);
+  animation: tw-bar-sweep 1.3s ease-in-out infinite;
+}
+
+@keyframes tw-bar-sweep {
+  0%   { left: -55%; }
+  100% { left: 160%; }
+}
+
+/* ── Input row ───────────────────────────────────────────── */
+.tw-input-row {
+  height: 36px;
+  background: #161b22;
+  border-top: 1px solid #30363d;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  flex-shrink: 0;
+}
+
+.tw-prompt {
+  color: #3fb950;
+  white-space: nowrap;
+  margin-right: 6px;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, 'Courier New', monospace;
+  font-size: 12px;
+}
+
+.tw-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #e6edf3;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, 'Courier New', monospace;
+  font-size: 12px;
+  caret-color: #58a6ff;
+}
+
+.tw-input:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.tw-input::placeholder {
+  color: #8b949e;
+  font-style: italic;
+}
+
+/* ── Fullscreen & Minimized modifiers ───────────────────── */
+.tw-panel.tw-fullscreen {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  border-radius: 0 !important;
+  z-index: 2000 !important;
+}
+
+.tw-panel.tw-minimized {
+  height: 34px !important;
+  overflow: hidden !important;
+}
+
+/* ── AI line type ────────────────────────────────────────── */
+.tw-line-ai {
+  color: #e6edf3;
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.6;
+}
+
+/* ── Mode badge ──────────────────────────────────────────── */
+.tw-mode-badge {
+  font-size: 9px;
+  padding: 1px 5px;
+  border-radius: 3px;
+  margin-left: 7px;
+  vertical-align: middle;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.tw-mode-badge-dev {
+  background: rgba(88, 166, 255, 0.12);
+  color: #58a6ff;
+}
+
+.tw-mode-badge-recruiter {
+  background: rgba(163, 113, 247, 0.15);
+  color: #a371f7;
+}
+
+/* ── Mode toggle button ──────────────────────────────────── */
+.tw-mode-toggle {
+  background: transparent !important;
+  border: 1px solid #30363d !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
+  color: #8b949e !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  padding: 3px 8px !important;
+  margin-left: auto !important;
+  width: auto !important;
+  height: auto !important;
+  transition: color 0.15s, border-color 0.15s, background 0.15s !important;
+  animation: none !important;
+  flex-shrink: 0;
+}
+
+.tw-mode-toggle-label {
+  font-size: 9.5px;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', Consolas, 'Courier New', monospace;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.tw-mode-toggle:hover {
+  color: #a371f7 !important;
+  border-color: rgba(163, 113, 247, 0.5) !important;
+  background: rgba(163, 113, 247, 0.08) !important;
+  transform: none !important;
+}
+
+/* ── Recruiter mode panel overrides ─────────────────────── */
+.tw-panel[data-mode="recruiter"] .tw-header {
+  background: #160d2a;
+  border-bottom-color: #3d2060;
+}
+
+.tw-panel[data-mode="recruiter"] .tw-dot-red    { background: #ff5f57; }
+.tw-panel[data-mode="recruiter"] .tw-dot-yellow { background: #febc2e; }
+.tw-panel[data-mode="recruiter"] .tw-dot-green  { background: #28c840; }
+
+/* ── Header right group ──────────────────────────────────── */
+.tw-header-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+
+/* Override margin-left on the toggle when inside the group */
+.tw-header-right .tw-mode-toggle {
+  margin-left: 0 !important;
+}
+
+/* ── Help button ─────────────────────────────────────────── */
+.tw-help-btn {
+  background: transparent !important;
+  border: 1px solid #30363d !important;
+  border-radius: 50% !important;
+  box-shadow: none !important;
+  animation: none !important;
+  color: #8b949e !important;
+  cursor: pointer !important;
+  width: 20px !important;
+  height: 20px !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  font-family: 'JetBrains Mono', Consolas, monospace !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  transition: color 0.15s, border-color 0.15s !important;
+  line-height: 1 !important;
+}
+
+.tw-help-btn:hover {
+  color: #a371f7 !important;
+  border-color: rgba(163, 113, 247, 0.5) !important;
+  transform: none !important;
+  background: rgba(163, 113, 247, 0.08) !important;
+}
+
+/* ── Light mode ──────────────────────────────────────────── */
+[data-theme="light"] .tw-panel {
+  background: #f6f8fa;
+  border-color: #d0d7de;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="light"] .tw-header {
+  background: #eaeef2;
+  border-bottom-color: #d0d7de;
+}
+
+[data-theme="light"] .tw-panel[data-mode="recruiter"] .tw-header {
+  background: #f0ebfa;
+  border-bottom-color: #c9b3f0;
+}
+
+[data-theme="light"] .tw-title       { color: #656d76; }
+[data-theme="light"] .tw-close-btn   { color: #656d76 !important; }
+[data-theme="light"] .tw-close-btn:hover { color: #1f2328 !important; }
+
+[data-theme="light"] .tw-mode-badge-dev {
+  background: rgba(9, 105, 218, 0.1);
+  color: #0969da;
+}
+[data-theme="light"] .tw-mode-badge-recruiter {
+  background: rgba(130, 80, 223, 0.12);
+  color: #8250df;
+}
+
+[data-theme="light"] .tw-mode-toggle {
+  border-color: #d0d7de !important;
+  color: #656d76 !important;
+}
+[data-theme="light"] .tw-mode-toggle:hover {
+  color: #8250df !important;
+  border-color: rgba(130, 80, 223, 0.5) !important;
+  background: rgba(130, 80, 223, 0.07) !important;
+}
+
+[data-theme="light"] .tw-help-btn {
+  border-color: #d0d7de !important;
+  color: #656d76 !important;
+}
+[data-theme="light"] .tw-help-btn:hover {
+  color: #8250df !important;
+  border-color: rgba(130, 80, 223, 0.5) !important;
+  background: rgba(130, 80, 223, 0.07) !important;
+}
+
+[data-theme="light"] .tw-tabbar {
+  background: #eaeef2;
+  border-bottom-color: #d0d7de;
+}
+[data-theme="light"] .tw-tab         { color: #656d76; }
+[data-theme="light"] .tw-tab-active  { color: #1f2328; border-bottom-color: #0969da; }
+
+[data-theme="light"] .tw-body {
+  background: #f6f8fa;
+}
+[data-theme="light"] .tw-body::-webkit-scrollbar-track { background: #f6f8fa; }
+[data-theme="light"] .tw-body::-webkit-scrollbar-thumb { background: #d0d7de; }
+
+[data-theme="light"] .tw-line-ctx  { color: rgba(9, 105, 218, 0.75); }
+[data-theme="light"] .tw-line-cmd  { color: #1f2328; }
+[data-theme="light"] .tw-line-sym  { color: #116329; }
+[data-theme="light"] .tw-line-ok   { color: #116329; }
+[data-theme="light"] .tw-line-dim  { color: #8c959f; }
+[data-theme="light"] .tw-line-rdy  { color: #0969da; }
+[data-theme="light"] .tw-line-ai   { color: #1f2328; }
+
+[data-theme="light"] .tw-loading-bar { background: rgba(9, 105, 218, 0.08); }
+[data-theme="light"] .tw-loading-bar::after {
+  background: linear-gradient(90deg, transparent, #0969da, #388bfd, transparent);
+}
+
+[data-theme="light"] .tw-input-row {
+  background: #eaeef2;
+  border-top-color: #d0d7de;
+}
+[data-theme="light"] .tw-prompt  { color: #116329; }
+[data-theme="light"] .tw-input   { color: #1f2328; caret-color: #0969da; }
+[data-theme="light"] .tw-input::placeholder { color: #8c959f; }
+
+[data-theme="light"] .tw-bubble {
+  background-color: #f6f8fa !important;
+  border-color: #d0d7de !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1) !important;
+}
+[data-theme="light"] .tw-bubble:hover {
+  background-color: #eaeef2 !important;
+}
+
+[data-theme="light"] .tw-bubble-label-dev {
+  background: rgba(9, 105, 218, 0.08);
+  color: #0969da;
+  border-color: rgba(9, 105, 218, 0.18);
+}
+[data-theme="light"] .tw-bubble-label-recruiter {
+  background: rgba(130, 80, 223, 0.08);
+  color: #8250df;
+  border-color: rgba(130, 80, 223, 0.2);
+}
+
+/* ── Mobile ──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .tw-container {
+    bottom: 68px;
+    right: 1.5rem;
+  }
+
+  .tw-panel {
+    width: calc(100vw - 3rem);
+    height: 340px;
+  }
+}

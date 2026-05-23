@@ -3,7 +3,8 @@
   min-height: 100vh;
   padding: 90px var(--spacing-2xl) var(--spacing-2xl);
   color: var(--apple-dark-gray);
-  background: var(--bg-page-light);
+  background: transparent;
+  overflow-x: hidden;
 }
 
 .project-detail-container {
@@ -51,7 +52,7 @@
 }
 
 .project-subtitle {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-base);
   color: var(--apple-gray);
   max-width: 700px;
   margin: 0 auto var(--spacing-lg);
@@ -66,9 +67,14 @@
   margin-bottom: var(--spacing-xl);
 }
 
+/* Centre any flex container (e.g. tech chip rows) placed directly inside the header */
+.project-header > div {
+  justify-content: center;
+}
+
 .tech-badge {
-  background: rgba(0, 113, 227, 0.08);
-  border: 1px solid rgba(0, 113, 227, 0.15);
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
   padding: 6px 16px;
   border-radius: var(--radius-lg);
   font-size: var(--font-size-sm);
@@ -83,6 +89,7 @@
   display: flex;
   gap: var(--spacing-md);
   justify-content: center;
+  margin-top: var(--spacing-lg);
 }
 
 .project-link-btn {
@@ -116,10 +123,22 @@
   gap: var(--spacing-xl);
 }
 
+.demo-video-hero {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-2xl);
+  border: 1px solid rgba(0, 122, 255, 0.3);
+  box-shadow: 0 0 40px rgba(0, 122, 255, 0.08);
+  margin-bottom: var(--spacing-xl);
+  width: 100%;
+}
+
 .content-section {
-  background: var(--bg-glass-light);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
   border-radius: var(--radius-xl);
   padding: var(--spacing-xl);
   border: var(--border-light);
@@ -152,7 +171,7 @@
 }
 
 .content-section tbody tr:nth-child(even) {
-  background: rgba(0,0,0,0.03);
+  background: var(--card-bg);
 }
 
 .content-section table code,
@@ -161,10 +180,10 @@
 }
 
 .section-title {
-  font-size: clamp(var(--font-size-2xl), 3vw, var(--font-size-3xl));
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
   font-weight: var(--font-weight-semibold);
   color: var(--apple-blue);
-  margin-bottom: var(--spacing-xl);
+  margin-bottom: var(--spacing-lg);
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
@@ -178,36 +197,32 @@
 
 .section-content p {
   color: var(--apple-gray);
-  line-height: 1.8;
+  line-height: 1.6;
   margin-bottom: var(--spacing-md);
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-sm);
 }
 
 .features-grid {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: var(--spacing-xl);
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
 .feature-card {
   background: var(--bg-accent-light);
-  padding: var(--spacing-xl);
+  padding: var(--spacing-lg);
   border-radius: var(--radius-lg);
   border-left: 4px solid var(--apple-blue);
   transition: all var(--transition-normal);
-  /* Keep cards in a horizontal row */
-  flex: 0 0 300px;
-  min-width: 260px;
 }
 
 .feature-card:hover {
-  transform: translateX(8px);
+  transform: translateY(-4px);
   box-shadow: var(--shadow-md);
 }
 
 .feature-title {
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-lg);
   font-weight: var(--font-weight-semibold);
   color: var(--apple-dark-gray);
   margin-bottom: var(--spacing-sm);
@@ -219,10 +234,9 @@
 }
 
 .tech-stack-list {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: var(--spacing-md);
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
 .tech-item {
@@ -233,9 +247,6 @@
   background: var(--bg-accent-light);
   border-radius: var(--radius-md);
   color: var(--apple-gray);
-  /* Keep items from shrinking too small in horizontal layout */
-  flex: 0 0 220px;
-  min-width: 200px;
 }
 
 .tech-item svg {
@@ -243,42 +254,102 @@
   flex-shrink: 0;
 }
 
+/* ── 3-column chart grid ─────────────────────────────────── */
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-lg);
+  width: 100%;
+}
+
+.chart-grid-3x3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-xl);
+  width: 100%;
+}
+
+.chart-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+}
+
+.chart-card h3 {
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: var(--text-1);
+}
+
+/* Spans all 3 columns, centered at a readable width */
+.chart-card-full {
+  grid-column: 1 / -1;
+  max-width: 680px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (max-width: 960px) {
+  .chart-grid-3x3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .charts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .chart-card-full {
+    grid-column: 1 / -1;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  .chart-grid-3x3 {
+    grid-template-columns: 1fr;
+  }
+  .charts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .highlights-list {
   list-style: none;
   padding: 0;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: var(--spacing-md);
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
 .highlights-list li {
   padding: var(--spacing-lg);
-  background: linear-gradient(135deg, rgba(10, 132, 255, 0.08), rgba(88, 86, 214, 0.08));
-  border: 1px solid rgba(10, 132, 255, 0.1);
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
   border-radius: var(--radius-lg);
-  color: var(--apple-light-gray);
+  color: var(--text-2);
   transition: all var(--transition-normal);
   display: flex;
   align-items: flex-start;
   gap: var(--spacing-md);
   font-size: var(--font-size-sm);
   line-height: 1.6;
-  /* Make each highlight a horizontal card */
-  flex: 0 0 260px;
-  min-width: 240px;
 }
 
 .highlights-list li:hover {
-  background: linear-gradient(135deg, rgba(10, 132, 255, 0.12), rgba(88, 86, 214, 0.12));
-  border-color: rgba(10, 132, 255, 0.2);
+  background: var(--accent-bg);
+  border-color: var(--accent-border-hover);
   transform: translateY(-2px);
   box-shadow: var(--shadow-sm);
 }
 
 .highlights-list li::before {
   content: '✓';
-  color: var(--apple-blue);
+  color: var(--accent);
   font-weight: bold;
   flex-shrink: 0;
   font-size: var(--font-size-lg);
@@ -287,7 +358,7 @@
   justify-content: center;
   width: 24px;
   height: 24px;
-  background: rgba(10, 132, 255, 0.1);
+  background: var(--accent-bg);
   border-radius: 50%;
 }
 
@@ -388,50 +459,55 @@
     margin-bottom: var(--spacing-sm);
   }
 
-  /* HIDE ELEMENTS THAT DON'T FIT ON MOBILE - NO HORIZONTAL SCROLLING */
+  /* CONTAIN wide content inside its section — scroll within, not page-wide */
   
-  /* Hide architecture diagrams - they're too wide for mobile */
-  .content-section > div:has(> svg[id*="mermaid"]),
-  .content-section .mermaid,
-  .content-section svg[id*="mermaid"],
-  .content-section div[class*="architecture"],
-  .content-section section:has(h2:contains("Architecture")) {
-    display: none !important;
-  }
-
-  /* Hide tables - replace with simplified data if needed */
+  /* Tables - responsive block layout, no horizontal scroll */
   .content-section table {
-    display: none !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100%;
+    font-size: 0.8rem;
+    overflow-x: hidden;
   }
 
-  /* Hide wide chart grids with multiple charts side-by-side */
-  .content-section > div[style*="display:flex"][style*="maxWidth:'1400px"],
-  .content-section > div[style*="display: flex"][style*="maxWidth: '1400px"],
-  .content-section > div[style*="display:'flex'"][style*="maxWidth:'1400px"] {
-    display: none !important;
+  .content-section table thead,
+  .content-section table tbody,
+  .content-section table tr {
+    display: revert;
   }
 
-  /* Hide grids with minmax > 300px (too wide for mobile) */
-  .content-section > div[style*="minmax(400px"],
-  .content-section > div[style*="minmax(350px"] {
-    display: none !important;
+  .content-section table th,
+  .content-section table td {
+    padding: var(--spacing-sm) var(--spacing-xs);
+    white-space: normal;  /* allow wrapping so rows don't blow out width */
+    font-size: 0.8rem;
+    word-break: break-word;
   }
 
-  /* Feature cards - convert to vertical stack, NO horizontal scroll */
-  .features-grid {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-    overflow-x: visible !important;
+  /* Table wrapper divs: clamp to container, no horizontal scroll */
+  .content-section > div,
+  .content-section > section {
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow-x: hidden !important;
   }
 
-  .feature-card {
-    flex: 1 1 auto !important;
-    min-width: unset !important;
-    width: 100%;
-    padding: var(--spacing-md);
+  /* chart-grid-section: collapse to single column on mobile */
+  .chart-grid-section {
+    grid-template-columns: 1fr !important;
+    max-width: 100% !important;
   }
 
+  /* Hide wide chart grids with multiple charts side-by-side only when they have no class-based responsive handling */
+  /* (chart-grid-section is now handled with collapsed single-column above) */
+
+  /* Grids with minmax(400px/350px) that are NOT .chart-grid-section: collapse them */
+  .content-section > div:not(.chart-grid-section)[style*="minmax(400px"],
+  .content-section > div:not(.chart-grid-section)[style*="minmax(350px"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Feature cards - responsive via grid auto-fit */
   .feature-title {
     font-size: 1rem;
     margin-bottom: var(--spacing-xs);
@@ -442,17 +518,13 @@
     line-height: 1.4;
   }
 
-  /* Tech stack - convert to wrapped grid */
+  /* Tech stack grid */
   .tech-stack-list {
-    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: var(--spacing-sm);
-    overflow-x: visible !important;
   }
 
   .tech-item {
-    flex: 1 1 auto !important;
-    min-width: unset !important;
     padding: var(--spacing-sm);
     font-size: 0.85rem;
   }
@@ -462,18 +534,8 @@
     height: 18px;
   }
 
-  /* Highlights - convert to vertical list */
-  .highlights-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-sm);
-    overflow-x: visible !important;
-  }
-
+  /* Highlights - responsive via grid auto-fit */
   .highlights-list li {
-    flex: 1 1 auto !important;
-    min-width: unset !important;
-    width: 100%;
     padding: var(--spacing-md);
     font-size: 0.8rem;
     line-height: 1.5;
@@ -504,7 +566,7 @@
   .content-section > div[style*="display:flex"] {
     flex-wrap: wrap !important;
     gap: var(--spacing-sm) !important;
-    overflow-x: visible !important;
+    overflow-x: hidden !important;
   }
 
   /* Code blocks - allow minimal horizontal scroll only for code */
@@ -514,83 +576,6 @@
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     max-width: 100%;
-  }
-
-  /* Status badges */
-  .status-badge {
-    font-size: 0.75rem;
-    padding: 4px var(--spacing-sm);
-  }
-
-  /* Metric cards in grids */
-  .content-section .metric-card,
-  .content-section div[style*="flex: '1 1 200px"],
-  .content-section div[style*="flex:'1 1 200px"] {
-    flex: 1 1 auto !important;
-    min-width: unset !important;
-    max-width: unset !important;
-    width: 100%;
-    padding: var(--spacing-sm) !important;
-    font-size: 0.85rem !important;
-  }
-
-  /* Platform/feature cards in flex containers */
-  .content-section div[style*="display: flex"] > div,
-  .content-section div[style*="display:flex"] > div {
-    flex: 1 1 auto !important;
-    min-width: 120px !important;
-    max-width: unset !important;
-    padding: var(--spacing-sm) !important;
-    font-size: 0.85rem !important;
-  }
-
-  /* Icons in mobile view */
-  .content-section svg[data-lucide],
-  .content-section svg[id*="lucide"] {
-    width: 18px !important;
-    height: 18px !important;
-  }
-
-  /* Headings in cards */
-  .content-section h3,
-  .content-section h4 {
-    font-size: 0.9rem !important;
-  }
-
-  /* Paragraphs in cards */
-  .content-section div[style*="padding"] > p {
-    font-size: 0.8rem !important;
-    line-height: 1.4 !important;
-  }
-
-  /* Make all fixed-width containers responsive */
-  .content-section div[style*="width:"],
-  .content-section div[style*="minWidth:"],
-  .content-section div[style*="maxWidth:"] {
-    max-width: 100% !important;
-    min-width: unset !important;
-  }
-
-  /* Remove all horizontal overflow */
-  .content-section,
-  .content-section > div,
-  .content-section > section {
-    overflow-x: visible !important;
-  }
-
-  /* Ensure proper spacing */
-  .content-section > div[style] {
-    margin-bottom: var(--spacing-md) !important;
-  }
-
-  /* If a section contains hidden-only content (architecture/chart/table), hide the entire card */
-  .content-section:has(.architecture-section),
-  .content-section:has(.diagram-section),
-  .content-section:has(.chart-grid-section),
-  .content-section:has(> table),
-  .content-section:has(.hide-mobile),
-  .content-section:has(.mobile-hide) {
-    display: none !important;
   }
 }
 
@@ -654,17 +639,7 @@
   /* Add these classes to sections you want to hide on mobile */
   .hide-mobile,
   .mobile-hide,
-  .architecture-section,
-  .diagram-section,
-  .chart-grid-section {
-    display: none !important;
-  }
-  
-  /* Hide sections containing "Architecture" or "System Design" in title */
-  section:has(h2[class*="section-title"]:contains("Architecture")),
-  section:has(h2[class*="section-title"]:contains("System Design")),
-  section:has(.section-title:contains("Architecture")),
-  section:has(.section-title:contains("System Design")) {
+  .diagram-section {
     display: none !important;
   }
 
@@ -675,36 +650,5 @@
     font-size: 0.8rem;
     padding: 4px 10px;
     line-height: 1.3;
-  }
-}
-
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  .project-detail-page {
-    color: var(--apple-light-gray);
-  }
-
-  .content-section {
-    background: var(--bg-glass-light);
-    border: var(--border-light);
-  }
-
-  .section-content p,
-  .feature-description,
-  .tech-item,
-  .highlights-list li {
-    color: var(--apple-gray-light);
-  }
-
-  .feature-title {
-    color: #f5f5f7;
-  }
-
-  .feature-card {
-    background: var(--bg-accent-light);
-  }
-
-  .tech-item {
-    background: var(--bg-accent-light);
   }
 }

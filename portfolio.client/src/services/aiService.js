@@ -1,0 +1,157 @@
+import { getKnowledgeBase, PAGE_CONTEXTS } from '../data/portfolioKnowledge.js';
+
+const OPENROUTER_KEY = import.meta.env.VITE_OPENROUTER_KEY ?? '';
+const MODEL = 'openai/gpt-oss-120b:free';
+const API_URL = 'https://openrouter.ai/api/v1/chat/completions';
+
+// ── Markdown stripper (applied at render-time to AI output) ───────────────────
+
+export function cleanMarkdown(text) {
+  if (!text) return text;
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '$1')            // **bold**
+    .replace(/__(.*?)__/g, '$1')                 // __bold__
+    .replace(/\*([^*\n]+)\*/g, '$1')             // *italic* (not **)
+    .replace(/_([^_\n]+)_/g, '$1')               // _italic_ (not __)
+    .replace(/^#{1,6}\s+(.+)$/gm, '$1')          // ## Header → Header
+    .replace(/^[-*+]\s+/gm, '')                  // - * + bullet prefix
+    .replace(/^\d+\.\s+/gm, '')                  // 1. numbered list prefix
+    .replace(/`([^`\n]+)`/g, '$1')               // `inline code`
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')     // [link](url) → link text
+    .replace(/^>\s*/gm, '')                      // > blockquotes
+    .replace(/\n{3,}/g, '\n\n')                  // collapse extra blank lines
+    .trim();
+}
+
+// ── System prompt builders ────────────────────────────────────────────────────
+
+export function buildSystemPrompt(mode, currentPage = null) {
+  const kb = getKnowledgeBase();
+
+  if (mode === 'recruiter') {
+    return `You are Tredir Sewpaul's portfolio assistant. Your job is to help recruiters understand Tredir's background, projects, and skills in a friendly, professional tone. Answer questions conversationally and concisely. Highlight relevant achievements. Do not invent information — if you genuinely don't know something, say so. You may format responses with short paragraphs but avoid markdown headers or bullet symbols.
+
+PORTFOLIO KNOWLEDGE BASE:
+${kb}`;
+  }
+
+  const pageHint = currentPage && PAGE_CONTEXTS[currentPage]
+    ? `\n\nCURRENT PAGE THE USER IS VIEWING:\n${PAGE_CONTEXTS[currentPage]}`
+    : '';
+
+  return `You are a terminal AI embedded in Tredir Sewpaul's developer portfolio. Answer questions about Tredir's background, projects, and skills in plain text only — no markdown, no bullet dashes or asterisks, no headers. URLs go on their own line. Keep responses to 6-8 lines maximum. Be direct and informative.${pageHint}
+
+PORTFOLIO KNOWLEDGE BASE:
+${kb}`;
+}
+
+// ── Core streaming function ───────────────────────────────────────────────────
+
+export async function streamChat({
+  messages,
+  systemPrompt,
+  maxTokens = 500,
+  onChunk,
+  onDone,
+  onError,
+}) {
+  if (!OPENROUTER_KEY) {
+    onError('AI key not configured. Set VITE_OPENROUTER_KEY in .env.local');
+    return;
+  }
+
+  const controller = new AbortController();
+  const timeoutId  = setTimeout(() => controller.abort(), 45_000);
+
+  try {
+    const res = await fetch(API_URL, {
+      method: 'POST',
+      signal: controller.signal,
+      headers: {
+        'Authorization': `Bearer ${OPENROUTER_KEY}`,
+        'Content-Type': 'application/json',
+        'HTTP-Referer': window.location.origin,
+        'X-Title': 'Portfolio Terminal',
+      },
+      body: JSON.stringify({
+        model: MODEL,
+        stream: true,
+        max_tokens: maxTokens,
+        messages: [
+          { role: 'system', content: systemPrompt },
+          ...messages,
+        ],
+      }),
+    });
+
+    if (!res.ok) {
+      const t = await res.text();
+      onError(`API ${res.status}: ${t.slice(0, 120)}`);
+      return;
+    }
+
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let buf = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      buf += decoder.decode(value, { stream: true });
+      const lines = buf.split('\n');
+      buf = lines.pop() ?? '';
+
+      for (const line of lines) {
+        const t = line.trim();
+        if (!t) continue;
+        if (t === 'data: [DONE]') { onDone(); return; }
+        if (t.startsWith('data: ')) {
+          try {
+            const json = JSON.parse(t.slice(6));
+            const content = json.choices?.[0]?.delta?.content;
+            if (content) onChunk(content);
+          } catch { /* ignore malformed SSE frames */ }
+        }
+      }
+    }
+
+    onDone();
+  } catch (err) {
+    if (err.name === 'AbortError') {
+      onError('Request timed out (45s). The free model may be overloaded — try again.');
+    } else {
+      onError(err.message ?? 'Network error');
+    }
+  } finally {
+    clearTimeout(timeoutId);
+  }
+}
+
+// ── Convenience: single-turn question in dev terminal ────────────────────────
+
+export function streamDevAnswer({ question, currentPage, chatMessages = [], onChunk, onDone, onError }) {
+  const systemPrompt = buildSystemPrompt('dev', currentPage);
+  return streamChat({
+    messages: [...chatMessages, { role: 'user', content: question }],
+    systemPrompt,
+    maxTokens: 500,
+    onChunk,
+    onDone,
+    onError,
+  });
+}
+
+// ── Convenience: page/project summary (backward compat) ──────────────────────
+
+export function streamSummarize({ pageKey, context, onChunk, onDone, onError }) {
+  const systemPrompt = `You are describing a section of a developer portfolio to a visitor using a terminal widget. Write a concise, informative summary in plain text only — no markdown, no bullet dashes or asterisks, no headers. Put any URLs on their own line. 6-8 lines maximum. Be direct and informative. End with a short tip like "Type 'open geology-sim' to visit this project."`;
+  return streamChat({
+    messages: [{ role: 'user', content: `Summarize this portfolio section:\n\n${context}` }],
+    systemPrompt,
+    maxTokens: 400,
+    onChunk,
+    onDone,
+    onError,
+  });
+}

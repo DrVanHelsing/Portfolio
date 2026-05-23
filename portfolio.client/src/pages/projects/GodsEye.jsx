@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import AnimatedBackground from '../../components/sections/AnimatedBackground';
 import AnimatedChart from '../../components/sections/AnimatedChart';
 import TechIconChip from '../../components/ui/TechIconChip';
 import ArchitectureDiagram from '../../components/sections/ArchitectureDiagram';
@@ -16,7 +15,6 @@ const GodsEye = () => {
   return (
     <div className="project-detail-page">
       <SEO title="GodsEye - Gesture Control | Tredir Sewpaul" description="Experimental gesture-controlled gaming mouse using facial gestures and eye tracking" path="/projects/godseye" />
-      <AnimatedBackground variant="particles" />
       
       <motion.div className="project-detail-container" initial={{opacity:0}} animate={{opacity:1}}>
         <Link to="/projects" className="back-link" style={{display:'inline-flex',alignItems:'center',gap:'8px',color:'var(--apple-blue)',marginBottom:'var(--spacing-xl)',textDecoration:'none'}}>

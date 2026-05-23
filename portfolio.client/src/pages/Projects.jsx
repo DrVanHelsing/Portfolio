@@ -1,11 +1,14 @@
+import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import AnimatedBackground from '../components/sections/AnimatedBackground';
 import SEO from '../components/utility/SEO';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Search, X, Play } from 'lucide-react';
 import './Projects.css';
 
 const Projects = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeCategory, setActiveCategory] = useState('All');
+
   const projects = [
     {
       title: "FinanceBuddy",
@@ -36,7 +39,8 @@ const Projects = () => {
       category: "Enterprise",
       impact: "Real-time AI-powered customer engagement",
       color: "indigo",
-      link: "/projects/callcentre-ai"
+      link: "/projects/callcentre-ai",
+      hasDemo: true
     },
     {
       title: "Machine Learning Basics",
@@ -81,6 +85,50 @@ const Projects = () => {
       color: "blue",
       link: "/projects/tictactoe",
       github: "https://github.com/DrVanHelsing/TicTacToe"
+    },
+    {
+      title: "UWC PostGrad Portal",
+      date: "Feb 2025 - Present",
+      description: "Comprehensive academic administration portal for postgraduate students with role-based access, dynamic form builder, PDF annotations, digital signatures, and automated email workflows. Research collaboration — co-authoring a paper with a PhD student.",
+      technologies: ["React 19", "Firebase", "Cloud Firestore", "EmailJS"],
+      category: "Full-Stack",
+      impact: "6 user roles · 20+ dynamic forms",
+      color: "purple",
+      link: "/projects/postgrad-portal"
+    },
+    {
+      title: "Geology Field Mapping Sim",
+      date: "Feb 2025 - Present",
+      description: "3D structural geology field mapping simulator with procedural terrain generation, real-time water dynamics, PBR shading, and interactive field instruments for geological education. Research collaboration — co-authoring a paper with a PhD student.",
+      technologies: ["Three.js", "React", "WebGL", "Simplex Noise"],
+      category: "3D Simulation",
+      impact: "2 km² terrain · 148K vertices",
+      color: "indigo",
+      link: "/projects/geology-sim",
+      hasDemo: true
+    },
+    {
+      title: "Physics Lab IDE",
+      date: "Feb 2025 - Present",
+      description: "Visual block-based programming environment for physics simulations. Drag-and-drop Blockly editor with live 3D preview, code generation, and experiment templates.",
+      technologies: ["React", "Blockly", "GlowScript", "VPython"],
+      category: "Education",
+      impact: "23 custom blocks · 5 templates",
+      color: "blue",
+      link: "/projects/physics-lab",
+      hasDemo: true
+    },
+    {
+      title: "Hide Distracting Items",
+      date: "Jan 2025",
+      description: "Privacy-preserving Chrome extension to permanently hide ads, pop-ups, and distracting elements with smart ad container detection, per-site persistence, and zero network requests.",
+      technologies: ["JavaScript", "Chrome Extension", "Manifest V3", "CSS"],
+      category: "Browser Extension",
+      impact: "Zero network requests · 100% local",
+      color: "purple",
+      link: "/projects/anti-temu",
+      hasDemo: true,
+      github: "https://github.com/DrVanHelsing/AntiTemu"
     }
   ];
   const containerVariants = {
@@ -98,6 +146,27 @@ const Projects = () => {
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
   };
 
+  // Derive unique categories for filter pills
+  const categories = useMemo(() => {
+    const cats = ['All', ...new Set(projects.map(p => p.category))];
+    return cats;
+  }, [projects]);
+
+  // Filter projects by category and search query
+  const filteredProjects = useMemo(() => {
+    return projects.filter(p => {
+      const matchesCategory = activeCategory === 'All' || p.category === activeCategory;
+      const q = searchQuery.toLowerCase();
+      const matchesSearch =
+        !q ||
+        p.title.toLowerCase().includes(q) ||
+        p.description.toLowerCase().includes(q) ||
+        p.technologies.some(t => t.toLowerCase().includes(q)) ||
+        p.category.toLowerCase().includes(q);
+      return matchesCategory && matchesSearch;
+    });
+  }, [projects, activeCategory, searchQuery]);
+
   return (
     <div className="projects-page">
       <SEO 
@@ -106,24 +175,81 @@ const Projects = () => {
         keywords="portfolio projects, web development projects, mobile apps, cloud architecture, react projects"
         path="/projects"
       />
-      <AnimatedBackground variant="particles" />
       
+ 
  <motion.div 
         className="projects-container"
    initial="hidden"
    animate="visible"
       variants={containerVariants}
   >
-        <motion.h1 className="page-title" variants={cardVariants}>
-          Projects & Portfolio
-        </motion.h1>
+        <div className="page-title-row">
+          <motion.h1 className="page-title" variants={cardVariants}>
+            Projects & Portfolio
+          </motion.h1>
+          <img
+            src="/memojis/memoji-peeking-fingers.png"
+            alt="Peeking memoji"
+            className="memoji-page-float"
+          />
+        </div>
         
         <motion.p className="page-subtitle" variants={cardVariants}>
      A showcase of my recent work and technical achievements
         </motion.p>
 
+        {/* ── Search & Filter bar ───────────────────────── */}
+        <motion.div className="projects-filter-bar" variants={cardVariants}>
+          {/* Search input */}
+          <div className="projects-search-wrap">
+            <Search size={16} className="projects-search-icon" />
+            <input
+              type="text"
+              className="projects-search-input"
+              placeholder="Search projects, technologies…"
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+              aria-label="Search projects"
+            />
+            {searchQuery && (
+              <button
+                className="projects-search-clear"
+                onClick={() => setSearchQuery('')}
+                aria-label="Clear search"
+              >
+                <X size={14} />
+              </button>
+            )}
+          </div>
+
+          {/* Category pills */}
+          <div className="projects-filter-pills" role="group" aria-label="Filter by category">
+            {categories.map(cat => (
+              <button
+                key={cat}
+                className={`filter-pill${activeCategory === cat ? ' filter-pill--active' : ''}`}
+                onClick={() => setActiveCategory(cat)}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Results count */}
+        <motion.p className="projects-results-count" variants={cardVariants}>
+          {filteredProjects.length === projects.length
+            ? `${projects.length} projects`
+            : `${filteredProjects.length} of ${projects.length} projects`}
+        </motion.p>
+
         <div className="projects-grid">
-      {projects.map((project, index) => {
+      {filteredProjects.length === 0 ? (
+        <motion.div className="projects-empty" variants={cardVariants}>
+          <p>No projects match your search.</p>
+          <button onClick={() => { setSearchQuery(''); setActiveCategory('All'); }} className="filter-pill filter-pill--active">Clear filters</button>
+        </motion.div>
+      ) : filteredProjects.map((project, index) => {
         const CardWrapper = project.link ? Link : 'div';
         const wrapperProps = project.link 
           ? { to: project.link }
@@ -144,6 +270,9 @@ const Projects = () => {
               <div className="project-category">{project.category}</div>
               {project.date && (
                 <div className="project-date-chip">{project.date}</div>
+              )}
+              {project.hasDemo && (
+                <div className="project-demo-chip"><Play size={12} />Demo</div>
               )}
               <h3 className="project-title">{project.title}</h3>
        <p className="project-description">{project.description}</p>

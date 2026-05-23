@@ -1,13 +1,74 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { useState, useEffect, lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navigation from './components/layout/Navigation';
 import Footer from './components/layout/Footer';
+import AnimatedBackground from './components/sections/AnimatedBackground';
 import LoadingScreen from './components/utility/LoadingScreen';
 import ScrollToTop from './components/ui/ScrollToTop';
+import TerminalWidget from './components/ui/TerminalWidget';
 import SkipLink from './components/layout/SkipLink';
 import './App.css';
+
+// Resets scroll position to top on every route change
+function ScrollReset() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
+
+const KNOWN_PATHS = new Set([
+  '/', '/about', '/projects', '/skills', '/resume', '/experience', '/contact',
+]);
+
+function isKnownRoute(pathname) {
+  return KNOWN_PATHS.has(pathname) || pathname.startsWith('/projects/');
+}
+
+const pageTransition = {
+  initial: { opacity: 0, y: 8 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -8 },
+  transition: { duration: 0.25, ease: 'easeInOut' },
+};
+
+function AnimatedRoutes() {
+  const location = useLocation();
+  return (
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={location.pathname}
+        {...pageTransition}
+        style={{ width: '100%' }}
+      >
+        <Routes location={location}>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/projects/financebuddy" element={<FinanceBuddy />} />
+          <Route path="/projects/machine-learning" element={<MachineLearning />} />
+          <Route path="/projects/studentlink" element={<StudentLink />} />
+          <Route path="/projects/callcentre-ai" element={<CallCentreAI />} />
+          <Route path="/projects/godseye" element={<GodsEye />} />
+          <Route path="/projects/hangman" element={<Hangman />} />
+          <Route path="/projects/tictactoe" element={<TicTacToe />} />
+          <Route path="/projects/postgrad-portal" element={<PostGradPortal />} />
+          <Route path="/projects/geology-sim" element={<GeologyFieldSim />} />
+          <Route path="/projects/physics-lab" element={<PhysicsLab />} />
+          <Route path="/projects/anti-temu" element={<AntiTemu />} />
+          <Route path="/skills" element={<Skills />} />
+          <Route path="/resume" element={<Resume />} />
+          <Route path="/experience" element={<Resume />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
 
 // Lazy load pages for code splitting
 const Home = lazy(() => import('./pages/Home'));
@@ -25,58 +86,54 @@ const CallCentreAI = lazy(() => import('./pages/projects/CallCentreAI'));
 const GodsEye = lazy(() => import('./pages/projects/GodsEye'));
 const Hangman = lazy(() => import('./pages/projects/Hangman'));
 const TicTacToe = lazy(() => import('./pages/projects/TicTacToe'));
+const PostGradPortal = lazy(() => import('./pages/projects/PostGradPortal'));
+const GeologyFieldSim = lazy(() => import('./pages/projects/GeologyFieldSim'));
+const PhysicsLab = lazy(() => import('./pages/projects/PhysicsLab'));
+const AntiTemu = lazy(() => import('./pages/projects/AntiTemu'));
+const NotFound = lazy(() => import('./pages/NotFound'));
+
+// Inner shell — lives inside <Router> so useLocation is available
+function AppShell() {
+  const location = useLocation();
+  const isContact = location.pathname === '/contact';
+  // Skip the loading splash on 404 routes
+  const [isLoading, setIsLoading] = useState(() => isKnownRoute(location.pathname));
+
+  return (
+    <AnimatePresence mode="wait">
+      {isLoading ? (
+        <LoadingScreen key="loading" onEnter={() => setIsLoading(false)} />
+      ) : (
+        <motion.div
+          key="app"
+          className="app"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, ease: [0.43, 0.13, 0.23, 0.96] }}
+        >
+          <AnimatedBackground variant="orbs" />
+          <SkipLink />
+          <Navigation />
+          <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
+            <main id="main-content" className="main-content">
+              <AnimatedRoutes />
+            </main>
+          </Suspense>
+          {!isContact && <Footer />}
+          <ScrollToTop />
+          <TerminalWidget />
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  const handleLoadingComplete = () => {
-    setIsLoading(false);
-  };
-
   return (
     <HelmetProvider>
       <Router>
-        <AnimatePresence mode="wait">
-          {isLoading ? (
-            <LoadingScreen key="loading" onEnter={handleLoadingComplete} />
-          ) : (
-            <motion.div
-              key="app"
-              className="app"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ 
-                duration: 0.5,
-                ease: [0.43, 0.13, 0.23, 0.96]
-              }}
-            >
-              <SkipLink />
-              <Navigation />
-              <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
-                <main id="main-content" className="main-content">
-                  <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/projects" element={<Projects />} />
-                    <Route path="/projects/financebuddy" element={<FinanceBuddy />} />
-                    <Route path="/projects/machine-learning" element={<MachineLearning />} />
-                    <Route path="/projects/studentlink" element={<StudentLink />} />
-                    <Route path="/projects/callcentre-ai" element={<CallCentreAI />} />
-                    <Route path="/projects/godseye" element={<GodsEye />} />
-                    <Route path="/projects/hangman" element={<Hangman />} />
-                    <Route path="/projects/tictactoe" element={<TicTacToe />} />
-                    <Route path="/skills" element={<Skills />} />
-                    <Route path="/resume" element={<Resume />} />
-                    <Route path="/experience" element={<Resume />} />
-                    <Route path="/contact" element={<Contact />} />
-                  </Routes>
-                </main>
-              </Suspense>
-              <Footer />
-              <ScrollToTop />
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <ScrollReset />
+        <AppShell />
       </Router>
     </HelmetProvider>
   );

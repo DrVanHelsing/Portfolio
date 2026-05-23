@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import AnimatedBackground from '../../components/sections/AnimatedBackground';
 import AnimatedChart from '../../components/sections/AnimatedChart';
 import TechIconChip from '../../components/ui/TechIconChip';
 import ArchitectureDiagram from '../../components/sections/ArchitectureDiagram';
@@ -64,7 +63,6 @@ const FinanceBuddy = () => {
         keywords="financial app, .NET MAUI, Azure OpenAI, gamification, hackathon project"
         path="/projects/financebuddy"
       />
-      <AnimatedBackground variant="particles" />
       
       <motion.div
         className="project-detail-container"
@@ -310,9 +308,9 @@ const FinanceBuddy = () => {
             <p className="section-content" style={{marginBottom:'var(--spacing-lg)'}}>
               FinanceBuddy provides comprehensive visual analytics to help you understand your spending patterns, track progress toward goals, and improve your overall financial wellness.
             </p>
-            <div className="chart-grid-section" style={{display:'flex',flexWrap:'wrap',gap:'var(--spacing-xl)',maxWidth:'1400px',margin:'0 auto'}}>
-              <div style={{background:'var(--bg-secondary)',borderRadius:'var(--radius-lg)',padding:'var(--spacing-xl)',flex:'1 1 350px',minWidth:'320px'}}>
-                <h3 style={{fontSize:'var(--font-size-md)',fontWeight:600,marginBottom:'var(--spacing-md)',display:'flex',alignItems:'center',gap:'var(--spacing-sm)'}}>
+            <div className="chart-grid-3x3">
+              <div className="chart-card">
+                <h3>
                   <PieChart size={20} />
                   Expense Categories
                 </h3>
@@ -333,8 +331,8 @@ const FinanceBuddy = () => {
                 />
               </div>
 
-              <div style={{background:'var(--bg-secondary)',borderRadius:'var(--radius-lg)',padding:'var(--spacing-xl)',flex:'1 1 350px',minWidth:'320px'}}>
-                <h3 style={{fontSize:'var(--font-size-md)',fontWeight:600,marginBottom:'var(--spacing-md)',display:'flex',alignItems:'center',gap:'var(--spacing-sm)'}}>
+              <div className="chart-card">
+                <h3>
                   <TrendingUp size={20} />
                   Monthly Spending Trend
                 </h3>
@@ -347,8 +345,8 @@ const FinanceBuddy = () => {
                 />
               </div>
 
-              <div style={{background:'var(--bg-secondary)',borderRadius:'var(--radius-lg)',padding:'var(--spacing-xl)',flex:'1 1 350px',minWidth:'320px'}}>
-                <h3 style={{fontSize:'var(--font-size-md)',fontWeight:600,marginBottom:'var(--spacing-md)',display:'flex',alignItems:'center',gap:'var(--spacing-sm)'}}>
+              <div className="chart-card">
+                <h3>
                   <DollarSign size={20} />
                   Savings Progress
                 </h3>
@@ -366,8 +364,9 @@ const FinanceBuddy = () => {
                 />
               </div>
 
-              <div style={{background:'var(--bg-secondary)',borderRadius:'var(--radius-lg)',padding:'var(--spacing-xl)'}}>
-                <h3 style={{fontSize:'var(--font-size-md)',fontWeight:600,marginBottom:'var(--spacing-md)',display:'flex',alignItems:'center',gap:'var(--spacing-sm)'}}>
+              {/* Full-width bottom row — bar chart benefits from extra horizontal space */}
+              <div className="chart-card chart-card-full">
+                <h3>
                   <Activity size={20} />
                   Financial Wellness Score
                 </h3>
@@ -375,7 +374,13 @@ const FinanceBuddy = () => {
                   data={financialWellnessData} 
                   height={240}
                   type="bar"
-                  gradient={['var(--apple-green)', '#30D158']}
+                  gradient={['#34C759', '#30D158']}
+                  colorMap={{
+                    'Budgeting': '#34C759',
+                    'Saving': '#30D158',
+                    'Learning': '#32D74B',
+                    'Consistency': '#28CD41'
+                  }}
                   showLabels={true}
                   showValues={true}
                 />
@@ -534,7 +539,7 @@ const FinanceBuddy = () => {
             </h2>
             <div className="features-grid">
               <div className="feature-card">
-                <h3 className="feature-title">🤖 AI Money Mentor</h3>
+                <h3 className="feature-title"><Brain size={20} style={{display:'inline',marginRight:'8px',verticalAlign:'middle',color:'var(--apple-blue)'}} />AI Money Mentor</h3>
                 <p className="feature-description">
                   Powered by Azure OpenAI GPT-4, provides personalized financial advice through natural language chat with voice input support and multi-language capabilities via Azure Translator.
                 </p>

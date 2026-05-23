@@ -45,7 +45,7 @@ const TECH_MAP = {
   'React 18': { icon: Braces, color: '#61DAFB' },
   'Vite': { icon: Zap, color: '#646CFF' },
   'Tailwind CSS': { icon: Braces, color: '#38BDF8' },
-  'JavaScript': { icon: FileJson, color: '#F7DF1E' },
+  'JavaScript': { icon: FileJson, color: '#B8920A' },
   'TypeScript': { icon: FileCode, color: '#3178C6' },
   'Node.js': { icon: Server, color: '#339933' },
   'Node.js 18': { icon: Server, color: '#339933' },
@@ -59,31 +59,46 @@ const TECH_MAP = {
   'NumPy': { icon: Layers, color: '#4D77CF' },
   'Scikit-learn': { icon: BarChart3, color: '#F7931E' },
   'scikit-learn': { icon: BarChart3, color: '#F7931E' },
-  'Pandas': { icon: FileJson, color: '#150458' },
+  'Pandas': { icon: FileJson, color: '#7B68EE' },
   'OpenCV': { icon: Eye, color: '#5C3EE8' },
   'Mediapipe': { icon: Activity, color: '#00C4CC' },
   'PyAutoGUI': { icon: Monitor, color: '#3776AB' },
   'Jupyter': { icon: Book, color: '#F37626' },
   
   // Authentication & Security
-  'JWT': { icon: Lock, color: '#000000' },
-  'OAuth': { icon: Shield, color: '#000000' },
+  'JWT': { icon: Lock, color: '#6B7280' },
+  'OAuth': { icon: Shield, color: '#6B7280' },
   
   // Other
   'Computer Vision': { icon: Eye, color: '#5C3EE8' },
   'Machine Learning': { icon: Brain, color: '#FF6F00' },
   'TensorBoard': { icon: BarChart3, color: '#FF6F00' },
   'XGBoost': { icon: Layers, color: '#FF6600' },
-  'LightGBM': { icon: Layers, color: '#02A8EF' }
+  'LightGBM': { icon: Layers, color: '#02A8EF' },
+
+  // Skills page extras
+  'Java': { icon: Code2, color: '#B07219' },
+  'Matlab': { icon: BarChart3, color: '#e16737' },
+  'HTML': { icon: Globe, color: '#E34F26' },
+  'CSS': { icon: Braces, color: '#1572B6' },
+  'PHP': { icon: FileCode, color: '#8892BF' },
+  'SQL': { icon: Database, color: '#CC2927' },
+  'MySQL': { icon: Database, color: '#4479A1' },
+  'Git': { icon: GitBranch, color: '#F05032' },
+  'GitHub': { icon: GitBranch, color: '#6e5494' },
+  'Neural Networks': { icon: Brain, color: '#FF6F00' },
+  'Word': { icon: FileCode, color: '#2B579A' },
+  'Excel': { icon: BarChart3, color: '#217346' },
+  'PowerPoint': { icon: Monitor, color: '#B7472A' }
 };
 
 export default function TechIconChip({ name, technology, label }) {
   const displayName = (technology || name || label || '').trim();
-  const meta = TECH_MAP[displayName] || { icon: Code2, color: 'var(--apple-blue)' };
+  const meta = TECH_MAP[displayName] || { icon: Code2, color: 'var(--accent)' };
   const Icon = meta.icon;
   return (
-    <span className="tech-chip" style={{ borderColor: meta.color, color: meta.color }}>
-      <Icon size={14} />
+    <span className="tech-chip" style={{ borderColor: meta.color }}>
+      <Icon size={14} style={{ color: meta.color }} />
       <span>{displayName}</span>
     </span>
   );

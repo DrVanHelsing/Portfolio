@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import ThemeToggle from '../ui/ThemeToggle';
 import './Navigation.css';
 
 const Navigation = () => {
@@ -77,11 +78,12 @@ const location = useLocation();
      className={location.pathname === path ? 'active' : ''}
   onClick={() => setIsMobileMenuOpen(false)}
   >
-          {label}
+          {label}{label === 'Contact' && <span className="nav-availability-dot" aria-hidden="true" />}
               </Link>
        </li>
           ))}
       </ul>
+      <ThemeToggle />
       </div>
     </nav>
   );

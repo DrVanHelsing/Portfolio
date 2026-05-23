@@ -1,6 +1,6 @@
 import SEO from '../components/utility/SEO';
-import AnimatedBackground from '../components/sections/AnimatedBackground';
 import TimelineModern from '../components/sections/TimelineModern';
+import { Download } from 'lucide-react';
 import './Resume.css';
 
 /**
@@ -17,9 +17,25 @@ const Resume = () => {
         path="/resume"
       />
       
-      {/* Animated background particles */}
-      <AnimatedBackground variant="particles" />
+      {/* Animated background rendered at App level */}
       
+      {/* Thumbs-up memoji + Download button, stacked and centered */}
+      <div className="resume-header-aside">
+        <img
+          src="/memojis/memoji-thumbs-up.png"
+          alt="Thumbs up"
+          className="memoji-resume-float"
+        />
+        <a
+          href="/TredirSewpaul_CV.pdf"
+          download="TredirSewpaul_CV.pdf"
+          className="resume-download-btn"
+        >
+          <Download size={18} />
+          Download CV
+        </a>
+      </div>
+
       {/* Modern timeline with resume data */}
       <TimelineModern />
     </div>

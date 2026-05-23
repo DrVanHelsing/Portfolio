@@ -1,0 +1,251 @@
+/* ── Chat body ───────────────────────────────────────────── */
+.rc-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rc-body::-webkit-scrollbar       { width: 4px; }
+.rc-body::-webkit-scrollbar-track { background: #0d1117; }
+.rc-body::-webkit-scrollbar-thumb { background: #3d2060; border-radius: 2px; }
+
+/* ── Chat bubbles ────────────────────────────────────────── */
+.rc-bubble {
+  max-width: 85%;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-family: 'JetBrains Mono', 'Fira Code', Consolas, 'Courier New', monospace;
+  font-size: 11.5px;
+  line-height: 1.55;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+.rc-bubble-user {
+  align-self: flex-end;
+  background: #1d4ed8;
+  color: #e6edf3;
+  border-radius: 12px 12px 4px 12px;
+}
+
+.rc-bubble-ai {
+  align-self: flex-start;
+  background: #160d2a;
+  color: #e6edf3;
+  border-radius: 12px 12px 12px 4px;
+  border: 1px solid rgba(163, 113, 247, 0.2);
+}
+
+/* ── Typing indicator ────────────────────────────────────── */
+.rc-typing {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+  height: 16px;
+}
+
+.rc-typing span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #a371f7;
+  animation: rc-bounce 1.2s ease-in-out infinite;
+}
+
+.rc-typing span:nth-child(2) { animation-delay: 0.2s; }
+.rc-typing span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes rc-bounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+  40%            { transform: translateY(-4px); opacity: 1; }
+}
+
+/* ── Starter questions ───────────────────────────────────── */
+.rc-starters {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 4px;
+  align-self: flex-start;
+  max-width: 92%;
+}
+
+.rc-starter-btn {
+  background: rgba(163, 113, 247, 0.08);
+  border: 1px solid rgba(163, 113, 247, 0.25);
+  border-radius: 8px;
+  color: #c9afe9;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', 'Fira Code', Consolas, 'Courier New', monospace;
+  font-size: 11px;
+  padding: 5px 10px;
+  text-align: left;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.rc-starter-btn:hover:not(:disabled) {
+  background: rgba(163, 113, 247, 0.18);
+  border-color: rgba(163, 113, 247, 0.5);
+  color: #e2cfff;
+}
+
+.rc-starter-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Streaming bubble ─────────────────────────────────────── */
+.rc-bubble-ai.rc-streaming {
+  border-left: 2px solid rgba(163, 113, 247, 0.6);
+  animation: rc-stream-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes rc-stream-pulse {
+  0%, 100% { border-left-color: rgba(163, 113, 247, 0.3); }
+  50%       { border-left-color: rgba(163, 113, 247, 0.9); }
+}
+
+/* ── Input row ───────────────────────────────────────────── */
+.rc-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-top: 1px solid #3d2060;
+  background: #160d2a;
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* Loading sweep bar — appears above the input row */
+.rc-loading-bar {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  overflow: hidden;
+  background: rgba(163, 113, 247, 0.1);
+}
+
+.rc-loading-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -55%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, #a371f7, #c084fc, transparent);
+  animation: rc-bar-sweep 1.3s ease-in-out infinite;
+}
+
+@keyframes rc-bar-sweep {
+  0%   { left: -55%; }
+  100% { left: 160%; }
+}
+
+.rc-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #e6edf3;
+  font-family: 'JetBrains Mono', 'Fira Code', Consolas, 'Courier New', monospace;
+  font-size: 12px;
+  caret-color: #a371f7;
+}
+
+.rc-input::placeholder {
+  color: #6e4d9e;
+  font-style: italic;
+}
+
+.rc-input:disabled {
+  opacity: 0.4;
+}
+
+.rc-send-btn {
+  background: rgba(163, 113, 247, 0.15) !important;
+  border: 1px solid rgba(163, 113, 247, 0.35) !important;
+  border-radius: 6px !important;
+  color: #a371f7 !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 5px 7px !important;
+  transition: background 0.15s !important;
+  width: auto !important;
+  height: auto !important;
+  box-shadow: none !important;
+  animation: none !important;
+}
+
+.rc-send-btn:hover:not(:disabled) {
+  background: rgba(163, 113, 247, 0.3) !important;
+}
+
+.rc-send-btn:disabled {
+  opacity: 0.3 !important;
+  cursor: not-allowed !important;
+}
+
+/* ── Light mode ──────────────────────────────────────────── */
+[data-theme="light"] .rc-body {
+  background: #f6f8fa;
+}
+[data-theme="light"] .rc-body::-webkit-scrollbar-track { background: #f6f8fa; }
+[data-theme="light"] .rc-body::-webkit-scrollbar-thumb { background: #d0d7de; }
+
+[data-theme="light"] .rc-bubble-user {
+  background: #0969da;
+  color: #ffffff;
+}
+
+[data-theme="light"] .rc-bubble-ai {
+  background: #f0ebfa;
+  border-color: rgba(130, 80, 223, 0.2);
+  color: #1f2328;
+}
+
+[data-theme="light"] .rc-typing span { background: #8250df; }
+
+[data-theme="light"] .rc-starter-btn {
+  background: rgba(130, 80, 223, 0.06);
+  border-color: rgba(130, 80, 223, 0.2);
+  color: #6e40c9;
+}
+[data-theme="light"] .rc-starter-btn:hover:not(:disabled) {
+  background: rgba(130, 80, 223, 0.12);
+  border-color: rgba(130, 80, 223, 0.4);
+  color: #5a32a3;
+}
+
+[data-theme="light"] .rc-bubble-ai.rc-streaming {
+  border-left-color: rgba(130, 80, 223, 0.5);
+}
+
+[data-theme="light"] .rc-input-row {
+  background: #f0ebfa;
+  border-top-color: #c9b3f0;
+}
+
+[data-theme="light"] .rc-loading-bar { background: rgba(130, 80, 223, 0.08); }
+[data-theme="light"] .rc-loading-bar::after {
+  background: linear-gradient(90deg, transparent, #8250df, #a371f7, transparent);
+}
+
+[data-theme="light"] .rc-input   { color: #1f2328; caret-color: #8250df; }
+[data-theme="light"] .rc-input::placeholder { color: #8c6dbd; }
+
+[data-theme="light"] .rc-send-btn {
+  background: rgba(130, 80, 223, 0.1) !important;
+  border-color: rgba(130, 80, 223, 0.3) !important;
+  color: #8250df !important;
+}
+[data-theme="light"] .rc-send-btn:hover:not(:disabled) {
+  background: rgba(130, 80, 223, 0.2) !important;
+}

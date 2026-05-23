@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
-import AnimatedBackground from '../components/sections/AnimatedBackground';
 import SEO from '../components/utility/SEO';
-import { Lightbulb, Zap, Users, BookOpen } from 'lucide-react';
+import { Zap, Users, BookOpen, Lightbulb, Award, GraduationCap, Trophy } from 'lucide-react';
 import './About.css';
 
 const About = () => {
@@ -27,7 +26,6 @@ const About = () => {
    path="/about"
  />
  {/* Background is rendered visually and now explicitly used */}
- <AnimatedBackground variant="particles" />
 
  <motion.div
  className="about-container"
@@ -40,7 +38,7 @@ const About = () => {
  </motion.h1>
 
  <div className="about-content">
- <motion.div className="about-intro" variants={itemVariants}>
+ <motion.div className="about-intro about-intro--with-memoji" variants={itemVariants}>
  <div className="intro-text">
  <h2>Hello! I'm Tredir Sewpaul</h2>
  <p>
@@ -54,8 +52,11 @@ const About = () => {
  I completed a university-certified Continuing Education programme with the Samsung Future Innovation Lab (Mar–Dec 2025), covering multi-platform solutions, .NET/C#, AI-assisted development (GitHub Copilot, ChatGPT), cloud integration, Design Thinking, and SDG-aligned innovation through industry-moderated projects.
  Currently, I’m an AI Engineering Intern and Technical Lead, guiding architecture across supervised ML, LLM reasoning/summarisation, vector search, and Azure-based pipelines, while driving explainability, governance, and cross-team delivery.
  </p>
- </div>
- </motion.div>
+ </div> <img
+ src="/memojis/memoji-party-time.png"
+ alt="Tredir celebrating"
+ className="memoji-intro"
+ /> </motion.div>
 
          <motion.div className="education-section" variants={itemVariants}>
  <h2>Education</h2>
@@ -90,6 +91,54 @@ const About = () => {
  <span className="highlight-badge">Courses: CEM016, CES143, MPS</span>
  <span className="highlight-badge">AI-assisted delivery & cloud</span>
  <span className="highlight-badge">Design Thinking & SDG focus</span>
+ <span className="highlight-badge" style={{ background: 'rgba(255, 204, 0, 0.12)', color: '#d4a017', borderColor: 'rgba(255, 204, 0, 0.3)', display:'inline-flex', alignItems:'center', gap:'4px' }}><Award size={12} />Distinction</span>
+ <span className="highlight-badge" style={{ background: 'rgba(192, 192, 192, 0.12)', color: '#6b7280', borderColor: 'rgba(192, 192, 192, 0.3)', display:'inline-flex', alignItems:'center', gap:'4px' }}><Trophy size={12} />2nd Place in Course</span>
+ </div>
+ </div>
+ </motion.div>
+
+         <motion.div className="education-section" variants={itemVariants} style={{ marginTop: 0 }}>
+ <h2><Award size={24} style={{ display: 'inline', verticalAlign: 'middle', marginRight: 8 }} />Awards & Achievements</h2>
+ <div className="awards-grid">
+ <div className="education-card" style={{ borderLeftColor: '#FFD700' }}>
+ <div className="education-header">
+ <h3 style={{ fontSize: 'var(--font-size-lg)', display:'flex', alignItems:'center', gap:'8px' }}><Award size={18} style={{ color:'var(--apple-blue)', flexShrink:0 }} />Merit Award — Mathematics</h3>
+ <span className="year">2021</span>
+ </div>
+ <p className="institution">MAM152 · University of the Western Cape</p>
+ <p className="description" style={{ marginBottom: 0 }}>Awarded for outstanding academic performance in Mathematics.</p>
+ </div>
+ <div className="education-card" style={{ borderLeftColor: '#FFD700' }}>
+ <div className="education-header">
+ <h3 style={{ fontSize: 'var(--font-size-lg)', display:'flex', alignItems:'center', gap:'8px' }}><Award size={18} style={{ color:'var(--apple-blue)', flexShrink:0 }} />Merit Award — Astrophysics</h3>
+ <span className="year">2023</span>
+ </div>
+ <p className="institution">PHY217 · University of the Western Cape</p>
+ <p className="description" style={{ marginBottom: 0 }}>Awarded for outstanding academic performance in Astrophysics.</p>
+ </div>
+ <div className="education-card" style={{ borderLeftColor: '#AF52DE' }}>
+ <div className="education-header">
+ <h3 style={{ fontSize: 'var(--font-size-lg)', display:'flex', alignItems:'center', gap:'8px' }}><GraduationCap size={18} style={{ color:'var(--apple-purple)', flexShrink:0 }} />Distinction — Multiplatform Software Dev</h3>
+ <span className="year">2025</span>
+ </div>
+ <p className="institution">Samsung Future Innovation Lab</p>
+ <p className="description" style={{ marginBottom: 0 }}>Achieved a Distinction in the Multiplatform Software Development course and placed 2nd overall in the cohort.</p>
+ </div>
+ <div className="education-card" style={{ borderLeftColor: '#FF9F0A' }}>
+ <div className="education-header">
+ <h3 style={{ fontSize: 'var(--font-size-lg)', display:'flex', alignItems:'center', gap:'8px' }}><Trophy size={18} style={{ color:'#FF9F0A', flexShrink:0 }} />Telkom 10X Hack — 1st Place</h3>
+ <span className="year">Aug 2025</span>
+ </div>
+ <p className="institution">Telkom 10X Hackathon Competition</p>
+ <p className="description" style={{ marginBottom: 0 }}>Won first place building an autonomous call centre prototype using React, Python FastAPI, and OpenAI Whisper.</p>
+ </div>
+ <div className="education-card" style={{ borderLeftColor: '#34C759' }}>
+ <div className="education-header">
+ <h3 style={{ fontSize: 'var(--font-size-lg)', display:'flex', alignItems:'center', gap:'8px' }}><Trophy size={18} style={{ color:'#34C759', flexShrink:0 }} />SA Intervarsity Hackathon — 3rd Place (AI)</h3>
+ <span className="year">Aug 2025</span>
+ </div>
+ <p className="institution">SA Intervarsity Hackathon 2025</p>
+ <p className="description" style={{ marginBottom: 0 }}>3rd place in the AI category with FinanceBuddy — a cross-platform financial wellness app built with .NET MAUI and Azure OpenAI GPT-4.</p>
  </div>
  </div>
  </motion.div> <motion.div className="values-section" variants={itemVariants}>
@@ -125,7 +174,6 @@ const About = () => {
  <div className="interest-tag">.NET MAUI</div>
  <div className="interest-tag">Machine Learning</div>
  <div className="interest-tag">Neural Networks</div>
- <div className="interest-tag">Web Development</div>
  <div className="interest-tag">Database Design</div>
  <div className="interest-tag">Agile & Scrum</div>
  <div className="interest-tag">STEM Education</div>
