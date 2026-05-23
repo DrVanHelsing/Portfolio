@@ -1,8 +1,14 @@
 import { getKnowledgeBase, PAGE_CONTEXTS } from '../data/portfolioKnowledge.js';
 
-const OPENROUTER_KEY = import.meta.env.VITE_OPENROUTER_KEY ?? '';
 const MODEL = 'openai/gpt-oss-120b:free';
-const API_URL = 'https://openrouter.ai/api/v1/chat/completions';
+
+// In production, requests go through the Vercel Edge proxy (keeps key server-side).
+// In local dev, fall back to direct OpenRouter with the VITE_ dev key.
+const isDev   = import.meta.env.DEV;
+const DEV_KEY = import.meta.env.VITE_OPENROUTER_KEY ?? '';
+const API_URL  = isDev
+  ? 'https://openrouter.ai/api/v1/chat/completions'
+  : '/api/chat';
 
 // ── Security constants ────────────────────────────────────────────────────────
 
@@ -99,7 +105,7 @@ export async function streamChat({
   onDone,
   onError,
 }) {
-  if (!OPENROUTER_KEY) {
+  if (isDev && !DEV_KEY) {
     onError('AI key not configured. Set VITE_OPENROUTER_KEY in .env.local');
     return;
   }
@@ -107,16 +113,19 @@ export async function streamChat({
   const controller = new AbortController();
   const timeoutId  = setTimeout(() => controller.abort(), 45_000);
 
+  // In dev: call OpenRouter directly with the dev key.
+  // In prod: call /api/chat (the proxy handles auth server-side).
+  const headers = {
+    'Content-Type': 'application/json',
+    ...(isDev && DEV_KEY ? { 'Authorization': `Bearer ${DEV_KEY}` } : {}),
+    ...(isDev ? { 'HTTP-Referer': window.location.origin, 'X-Title': 'Portfolio Terminal' } : {}),
+  };
+
   try {
     const res = await fetch(API_URL, {
       method: 'POST',
       signal: controller.signal,
-      headers: {
-        'Authorization': `Bearer ${OPENROUTER_KEY}`,
-        'Content-Type': 'application/json',
-        'HTTP-Referer': window.location.origin,
-        'X-Title': 'Portfolio Terminal',
-      },
+      headers,
       body: JSON.stringify({
         model: MODEL,
         stream: true,

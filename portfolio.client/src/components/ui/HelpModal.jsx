@@ -110,7 +110,6 @@ function AIChatHelp() {
         <div className="hm-ctrl-list">
           <div className="hm-ctrl-row"><span className="hm-dot hm-dot-red"/>Close the widget entirely</div>
           <div className="hm-ctrl-row"><span className="hm-dot hm-dot-yellow"/>Minimize — click the header bar to restore</div>
-          <div className="hm-ctrl-row"><span className="hm-dot hm-dot-green"/>Fullscreen — expand to fill the screen</div>
           <div className="hm-ctrl-row">
             <span className="hm-inline-chip hm-chip-blue">⌨ Dev Mode</span>
             Switch to the developer terminal
@@ -184,7 +183,6 @@ function DevTerminalHelp() {
         <div className="hm-ctrl-list">
           <div className="hm-ctrl-row"><span className="hm-dot hm-dot-red"/>Close the widget entirely</div>
           <div className="hm-ctrl-row"><span className="hm-dot hm-dot-yellow"/>Minimize — click the header bar to restore</div>
-          <div className="hm-ctrl-row"><span className="hm-dot hm-dot-green"/>Fullscreen — expand to fill the screen</div>
           <div className="hm-ctrl-row">
             <span className="hm-inline-chip hm-chip-purple">✦ AI Chat</span>
             Switch to the AI chat interface

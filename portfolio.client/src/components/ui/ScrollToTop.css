@@ -1,7 +1,8 @@
 .scroll-to-top {
   position: fixed;
   bottom: 2rem;
-  right: 2rem;
+  right: auto;
+  left: 2rem;
   width: 48px;
   height: 48px;
   border-radius: 50%;
@@ -43,7 +44,8 @@
 @media (max-width: 768px) {
   .scroll-to-top {
     bottom: 1.5rem;
-    right: 1.5rem;
+    right: auto;
+    left: 1.5rem;
     width: 44px;
     height: 44px;
   }

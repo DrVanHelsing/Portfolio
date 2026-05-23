@@ -127,24 +127,24 @@
 }
 
 [data-theme="light"] .orbs-bg .orb {
-  opacity: 0.14;
+  opacity: 0.24;
 }
 
 [data-theme="light"] .orbs-bg .orb-1 {
-  background: radial-gradient(circle at 40% 40%, #54aeff, #0969da, transparent 70%);
+  background: radial-gradient(circle at 40% 40%, #74bcff, #1f80f2, transparent 70%);
 }
 
 [data-theme="light"] .orbs-bg .orb-2 {
-  background: radial-gradient(circle at 60% 60%, #c297ff, #8250df, transparent 70%);
+  background: radial-gradient(circle at 60% 60%, #d0aaff, #9a65e8, transparent 70%);
 }
 
 [data-theme="light"] .orbs-bg .orb-3 {
   background: radial-gradient(circle at 50% 50%, #0969da, #54aeff, transparent 70%);
-  opacity: 0.10;
+  opacity: 0.14;
 }
 
 [data-theme="light"] .orbs-bg .orb-4 {
-  opacity: 0.12;
+  opacity: 0.20;
 }
 
 

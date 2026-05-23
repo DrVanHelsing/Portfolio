@@ -203,9 +203,15 @@
 }
 
 .features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: var(--spacing-xl);
+}
+
+.features-grid > * {
+  flex: 1 1 260px;
+  max-width: 400px;
 }
 
 .feature-card {
@@ -234,9 +240,15 @@
 }
 
 .tech-stack-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: var(--spacing-md);
+}
+
+.tech-stack-list > * {
+  flex: 1 1 180px;
+  max-width: 280px;
 }
 
 .tech-item {
@@ -256,10 +268,16 @@
 
 /* ── 3-column chart grid ─────────────────────────────────── */
 .charts-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: var(--spacing-lg);
   width: 100%;
+}
+
+.charts-grid > * {
+  flex: 1 1 280px;
+  max-width: 420px;
 }
 
 .chart-grid-3x3 {
@@ -321,9 +339,15 @@
 .highlights-list {
   list-style: none;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: var(--spacing-md);
+}
+
+.highlights-list > * {
+  flex: 1 1 240px;
+  max-width: 380px;
 }
 
 .highlights-list li {

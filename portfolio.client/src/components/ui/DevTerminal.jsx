@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
-import { WELCOME_LINES } from '../../data/portfolioKnowledge.js';
 import { cleanMarkdown } from '../../services/aiService.js';
-import { useTerminalCommands, buildPrompt, getCompletions } from '../../hooks/useTerminalCommands.js';
+import { buildPrompt, getCompletions } from '../../hooks/useTerminalCommands.js';
 
 const LINE_CLASS = {
   ctx:   'tw-line-ctx',
@@ -14,37 +13,25 @@ const LINE_CLASS = {
   blank: 'tw-line-blank',
 };
 
-export default function DevTerminal({ navigate, setMode, currentPage }) {
-  const [history, setHistory]       = useState(WELCOME_LINES);
+export default function DevTerminal({
+  history,
+  setHistory,
+  cwd,
+  inChatSession,
+  cmdHistory,
+  historyIdx,
+  setHistoryIdx,
+  dispatch,
+  isAILoading,
+}) {
   const [inputValue, setInputValue] = useState('');
-  const [isAILoading, setIsAILoading] = useState(false);
-
   const bodyRef  = useRef(null);
   const inputRef = useRef(null);
 
-  const {
-    cwd,
-    inChatSession,
-    cmdHistory,
-    historyIdx,
-    setHistoryIdx,
-    dispatch,
-  } = useTerminalCommands({
-    navigate,
-    setMode,
-    setIsAILoading,
-    setHistory,
-    currentPage,
-  });
-
-  // Auto-scroll on new output
   useEffect(() => {
-    if (bodyRef.current) {
-      bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
-    }
+    if (bodyRef.current) bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
   }, [history]);
 
-  // Focus input when mounted
   useEffect(() => {
     setTimeout(() => inputRef.current?.focus(), 50);
   }, []);
@@ -99,7 +86,7 @@ export default function DevTerminal({ navigate, setMode, currentPage }) {
         {history.map((line, i) => (
           <div key={i} className={LINE_CLASS[line.type] ?? 'tw-line-cmd'}>
             {line.type === 'blank'
-              ? ' '
+              ? ' '
               : line.type === 'ai'
                 ? (line.text === '' && line.id ? '▋' : cleanMarkdown(line.text))
                 : line.text}

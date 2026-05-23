@@ -174,9 +174,15 @@ animation: shimmer 2.5s infinite;
 }
 
 .competencies-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: var(--spacing-md);
+}
+
+.competencies-grid > * {
+  flex: 1 1 200px;
+  max-width: 320px;
 }
 
 .competency {

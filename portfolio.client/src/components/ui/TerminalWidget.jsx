@@ -2,34 +2,63 @@ import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Terminal, Users } from 'lucide-react';
-import { derivePageKey } from '../../data/portfolioKnowledge.js';
+import { derivePageKey, WELCOME_LINES } from '../../data/portfolioKnowledge.js';
+import { useTerminalCommands } from '../../hooks/useTerminalCommands.js';
 import DevTerminal from './DevTerminal.jsx';
 import RecruiterChat from './RecruiterChat.jsx';
 import HelpModal from './HelpModal.jsx';
 import './TerminalWidget.css';
 
+const WELCOME_MESSAGE = {
+  role: 'assistant',
+  content: "Hi! I'm Tredir's portfolio AI. Ask me anything about his background, projects, or skills — I'm here to help.",
+};
+
 export default function TerminalWidget() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [isExpanded,   setIsExpanded]   = useState(false);
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  const [isMinimized,  setIsMinimized]  = useState(false);
-  const [isHelpOpen,   setIsHelpOpen]   = useState(false);
-  const [mode,         setMode]         = useState('recruiter'); // 'dev' | 'recruiter'
+  // Panel chrome state
+  const [isExpanded,  setIsExpanded]  = useState(false);
+  const [isMinimized, setIsMinimized] = useState(false);
+  const [isHelpOpen,  setIsHelpOpen]  = useState(false);
+  const [mode,        setMode]        = useState('recruiter'); // 'dev' | 'recruiter'
+
+  // Lifted: AI loading state (drives thinking glow + shared between children)
+  const [isAILoading, setIsAILoading] = useState(false);
+
+  // Lifted: persistent terminal history survives close/open and mode switches
+  const [terminalHistory, setTerminalHistory] = useState(WELCOME_LINES);
+
+  // Lifted: persistent recruiter messages survive close/open and mode switches
+  const [recruiterMessages, setRecruiterMessages] = useState([WELCOME_MESSAGE]);
 
   const currentPage = derivePageKey(location.pathname);
 
+  // Lifted: hook lives here so state isn't reset when DevTerminal unmounts
+  const {
+    cwd,
+    inChatSession,
+    cmdHistory,
+    historyIdx,
+    setHistoryIdx,
+    dispatch,
+  } = useTerminalCommands({
+    navigate,
+    setMode,
+    setIsAILoading,
+    setHistory: setTerminalHistory,
+    currentPage,
+  });
+
   function closeTerminal() {
     setIsExpanded(false);
-    setIsFullscreen(false);
     setIsMinimized(false);
   }
 
   const panelClasses = [
     'tw-panel',
-    isFullscreen && 'tw-fullscreen',
-    isMinimized  && 'tw-minimized',
+    isMinimized && 'tw-minimized',
   ].filter(Boolean).join(' ');
 
   return (
@@ -39,6 +68,7 @@ export default function TerminalWidget() {
           <motion.div
             className={panelClasses}
             data-mode={mode}
+            data-thinking={isAILoading}
             initial={{ opacity: 0, scale: 0.6 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.6 }}
@@ -63,16 +93,6 @@ export default function TerminalWidget() {
                   onClick={(e) => {
                     e.stopPropagation();
                     setIsMinimized(p => !p);
-                    setIsFullscreen(false);
-                  }}
-                />
-                <span
-                  className="tw-dot tw-dot-green"
-                  title="Fullscreen"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setIsFullscreen(p => !p);
-                    setIsMinimized(false);
                   }}
                 />
               </div>
@@ -124,12 +144,22 @@ export default function TerminalWidget() {
                 >
                   {mode === 'dev'
                     ? <DevTerminal
-                        navigate={navigate}
-                        setMode={setMode}
-                        currentPage={currentPage}
+                        history={terminalHistory}
+                        setHistory={setTerminalHistory}
+                        cwd={cwd}
+                        inChatSession={inChatSession}
+                        cmdHistory={cmdHistory}
+                        historyIdx={historyIdx}
+                        setHistoryIdx={setHistoryIdx}
+                        dispatch={dispatch}
+                        isAILoading={isAILoading}
                       />
                     : <RecruiterChat
+                        messages={recruiterMessages}
+                        setMessages={setRecruiterMessages}
                         currentPage={currentPage}
+                        isAILoading={isAILoading}
+                        setIsAILoading={setIsAILoading}
                       />}
                 </motion.div>
               </AnimatePresence>

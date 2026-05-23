@@ -19,22 +19,19 @@ const STARTER_QUESTIONS = [
   'How can I contact Tredir?',
 ];
 
-const WELCOME_MESSAGE = {
-  role: 'assistant',
-  content: "Hi! I'm Tredir's portfolio AI. Ask me anything about his background, projects, or skills — I'm here to help.",
-};
-
-export default function RecruiterChat({ currentPage }) {
-  const [messages, setMessages]     = useState([WELCOME_MESSAGE]);
+export default function RecruiterChat({
+  messages,
+  setMessages,
+  currentPage,
+  isAILoading,
+  setIsAILoading,
+}) {
   const [inputValue, setInputValue] = useState('');
-  const [isLoading, setIsLoading]   = useState(false);
   const bodyRef  = useRef(null);
   const inputRef = useRef(null);
 
   useEffect(() => {
-    if (bodyRef.current) {
-      bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
-    }
+    if (bodyRef.current) bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
   }, [messages]);
 
   useEffect(() => {
@@ -45,7 +42,7 @@ export default function RecruiterChat({ currentPage }) {
 
   async function sendMessage(text) {
     const question = text.trim().slice(0, MAX_INPUT_LENGTH);
-    if (!question || isLoading) return;
+    if (!question || isAILoading) return;
 
     const userCount = messages.filter(m => m.role === 'user').length;
     if (userCount >= MAX_SESSION_MESSAGES) {
@@ -72,7 +69,7 @@ export default function RecruiterChat({ currentPage }) {
 
     setMessages(prev => [...prev, userMsg, aiMsg]);
     setInputValue('');
-    setIsLoading(true);
+    setIsAILoading(true);
 
     const history = messages.filter(m => m.role !== 'assistant' || !m.id);
     const messagesForApi = [...history, userMsg].map(m => ({
@@ -95,7 +92,7 @@ export default function RecruiterChat({ currentPage }) {
         setMessages(prev =>
           prev.map(m => m.id === streamId ? { ...m, id: undefined } : m)
         );
-        setIsLoading(false);
+        setIsAILoading(false);
       },
       onError: (errMsg) => {
         setMessages(prev =>
@@ -105,7 +102,7 @@ export default function RecruiterChat({ currentPage }) {
               : m
           )
         );
-        setIsLoading(false);
+        setIsAILoading(false);
       },
     });
   }
@@ -142,7 +139,7 @@ export default function RecruiterChat({ currentPage }) {
                 key={i}
                 className="rc-starter-btn"
                 onClick={() => sendMessage(q)}
-                disabled={isLoading}
+                disabled={isAILoading}
               >
                 {q}
               </button>
@@ -151,8 +148,8 @@ export default function RecruiterChat({ currentPage }) {
         )}
       </div>
 
-      <div className={`rc-input-row${isLoading ? ' rc-input-row-loading' : ''}`}>
-        {isLoading && <div className="rc-loading-bar" aria-hidden="true" />}
+      <div className={`rc-input-row${isAILoading ? ' rc-input-row-loading' : ''}`}>
+        {isAILoading && <div className="rc-loading-bar" aria-hidden="true" />}
         <input
           ref={inputRef}
           className="rc-input"
@@ -160,17 +157,17 @@ export default function RecruiterChat({ currentPage }) {
           value={inputValue}
           onChange={e => setInputValue(e.target.value)}
           onKeyDown={handleKeyDown}
-          disabled={isLoading}
+          disabled={isAILoading}
           autoComplete="off"
           spellCheck={false}
           maxLength={MAX_INPUT_LENGTH}
-          placeholder={isLoading ? 'Thinking…' : 'Ask me anything about Tredir…'}
+          placeholder={isAILoading ? 'Thinking…' : 'Ask me anything about Tredir…'}
           aria-label="Recruiter chat input"
         />
         <button
           className="rc-send-btn"
           onClick={() => sendMessage(inputValue)}
-          disabled={isLoading || !inputValue.trim()}
+          disabled={isAILoading || !inputValue.trim()}
           aria-label="Send message"
         >
           <SendHorizontal size={16} />
