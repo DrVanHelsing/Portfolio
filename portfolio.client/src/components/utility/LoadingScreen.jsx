@@ -233,7 +233,7 @@ const LoadingScreen = ({ onEnter }) => {
   const g        = greetings[currentGreeting];
   const filename = `portfolio.${g.ext}`;
   const termLines = [
-    { t: 'ctx', v: 'tredir@portfolio  ~/portfolio  (glassomorphism)' },
+    { t: 'ctx', v: 'tredir@portfolio  ~/portfolio  (main)' },
     { t: 'cmd', v: g.termCmd },
     { t: 'blank' },
     { t: 'out', v: '  Hello, World!' },
@@ -246,7 +246,7 @@ const LoadingScreen = ({ onEnter }) => {
     { t: 'ok',  v: '  ✓  Cloud: Azure (AI · Functions · Cosmos DB)' },
     { t: 'ok',  v: '  ✓  Status: Open to opportunities' },
     { t: 'blank' },
-    { t: 'ctx', v: 'tredir@portfolio  ~/portfolio  (glassomorphism)' },
+    { t: 'ctx', v: 'tredir@portfolio  ~/portfolio  (main)' },
     { t: 'blank' },
     { t: 'rdy', v: '  ▶  Portfolio ready · click "Run Portfolio" below ↓' },
   ];
@@ -444,7 +444,7 @@ const LoadingScreen = ({ onEnter }) => {
               <div className="ide-status-left">
                 <span className="ide-status-item">
                   <GitBranch size={13} />
-                  &nbsp;glassomorphism
+                  &nbsp;main
                 </span>
                 <span className="ide-status-item">
                   <Check size={13} />
