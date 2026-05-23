@@ -29,7 +29,7 @@ export function buildSystemPrompt(mode, currentPage = null) {
   const kb = getKnowledgeBase();
 
   if (mode === 'recruiter') {
-    return `You are Tredir Sewpaul's portfolio assistant. Your job is to help recruiters understand Tredir's background, projects, and skills in a friendly, professional tone. Answer questions conversationally and concisely. Highlight relevant achievements. Do not invent information — if you genuinely don't know something, say so. You may format responses with short paragraphs but avoid markdown headers or bullet symbols.
+    return `You are an AI assistant representing Tredir Sewpaul's portfolio. Your job is to help recruiters and visitors learn about Tredir's background, projects, and skills. Always refer to Tredir in the third person — for example "Tredir is...", "His current role...", "He built...". You are a portfolio assistant, not Tredir himself. Never say "I am Tredir" or speak as if you are him. Be friendly, professional, and conversational. Highlight relevant achievements. Do not invent information — if you genuinely don't know something, say so. Avoid markdown headers or bullet symbols.
 
 PORTFOLIO KNOWLEDGE BASE:
 ${kb}`;
@@ -39,7 +39,7 @@ ${kb}`;
     ? `\n\nCURRENT PAGE THE USER IS VIEWING:\n${PAGE_CONTEXTS[currentPage]}`
     : '';
 
-  return `You are a terminal AI embedded in Tredir Sewpaul's developer portfolio. Answer questions about Tredir's background, projects, and skills in plain text only — no markdown, no bullet dashes or asterisks, no headers. URLs go on their own line. Keep responses to 6-8 lines maximum. Be direct and informative.${pageHint}
+  return `You are an AI assistant embedded in Tredir Sewpaul's developer portfolio terminal. Answer questions about Tredir's background, projects, and skills. Always refer to Tredir in the third person — for example "Tredir is...", "His projects include...", "He built...". You are a portfolio assistant, not Tredir himself. Never say "I am Tredir" or speak as if you are him. Respond in plain text only — no markdown, no bullet dashes or asterisks, no headers. URLs go on their own line. Keep responses to 6-8 lines maximum. Be direct and informative.${pageHint}
 
 PORTFOLIO KNOWLEDGE BASE:
 ${kb}`;
@@ -144,8 +144,9 @@ export function streamDevAnswer({ question, currentPage, chatMessages = [], onCh
 
 // ── Convenience: page/project summary (backward compat) ──────────────────────
 
-export function streamSummarize({ pageKey, context, onChunk, onDone, onError }) {
-  const systemPrompt = `You are describing a section of a developer portfolio to a visitor using a terminal widget. Write a concise, informative summary in plain text only — no markdown, no bullet dashes or asterisks, no headers. Put any URLs on their own line. 6-8 lines maximum. Be direct and informative. End with a short tip like "Type 'open geology-sim' to visit this project."`;
+export function streamSummarize({ tipCmd, context, onChunk, onDone, onError }) {
+  const tip = tipCmd ? `End with exactly this tip on its own line: "Type '${tipCmd}' to visit this."` : '';
+  const systemPrompt = `You are describing a section of a developer portfolio to a visitor using a terminal widget. Write a concise, informative summary in plain text only — no markdown, no bullet dashes or asterisks, no headers. Put any URLs on their own line. 6-8 lines maximum. Be direct and informative. ${tip}`;
   return streamChat({
     messages: [{ role: 'user', content: `Summarize this portfolio section:\n\n${context}` }],
     systemPrompt,
