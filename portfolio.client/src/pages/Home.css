@@ -464,7 +464,7 @@
   .home-content {
     height: auto;
     overflow: visible;
-    padding: 62px var(--spacing-md) var(--spacing-xl);
+    padding: 62px var(--spacing-md) 56px;
     gap: var(--spacing-md);
   }
 
@@ -507,18 +507,24 @@
     display: none;
   }
 
-  /* Marquee back to normal flow on mobile */
+  /* Keep marquee fixed at bottom of viewport on mobile */
   .tech-marquee {
-    position: static;
-    width: 100%;
-    margin-top: var(--spacing-md);
-    border-radius: var(--radius-lg);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    border-radius: 0;
+    margin-top: 0;
+  }
+
+  .marquee-content {
+    gap: var(--spacing-xl);
   }
 }
 
 @media (max-width: 480px) {
   .home-content {
-    padding: 70px var(--spacing-sm) var(--spacing-md);
+    padding: 70px var(--spacing-sm) 56px;
   }
 
   .marquee-content span {

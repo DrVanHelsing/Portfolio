@@ -43,7 +43,7 @@
 
 @media (max-width: 768px) {
   .scroll-to-top {
-    bottom: 1.5rem;
+    bottom: 56px;
     right: auto;
     left: 1.5rem;
     width: 44px;

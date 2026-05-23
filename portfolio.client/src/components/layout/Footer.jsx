@@ -29,7 +29,7 @@ const Footer = () => {
 
   const socialLinks = [
     {
-      href: 'https://github.com/tredir',
+      href: 'https://github.com/DrVanHelsing',
       label: 'GitHub',
       icon: Github,
     },
