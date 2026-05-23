@@ -144,8 +144,9 @@ export function streamDevAnswer({ question, currentPage, chatMessages = [], onCh
 
 // ── Convenience: page/project summary (backward compat) ──────────────────────
 
-export function streamSummarize({ pageKey, context, onChunk, onDone, onError }) {
-  const systemPrompt = `You are describing a section of a developer portfolio to a visitor using a terminal widget. Write a concise, informative summary in plain text only — no markdown, no bullet dashes or asterisks, no headers. Put any URLs on their own line. 6-8 lines maximum. Be direct and informative. End with a short tip like "Type 'open geology-sim' to visit this project."`;
+export function streamSummarize({ tipCmd, context, onChunk, onDone, onError }) {
+  const tip = tipCmd ? `End with exactly this tip on its own line: "Type '${tipCmd}' to visit this."` : '';
+  const systemPrompt = `You are describing a section of a developer portfolio to a visitor using a terminal widget. Write a concise, informative summary in plain text only — no markdown, no bullet dashes or asterisks, no headers. Put any URLs on their own line. 6-8 lines maximum. Be direct and informative. ${tip}`;
   return streamChat({
     messages: [{ role: 'user', content: `Summarize this portfolio section:\n\n${context}` }],
     systemPrompt,

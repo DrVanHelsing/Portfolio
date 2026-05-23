@@ -327,6 +327,9 @@ async function cmdSummarize({ args, currentPage, addLines, setIsAILoading, onStr
     return;
   }
 
+  const isProject = args[0] === 'projects' || !!PROJECT_ALIASES[args[0]];
+  const tipCmd    = isProject ? `open ${pageKey}` : `nav_to ${pageKey}`;
+
   setIsAILoading(true);
   const streamId = `ai-${Date.now()}`;
   addLines([
@@ -336,6 +339,7 @@ async function cmdSummarize({ args, currentPage, addLines, setIsAILoading, onStr
 
   await streamSummarize({
     pageKey,
+    tipCmd,
     context,
     onChunk:  (c) => onStreamChunk(streamId, c),
     onDone:   ()  => { onStreamDone(streamId);  setIsAILoading(false); },
