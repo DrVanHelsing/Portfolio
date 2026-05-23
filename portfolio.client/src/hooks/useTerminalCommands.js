@@ -8,7 +8,7 @@ import { streamDevAnswer, streamSummarize } from '../services/aiService.js';
 // ── Prompt builder ─────────────────────────────────────────────────────────────
 
 export function buildPrompt(cwd, inChat) {
-  if (inChat) return '[AI] > ';
+  if (inChat) return '(You) > ';
   const display = cwd.length > 28 ? `…${cwd.slice(-26)}` : cwd;
   return `${display} $ `;
 }
@@ -286,7 +286,7 @@ async function cmdAsk({ args, currentPage, chatMessages, addLines, setIsAILoadin
 
   setIsAILoading(true);
   const streamId = `ai-${Date.now()}`;
-  addLines([{ type: 'ai', text: '', id: streamId }]);
+  addLines([{ type: 'dim', text: '(AI)' }, { type: 'ai', text: '', id: streamId }]);
 
   await streamDevAnswer({
     question,
@@ -659,7 +659,7 @@ export function useTerminalCommands({ navigate, setMode, setIsAILoading, setHist
     if (inChatSession) {
       const streamId = `ai-${Date.now()}`;
       setIsAILoading(true);
-      addLines([{ type: 'ai', text: '', id: streamId }]);
+      addLines([{ type: 'dim', text: '(AI)' }, { type: 'ai', text: '', id: streamId }]);
 
       const updatedMessages = [...chatMessages, { role: 'user', content: trimmed }];
 
