@@ -259,7 +259,7 @@ function cmdMan({ args, addLines }) {
       { type: 'dim', text: '    github   linkedin   email' },
       { type: 'blank' },
       { type: 'dim', text: '  Other' },
-      { type: 'dim', text: '    whoami   theme   man [cmd]   clear   exit / quit' },
+      { type: 'dim', text: '    whoami   man [cmd]   clear   exit / quit' },
       { type: 'blank' },
       { type: 'dim', text: '  Tip: unrecognized input is sent to the AI automatically.' },
       { type: 'blank' },
@@ -442,14 +442,6 @@ function cmdWhoami({ addLines }) {
   ]);
 }
 
-function cmdTheme({ addLines }) {
-  const current = document.documentElement.getAttribute('data-theme');
-  const next    = current === 'light' ? 'dark' : 'light';
-  document.documentElement.setAttribute('data-theme', next);
-  localStorage.setItem('theme', next);
-  addLines([{ type: 'ok', text: `→ Theme switched to ${next}` }, { type: 'blank' }]);
-}
-
 // ── Command registry ──────────────────────────────────────────────────────────
 
 const COMMANDS = {
@@ -565,11 +557,6 @@ const COMMANDS = {
     description: 'Display current user info',
     usage: 'whoami',
     handler: cmdWhoami,
-  },
-  theme: {
-    description: 'Toggle dark/light theme',
-    usage: 'theme',
-    handler: cmdTheme,
   },
   sudo: {
     handler: ({ addLines }) => {

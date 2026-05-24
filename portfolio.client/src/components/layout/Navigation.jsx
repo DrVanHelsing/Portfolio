@@ -1,6 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import ThemeToggle from '../ui/ThemeToggle';
 import './Navigation.css';
 
 const Navigation = () => {
@@ -83,7 +82,6 @@ const location = useLocation();
        </li>
           ))}
       </ul>
-      <ThemeToggle />
       </div>
     </nav>
   );

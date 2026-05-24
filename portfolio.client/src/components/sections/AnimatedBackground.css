@@ -18,18 +18,6 @@
   animation: gradientShift 20s ease infinite;
 }
 
-[data-theme="light"] .animated-gradient-bg {
-  background: linear-gradient(
-    -45deg,
-    #f6f8fa,
-    #eef2f7,
-    #f0f3f9,
-    #edf0f8,
-    #f6f8fa
-  );
-  background-size: 400% 400%;
-}
-
 @keyframes gradientShift {
   0% {
     background-position: 0% 50%;
@@ -122,32 +110,6 @@
   75%       { transform: translate(calc(-50% + 12px), calc(-50% + 20px)) scale(1.03); }
 }
 
-[data-theme="light"] .orbs-bg {
-  background: var(--bg-dark);
-}
-
-[data-theme="light"] .orbs-bg .orb {
-  opacity: 0.24;
-}
-
-[data-theme="light"] .orbs-bg .orb-1 {
-  background: radial-gradient(circle at 40% 40%, #74bcff, #1f80f2, transparent 70%);
-}
-
-[data-theme="light"] .orbs-bg .orb-2 {
-  background: radial-gradient(circle at 60% 60%, #d0aaff, #9a65e8, transparent 70%);
-}
-
-[data-theme="light"] .orbs-bg .orb-3 {
-  background: radial-gradient(circle at 50% 50%, #0969da, #54aeff, transparent 70%);
-  opacity: 0.14;
-}
-
-[data-theme="light"] .orbs-bg .orb-4 {
-  opacity: 0.20;
-}
-
-
 .wave-bg {
   position: fixed;
   top: 0;
@@ -159,10 +121,6 @@
   overflow: clip;
   contain: strict;
   pointer-events: none;
-}
-
-[data-theme="light"] .wave-bg {
-  background: linear-gradient(to bottom, #f6f8fa, #eef2f7);
 }
 
 .wave {
@@ -177,14 +135,6 @@
     transparent 70%
   );
   transform-origin: center bottom;
-}
-
-[data-theme="light"] .wave {
-  background: radial-gradient(
-    ellipse at center,
-    rgba(9, 105, 218, 0.1) 0%,
-    transparent 70%
-  );
 }
 
 .wave1 {
