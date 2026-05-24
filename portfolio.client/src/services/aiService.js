@@ -2,13 +2,13 @@ import { getKnowledgeBase, PAGE_CONTEXTS } from '../data/portfolioKnowledge.js';
 
 const MODEL = 'openai/gpt-oss-120b:free';
 
-// In production, requests go through the Vercel Edge proxy (keeps key server-side).
+// In production, requests go through the Cloudflare Worker proxy (keeps key server-side).
 // In local dev, fall back to direct OpenRouter with the VITE_ dev key.
 const isDev   = import.meta.env.DEV;
 const DEV_KEY = import.meta.env.VITE_OPENROUTER_KEY ?? '';
 const API_URL  = isDev
   ? 'https://openrouter.ai/api/v1/chat/completions'
-  : '/api/chat';
+  : import.meta.env.VITE_AI_PROXY_URL;
 
 // ── Security constants ────────────────────────────────────────────────────────
 
