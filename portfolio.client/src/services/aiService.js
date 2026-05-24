@@ -8,7 +8,7 @@ const isDev   = import.meta.env.DEV;
 const DEV_KEY = import.meta.env.VITE_OPENROUTER_KEY ?? '';
 const API_URL  = isDev
   ? 'https://openrouter.ai/api/v1/chat/completions'
-  : import.meta.env.VITE_AI_PROXY_URL;
+  : 'https://portfolio-ai-proxy.tredirs.workers.dev';
 
 // ── Security constants ────────────────────────────────────────────────────────
 
