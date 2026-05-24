@@ -6,6 +6,29 @@ All notable changes to this project are documented here.
 
 ## [Unreleased]
 
+## [3.0.3] — 2026-05-24
+
+### AI Thinking — Rotating Border Animation
+
+- **Copilot-style border spin** — replaced pulsing box-shadow with a `conic-gradient` comet that rotates around the terminal panel border while the AI is generating a response
+- Uses CSS `@property --tw-angle` for GPU-smooth rotation; a dim purple trail transitions to dark purple → mid purple → white hotspot → back to trail over 2.5 s
+- Implemented via dual-layer `background` (`padding-box` inner fill + `border-box` conic gradient) — no extra DOM nodes, no JS
+- Subtle outer glow (`box-shadow`) retained for depth
+
+### Infra
+
+- **Cloudflare Worker proxy** — AI requests now route through `portfolio-ai-proxy.tredirs.workers.dev`; `OPENROUTER_KEY` is a Cloudflare secret, never in client bundle or Vercel env vars
+- Removed `portfolio.client/api/chat.js` (Vercel serverless approach abandoned due to Vite framework preset incompatibility)
+- Added `.npmrc` (`legacy-peer-deps=true`) to fix Vercel function install step
+
+### Dark Mode Only
+
+- Removed light mode entirely — `[data-theme="light"]` CSS deleted from all stylesheets (~580 lines removed)
+- Removed `ThemeToggle` component and `theme` terminal command
+- `data-theme="dark"` set statically in `index.html`; no flash-prevention script required
+
+---
+
 ## [3.0.1] — 2026-05-23
 
 ### Terminal Widget UX — Mode Guidance & Fullscreen Polish

@@ -43,13 +43,12 @@ A floating terminal widget in the bottom-right corner with two modes:
 - `/chat` — persistent multi-turn AI session with history
 - Dynamic prompt reflecting current virtual directory
 
-Both modes support fullscreen (green traffic light), minimize (yellow), and close (red).
+Both modes support minimize (yellow traffic light) and close (red). When the AI is processing a response, a white-tipped comet animates around the panel border.
 
 ### Other Features
 - **VS Code-style IDE splash screen** — dismissable on first load
 - **Animated particle background** — GPU-friendly, `contain: strict`
-- **IDE-themed UI** — GitHub-inspired dark/light theme via CSS custom properties
-- **Theme toggle** — dark/light mode persisted via `data-theme` attribute
+- **IDE-themed UI** — GitHub-inspired dark theme via CSS custom properties (dark-only)
 - **Interactive timeline** — career and education timeline (`TimelineModern`)
 - **Animated charts & architecture diagrams** — custom components
 - **Lazy-loaded pages** — every page and project detail code-split via `React.lazy`

@@ -295,25 +295,38 @@
   overflow: hidden !important;
 }
 
-/* ── AI thinking glow ────────────────────────────────────── */
-@keyframes tw-thinking-glow {
-  0%, 100% {
-    box-shadow:
-      0 20px 60px rgba(0, 0, 0, 0.45),
-      0 0 0 1px rgba(163, 113, 247, 0.3),
-      0 0 30px rgba(163, 113, 247, 0.12);
-  }
-  50% {
-    box-shadow:
-      0 20px 60px rgba(0, 0, 0, 0.45),
-      0 0 0 1px rgba(163, 113, 247, 0.65),
-      0 0 55px rgba(163, 113, 247, 0.30),
-      0 0 90px rgba(203, 120, 255, 0.14);
-  }
+/* ── AI thinking — rotating border (Copilot-style) ──────── */
+@property --tw-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes tw-border-spin {
+  to { --tw-angle: 360deg; }
 }
 
 .tw-panel[data-thinking="true"] {
-  animation: tw-thinking-glow 1.8s ease-in-out infinite;
+  border: 2px solid transparent;
+  background:
+    linear-gradient(#0d1117, #0d1117) padding-box,
+    conic-gradient(
+      from var(--tw-angle),
+      rgba(163, 113, 247, 0.12) 0deg,
+      rgba(163, 113, 247, 0.12) 195deg,
+      #6d28d9                   228deg,
+      #a371f7                   250deg,
+      #dbb6ff                   263deg,
+      #ffffff                   270deg,
+      #dbb6ff                   277deg,
+      #a371f7                   290deg,
+      #6d28d9                   312deg,
+      rgba(163, 113, 247, 0.12) 345deg
+    ) border-box;
+  animation: tw-border-spin 2.5s linear infinite;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.45),
+    0 0 36px rgba(163, 113, 247, 0.18);
 }
 
 /* ── AI line type ────────────────────────────────────────── */
