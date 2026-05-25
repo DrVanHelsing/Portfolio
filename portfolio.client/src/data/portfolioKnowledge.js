@@ -22,11 +22,18 @@ const FS_SLUG_TO_DATA_ID = {
 };
 
 // Ordered list of project FS slugs (used for ls output)
-const PROJECT_FS_SLUGS = [
+export const PROJECT_FS_SLUGS = [
   'financebuddy', 'studentlink', 'callcentre-ai', 'godseye',
   'hangman', 'tictactoe', 'postgrad-portal', 'geology-sim',
   'physics-lab', 'anti-temu', 'machine-learning',
 ];
+
+// Compact list for the `projects` command — slug + title + one-liner
+export const PROJECTS_LIST = PROJECT_FS_SLUGS.map(slug => {
+  const dataId = FS_SLUG_TO_DATA_ID[slug];
+  const p = dataId ? projectById(dataId) : null;
+  return p ? { slug, title: p.title, description: p.description } : null;
+}).filter(Boolean);
 
 // ── Content formatters ────────────────────────────────────────────────────────
 
@@ -113,15 +120,18 @@ export function getReadmeContent() {
     'Tredir Sewpaul — Full-stack Developer & AI Engineer',
     'Based in Cape Town, South Africa',
     '',
-    'QUICK NAVIGATION',
+    'QUICK START',
+    '  tree                    see everything at a glance',
+    '  projects                list all projects with descriptions',
     '  cat resume.md           full resume',
     '  cat skills.txt          tech stack',
-    '  ls projects/            all projects',
-    '  cat projects/<slug>     project detail',
-    '  cd /about               navigate to about page',
-    '  cd /projects            navigate to projects page',
-    '  man                     all available commands',
-    '  mode recruiter          switch to recruiter chat mode',
+    '  cat <project-slug>      project detail (e.g. cat geology)',
+    '  cd /about               jump to the About page',
+    '  /chat                   multi-turn AI conversation',
+    '  help                    every available command',
+    '  mode ai                 switch to AI Chat mode',
+    '',
+    'Tip: just type any question — input is sent to AI automatically.',
     '',
     'GitHub:   github.com/DrVanHelsing',
     'LinkedIn: linkedin.com/in/tredir-sewpaul',
@@ -387,7 +397,7 @@ export function getKnowledgeBase() {
 export const WELCOME_LINES = [
   { type: 'ctx',   text: 'portfolio@tredir-sewpaul:~' },
   { type: 'sym',   text: '◆  Terminal v3.0  —  Dev Mode' },
-  { type: 'dim',   text: "  Type 'man' for all commands." },
-  { type: 'dim',   text: "  Type 'mode recruiter' for AI chat mode." },
+  { type: 'dim',   text: "  Try: tree · projects · cat resume.md · /chat" },
+  { type: 'dim',   text: "  Type 'help' for all commands, or just ask any question." },
   { type: 'blank' },
 ];

@@ -28,36 +28,32 @@ const FS_TREE = `~/
 
 const CMD_GROUPS = [
   { label: 'Navigate', color: 'blue', items: [
-    { cmd: 'ls [path]',   tip: 'List directory contents' },
-    { cmd: 'ls -la',      tip: 'Detailed listing with type indicators' },
-    { cmd: 'cd <dir>',    tip: 'Change directory  (cd ~ → home)' },
-    { cmd: 'cd /about',   tip: 'Jump directly to the About page' },
-    { cmd: 'pwd',         tip: 'Print current working directory' },
+    { cmd: 'tree',         tip: 'Print the full virtual-FS tree (start here)' },
+    { cmd: 'ls [path]',    tip: 'List directory contents' },
+    { cmd: 'cd <path>',    tip: 'Change directory  (cd ~ → home)' },
+    { cmd: 'cd /about',    tip: 'Jump directly to the About page' },
+    { cmd: 'cd geology',   tip: 'Open a project page by slug' },
+    { cmd: 'pwd',          tip: 'Print current working directory' },
   ]},
-  { label: 'Read Files', color: 'blue', items: [
-    { cmd: 'cat resume.md',        tip: 'Read the full resume' },
-    { cmd: 'cat skills.txt',       tip: 'Read the complete tech stack' },
-    { cmd: 'cat projects/<slug>',  tip: 'Read a project file' },
-    { cmd: 'cat README.md',        tip: 'Navigation quick-start' },
+  { label: 'Read', color: 'blue', items: [
+    { cmd: 'cat resume.md',     tip: 'Read the full resume' },
+    { cmd: 'cat skills.txt',    tip: 'Read the complete tech stack' },
+    { cmd: 'cat <slug>',        tip: 'Project detail (cat geology, cat financebuddy)' },
+    { cmd: 'projects',          tip: 'List all projects with one-line descriptions' },
+    { cmd: 'grep <pattern>',    tip: 'Search all portfolio content' },
   ]},
-  { label: 'Search & Info', color: 'blue', items: [
-    { cmd: 'grep <pattern>',  tip: 'Search all portfolio content' },
-    { cmd: 'env',             tip: 'Portfolio environment variables' },
-    { cmd: 'whoami',          tip: 'Short bio about Tredir' },
-    { cmd: 'man [cmd]',       tip: 'Show command manual pages' },
-    { cmd: 'history',         tip: 'Command history' },
+  { label: 'AI', color: 'purple', items: [
+    { cmd: '<just type>',          tip: 'Any unrecognized input is sent to the AI' },
+    { cmd: '/chat',                tip: 'Multi-turn AI session (type exit to leave)' },
+    { cmd: 'summarize <page|proj>',tip: 'Streamed AI summary' },
+    { cmd: 'mode ai',              tip: 'Switch to AI Chat mode' },
   ]},
-  { label: 'AI & Pages', color: 'purple', items: [
-    { cmd: 'ask <question>',  tip: 'One-shot AI answer' },
-    { cmd: '/chat',           tip: 'Multi-turn AI session (exit to leave)' },
-    { cmd: 'open <project>',  tip: 'Navigate to a project page' },
-    { cmd: 'nav_to <page>',   tip: 'Navigate to any portfolio page' },
-    { cmd: 'mode recruiter',  tip: 'Switch to AI Chat mode' },
-  ]},
-  { label: 'Utility', color: 'dim', items: [
-    { cmd: 'help',   tip: 'List all available commands' },
-    { cmd: 'clear',  tip: 'Clear the terminal output' },
-    { cmd: 'sudo',   tip: '🤫' },
+  { label: 'Info & Utility', color: 'dim', items: [
+    { cmd: 'whoami / about', tip: 'Short bio about Tredir' },
+    { cmd: 'env',            tip: 'Portfolio environment variables' },
+    { cmd: 'history',        tip: 'Command history (also ↑/↓)' },
+    { cmd: 'help / man',     tip: 'List all commands or a single manual page' },
+    { cmd: 'clear',          tip: 'Clear the terminal output' },
   ]},
 ];
 
@@ -173,8 +169,7 @@ function DevTerminalHelp() {
           ))}
         </div>
         <p className="hm-hint">
-          Unrecognized input is automatically routed to the AI —{' '}
-          no <code className="hm-ic">ask</code> prefix needed.
+          Just type any question — unrecognized input is sent to the AI automatically.
         </p>
       </div>
 

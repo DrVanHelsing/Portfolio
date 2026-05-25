@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import {
   VIRTUAL_FS, ROUTE_MAP, PROJECT_ALIASES, PAGE_CONTEXTS,
+  PROJECT_FS_SLUGS, PROJECTS_LIST,
   resolvePath, getKnowledgeBase, WELCOME_LINES,
 } from '../data/portfolioKnowledge.js';
 import {
@@ -62,7 +63,7 @@ export function getCompletions(partial, cwd) {
 // Each handler receives a context object and calls addLines() directly.
 
 function cmdLs({ args, cwd, addLines }) {
-  const longFormat = args.includes('-la') || args.includes('-l') || args.includes('-a');
+  const longFormat = args.includes('-l') || args.includes('-la');
   const pathArg    = args.find(a => !a.startsWith('-'));
   const targetPath = pathArg ? resolvePath(cwd, pathArg) : cwd;
   const node       = VIRTUAL_FS[targetPath];
@@ -87,8 +88,10 @@ function cmdLs({ args, cwd, addLines }) {
     addLines([{ type: 'dim', text: `total ${entries.length}` }]);
     entries.forEach(({ name, isDir }) => {
       const perms = isDir ? 'drwxr-xr-x' : '-rw-r--r--';
-      const type  = isDir ? '\x1b[34m' : '';
-      addLines([{ type: 'dim', text: `${perms}  tredir  staff  ${isDir ? name + '/' : name}` }]);
+      addLines([{
+        type: isDir ? 'rdy' : 'dim',
+        text: `${perms}  tredir  staff  ${isDir ? name + '/' : name}`,
+      }]);
     });
   } else {
     const cols = [];
@@ -101,19 +104,60 @@ function cmdLs({ args, cwd, addLines }) {
   addLines([{ type: 'blank' }]);
 }
 
+function cmdTree({ addLines }) {
+  const root = VIRTUAL_FS['~'];
+  const lines = [{ type: 'rdy', text: '~/' }];
+
+  const children = root.children;
+  children.forEach((name, i) => {
+    const isLast    = i === children.length - 1;
+    const branch    = isLast ? '└─ ' : '├─ ';
+    const childPath = `~/${name}`;
+    const childNode = VIRTUAL_FS[childPath];
+    const isDir     = childNode?.type === 'dir';
+
+    lines.push({
+      type: isDir ? 'rdy' : 'dim',
+      text: `${branch}${name}${isDir ? '/' : ''}`,
+    });
+
+    if (isDir) {
+      const indent = isLast ? '   ' : '│  ';
+      childNode.children.forEach((subName, j) => {
+        const isSubLast = j === childNode.children.length - 1;
+        const subBranch = isSubLast ? '└─ ' : '├─ ';
+        lines.push({ type: 'dim', text: `${indent}${subBranch}${subName}` });
+      });
+    }
+  });
+
+  lines.push({ type: 'blank' });
+  addLines(lines);
+}
+
 function cmdCat({ args, cwd, addLines }) {
   if (!args[0]) {
     addLines([
       { type: 'dim', text: 'Usage: cat <file>' },
-      { type: 'dim', text: '  e.g. cat projects/geology-sim' },
       { type: 'dim', text: '  e.g. cat resume.md' },
+      { type: 'dim', text: '  e.g. cat geology     (project alias)' },
       { type: 'blank' },
     ]);
     return;
   }
 
-  const targetPath = resolvePath(cwd, args[0]);
-  const node       = VIRTUAL_FS[targetPath];
+  // First try a direct path resolution
+  let targetPath = resolvePath(cwd, args[0]);
+  let node       = VIRTUAL_FS[targetPath];
+
+  // Fallback: project alias (cat geology → ~/projects/geology-sim)
+  if (!node) {
+    const canonical = PROJECT_ALIASES[args[0]];
+    if (canonical) {
+      targetPath = `~/projects/${canonical}`;
+      node       = VIRTUAL_FS[targetPath];
+    }
+  }
 
   if (!node) {
     addLines([{ type: 'dim', text: `cat: ${args[0]}: no such file or directory` }, { type: 'blank' }]);
@@ -138,15 +182,15 @@ function cmdCd({ args, cwd, setCwd, navigate, addLines }) {
     return;
   }
 
-  // Check if it's a navigation alias: cd /about, cd /projects, etc.
-  const pageCandidate = target.replace(/^\//, '');
+  // Navigation alias: cd /about, cd /projects, etc.
+  const pageCandidate = target.replace(/^\//, '').replace(/\/+$/, '');
   if (ROUTE_MAP[pageCandidate] && !target.startsWith('~') && !target.includes('..')) {
     navigate(ROUTE_MAP[pageCandidate]);
     addLines([{ type: 'rdy', text: `→ navigated to ${ROUTE_MAP[pageCandidate]}` }, { type: 'blank' }]);
     return;
   }
 
-  // Also handle direct project slugs: cd financebuddy → navigate
+  // Direct project alias: cd financebuddy → navigate
   const projectAlias = PROJECT_ALIASES[pageCandidate];
   if (projectAlias && ROUTE_MAP[projectAlias]) {
     navigate(ROUTE_MAP[projectAlias]);
@@ -172,6 +216,22 @@ function cmdCd({ args, cwd, setCwd, navigate, addLines }) {
 
 function cmdPwd({ cwd, addLines }) {
   addLines([{ type: 'ai', text: cwd }, { type: 'blank' }]);
+}
+
+function cmdProjects({ addLines }) {
+  addLines([{ type: 'ok', text: `Projects (${PROJECTS_LIST.length}):` }, { type: 'blank' }]);
+  const slugWidth = Math.max(...PROJECTS_LIST.map(p => p.slug.length)) + 2;
+  PROJECTS_LIST.forEach(p => {
+    addLines([
+      { type: 'rdy', text: `  ${p.slug.padEnd(slugWidth)}${p.title}` },
+      { type: 'dim', text: `  ${' '.repeat(slugWidth)}${p.description}` },
+    ]);
+  });
+  addLines([
+    { type: 'blank' },
+    { type: 'dim', text: "  cat <slug>   read details   |   cd <slug>   open project page" },
+    { type: 'blank' },
+  ]);
 }
 
 function cmdGrep({ args, addLines }) {
@@ -206,10 +266,6 @@ function cmdGrep({ args, addLines }) {
   addLines([{ type: 'blank' }]);
 }
 
-function cmdEcho({ args, addLines }) {
-  addLines([{ type: 'ai', text: args.join(' ') }, { type: 'blank' }]);
-}
-
 function cmdEnv({ addLines }) {
   addLines([
     { type: 'ai',  text: 'NAME=Tredir Sewpaul' },
@@ -229,39 +285,34 @@ function cmdMan({ args, addLines }) {
     addLines([
       { type: 'ok',  text: 'Available commands:' },
       { type: 'blank' },
-      { type: 'dim', text: '  Filesystem' },
-      { type: 'dim', text: '    ls [-la] [path]           List directory contents' },
-      { type: 'dim', text: '    cat <file>                Read a file' },
-      { type: 'dim', text: '    cd <path>                 Change directory or navigate' },
-      { type: 'dim', text: '    pwd                       Print working directory' },
-      { type: 'dim', text: '    grep <pattern>            Search portfolio content' },
-      { type: 'dim', text: '    echo <text>               Echo text' },
+      { type: 'dim', text: '  Navigate' },
+      { type: 'dim', text: '    ls [-l] [path]          List directory contents' },
+      { type: 'dim', text: '    tree                    Full virtual-FS tree' },
+      { type: 'dim', text: '    cd <path|/page>         Change directory, or jump to a page' },
+      { type: 'dim', text: '    pwd                     Print working directory' },
       { type: 'blank' },
-      { type: 'dim', text: '  Environment' },
-      { type: 'dim', text: '    env                       Show environment variables' },
-      { type: 'dim', text: '    history                   Show command history' },
-      { type: 'blank' },
-      { type: 'dim', text: '  Navigation' },
-      { type: 'dim', text: '    nav_to <page>             Navigate to a page' },
-      { type: 'dim', text: '    open <slug>               Open a project page' },
+      { type: 'dim', text: '  Read' },
+      { type: 'dim', text: '    cat <file|alias>        Read a file (e.g. cat geology)' },
+      { type: 'dim', text: '    projects                List all projects with descriptions' },
+      { type: 'dim', text: '    grep <pattern>          Search portfolio content' },
       { type: 'blank' },
       { type: 'dim', text: '  AI' },
-      { type: 'dim', text: '    ask <question>            Ask the portfolio AI' },
-      { type: 'dim', text: '    /chat                     Start persistent AI chat session' },
-      { type: 'dim', text: '    summarize <page>          AI summary of a page' },
-      { type: 'dim', text: '    summarize projects <slug> AI summary of a project' },
+      { type: 'dim', text: '    /chat                   Multi-turn AI conversation' },
+      { type: 'dim', text: '    summarize <page|proj>   AI summary of a page or project' },
+      { type: 'dim', text: '    (just type a question — input is sent to AI automatically)' },
       { type: 'blank' },
-      { type: 'dim', text: '  Mode' },
-      { type: 'dim', text: '    mode recruiter            Switch to Recruiter chat mode' },
-      { type: 'dim', text: '    mode dev                  Switch back to Dev mode' },
+      { type: 'dim', text: '  Info' },
+      { type: 'dim', text: '    whoami / about          Short bio' },
+      { type: 'dim', text: '    env                     Environment variables' },
+      { type: 'dim', text: '    history                 Command history' },
+      { type: 'dim', text: '    help / man [cmd]        Manual page' },
       { type: 'blank' },
-      { type: 'dim', text: '  Social' },
-      { type: 'dim', text: '    github   linkedin   email' },
+      { type: 'dim', text: '  Mode & Social' },
+      { type: 'dim', text: '    mode ai | mode dev      Switch terminal mode' },
+      { type: 'dim', text: '    github  linkedin  email' },
       { type: 'blank' },
       { type: 'dim', text: '  Other' },
-      { type: 'dim', text: '    whoami   man [cmd]   clear   exit / quit' },
-      { type: 'blank' },
-      { type: 'dim', text: '  Tip: unrecognized input is sent to the AI automatically.' },
+      { type: 'dim', text: '    clear                   Clear the screen' },
       { type: 'blank' },
     ]);
     return;
@@ -279,67 +330,32 @@ function cmdMan({ args, addLines }) {
   addLines([...manLines, { type: 'blank' }]);
 }
 
-async function cmdAsk({ args, currentPage, chatMessages, addLines, setIsAILoading, onStreamChunk, onStreamDone, onStreamError }) {
-  const question = args.join(' ').trim().slice(0, MAX_INPUT_LENGTH);
-  if (!question) {
+async function cmdSummarize({ args, addLines, setIsAILoading, onStreamChunk, onStreamDone, onStreamError }) {
+  if (!args[0]) {
     addLines([
-      { type: 'dim', text: 'Usage: ask <question>' },
-      { type: 'dim', text: '  e.g. ask what projects involve AI?' },
-      { type: 'blank' },
-    ]);
-    return;
-  }
-
-  if (detectMisuse(question)) {
-    addLines([{ type: 'dim', text: MISUSE_REPLY }, { type: 'blank' }]);
-    return;
-  }
-
-  setIsAILoading(true);
-  const streamId = `ai-${Date.now()}`;
-  addLines([{ type: 'dim', text: '(AI)' }, { type: 'ai', text: '', id: streamId }]);
-
-  await streamDevAnswer({
-    question,
-    currentPage,
-    chatMessages: chatMessages ?? [],
-    onChunk:  (c) => onStreamChunk(streamId, c),
-    onDone:   ()  => { onStreamDone(streamId);     setIsAILoading(false); },
-    onError:  (m) => { onStreamError(streamId, m); setIsAILoading(false); },
-  });
-}
-
-async function cmdSummarize({ args, currentPage, addLines, setIsAILoading, onStreamChunk, onStreamDone, onStreamError }) {
-  let pageKey;
-
-  if (args[0] === 'projects' && args[1]) {
-    pageKey = PROJECT_ALIASES[args[1]] ?? args[1];
-  } else if (args[0] && args[0] !== 'projects') {
-    const raw = args[0];
-    pageKey = PROJECT_ALIASES[raw] ?? raw;
-  } else {
-    addLines([
-      { type: 'dim', text: 'Usage: summarize <page>' },
-      { type: 'dim', text: '       summarize projects <slug>' },
+      { type: 'dim', text: 'Usage: summarize <page-or-project>' },
       { type: 'dim', text: '  e.g. summarize about' },
-      { type: 'dim', text: '  e.g. summarize projects geology-sim' },
+      { type: 'dim', text: '  e.g. summarize geology' },
       { type: 'blank' },
     ]);
     return;
   }
 
+  const raw     = args[0];
+  const pageKey = PROJECT_ALIASES[raw] ?? raw;
   const context = PAGE_CONTEXTS[pageKey];
+
   if (!context) {
     addLines([
-      { type: 'dim', text: `Unknown page or project: ${args.join(' ')}` },
-      { type: 'dim', text: "  Type 'ls projects/' to see available slugs." },
+      { type: 'dim', text: `Unknown page or project: ${raw}` },
+      { type: 'dim', text: "  Try 'projects' to see all slugs, or 'tree' for available pages." },
       { type: 'blank' },
     ]);
     return;
   }
 
-  const isProject = args[0] === 'projects' || !!PROJECT_ALIASES[args[0]];
-  const tipCmd    = isProject ? `open ${pageKey}` : `nav_to ${pageKey}`;
+  const isProject = PROJECT_FS_SLUGS.includes(pageKey);
+  const tipCmd    = isProject ? `cd ${pageKey}` : `cd /${pageKey}`;
 
   setIsAILoading(true);
   const streamId = `ai-${Date.now()}`;
@@ -358,63 +374,17 @@ async function cmdSummarize({ args, currentPage, addLines, setIsAILoading, onStr
   });
 }
 
-function cmdOpen({ args, navigate, addLines }) {
-  const slug     = args[0];
-  const resolved = slug ? (PROJECT_ALIASES[slug] ?? null) : null;
-
-  if (!slug) {
-    addLines([
-      { type: 'dim', text: 'Usage: open <slug>  (e.g. open godseye)' },
-      { type: 'dim', text: "  Run 'ls projects/' to see available slugs." },
-      { type: 'blank' },
-    ]);
-    return;
-  }
-  if (resolved && ROUTE_MAP[resolved]) {
-    navigate(ROUTE_MAP[resolved]);
-    addLines([{ type: 'rdy', text: `→ Opening project: ${slug}` }, { type: 'blank' }]);
-  } else {
-    addLines([
-      { type: 'dim', text: `Project '${slug}' not found.` },
-      { type: 'dim', text: "  Run 'ls projects/' to see available slugs." },
-      { type: 'blank' },
-    ]);
-  }
-}
-
-function cmdNavTo({ args, navigate, addLines }) {
-  const dest = args[0];
-  if (!dest) {
-    addLines([
-      { type: 'dim', text: 'Usage: nav_to <page>' },
-      { type: 'dim', text: '  pages: home  about  projects  skills  resume  contact' },
-      { type: 'blank' },
-    ]);
-    return;
-  }
-  const route = ROUTE_MAP[dest];
-  if (route !== undefined) {
-    navigate(route);
-    addLines([{ type: 'rdy', text: `→ nav_to ${dest}` }, { type: 'blank' }]);
-  } else {
-    addLines([
-      { type: 'dim', text: `nav_to: unknown page: ${dest}` },
-      { type: 'dim', text: '  pages: home  about  projects  skills  resume  contact' },
-      { type: 'blank' },
-    ]);
-  }
-}
-
 function cmdMode({ args, setMode, addLines }) {
-  if (args[0] === 'recruiter') {
+  const arg = args[0]?.toLowerCase();
+  if (arg === 'ai' || arg === 'recruiter' || arg === 'chat') {
     setMode('recruiter');
-    addLines([{ type: 'rdy', text: '→ Switched to Recruiter mode. Type mode dev to return.' }, { type: 'blank' }]);
-  } else if (args[0] === 'dev') {
+    addLines([{ type: 'rdy', text: '→ Switched to AI Chat mode. Type `mode dev` to return.' }, { type: 'blank' }]);
+  } else if (arg === 'dev' || arg === 'terminal') {
     setMode('dev');
-    addLines([{ type: 'ok', text: '→ Switched to Dev mode.' }, { type: 'blank' }]);
+    addLines([{ type: 'ok', text: '→ Switched to Dev Mode.' }, { type: 'blank' }]);
   } else {
     addLines([
-      { type: 'dim', text: 'Usage: mode recruiter | mode dev' },
+      { type: 'dim', text: 'Usage: mode ai | mode dev' },
       { type: 'blank' },
     ]);
   }
@@ -447,20 +417,26 @@ function cmdWhoami({ addLines }) {
 const COMMANDS = {
   ls: {
     description: 'List directory contents',
-    usage: 'ls [-la] [path]',
-    man: `NAME\n  ls — list directory contents\n\nSYNOPSIS\n  ls [-la] [path]\n\nDESCRIPTION\n  Lists files and directories in the virtual portfolio filesystem.\n  Directories are shown in blue (with trailing /), files in grey.\n  -la  long format with permissions and type indicators.\n\nEXAMPLES\n  ls                    list current directory\n  ls projects/          list all projects\n  ls -la                long format listing`,
+    usage: 'ls [-l] [path]',
+    man: `NAME\n  ls — list directory contents\n\nSYNOPSIS\n  ls [-l] [path]\n\nDESCRIPTION\n  Lists files and directories in the virtual portfolio filesystem.\n  Directories are highlighted (with trailing /), files in grey.\n  -l  long format with permissions.\n\nEXAMPLES\n  ls                    list current directory\n  ls projects/          list all projects\n  ls -l                 long format listing`,
     handler: cmdLs,
   },
+  tree: {
+    description: 'Print the full virtual-FS tree',
+    usage: 'tree',
+    man: `NAME\n  tree — display the virtual filesystem as a tree\n\nSYNOPSIS\n  tree\n\nDESCRIPTION\n  Prints the entire portfolio filesystem layout at a glance.\n  Useful as a first command to get oriented.`,
+    handler: cmdTree,
+  },
   cat: {
-    description: 'Read a virtual file',
+    description: 'Read a virtual file (accepts project aliases)',
     usage: 'cat <file>',
-    man: `NAME\n  cat — concatenate and display file contents\n\nSYNOPSIS\n  cat <file>\n\nDESCRIPTION\n  Reads and displays the contents of a virtual portfolio file.\n  Paths are relative to your current directory.\n\nEXAMPLES\n  cat projects/geology-sim\n  cat resume.md\n  cat skills.txt\n  cat pages/about`,
+    man: `NAME\n  cat — concatenate and display file contents\n\nSYNOPSIS\n  cat <file>\n\nDESCRIPTION\n  Reads and displays the contents of a virtual portfolio file.\n  Accepts project aliases — 'cat geology' resolves to 'cat projects/geology-sim'.\n\nEXAMPLES\n  cat resume.md\n  cat skills.txt\n  cat README.md\n  cat geology              (alias)\n  cat projects/financebuddy`,
     handler: cmdCat,
   },
   cd: {
-    description: 'Change directory (or navigate to a site page)',
-    usage: 'cd [path]',
-    man: `NAME\n  cd — change current virtual directory\n\nSYNOPSIS\n  cd [path]\n\nDESCRIPTION\n  Changes the current virtual directory.\n  If path is a page name like /about or /projects, navigates the site instead.\n  cd with no arguments returns to home (~).\n\nEXAMPLES\n  cd projects/          enter projects directory\n  cd ..                 go up one level\n  cd /about             navigate to About page\n  cd /projects          navigate to Projects page\n  cd geology-sim        navigate to Geology Sim project`,
+    description: 'Change directory or navigate to a site page',
+    usage: 'cd [path|/page|slug]',
+    man: `NAME\n  cd — change current virtual directory, or navigate the site\n\nSYNOPSIS\n  cd [path]\n  cd /<page>\n  cd <project-slug>\n\nDESCRIPTION\n  Changes the current virtual directory, OR navigates the site if the\n  argument is a known page or project alias.\n  With no arguments, returns to home (~).\n\nEXAMPLES\n  cd projects/          enter the projects directory\n  cd ..                 go up one level\n  cd /about             navigate to the About page\n  cd geology            navigate to the Geology Sim project`,
     handler: cmdCd,
   },
   pwd: {
@@ -469,22 +445,22 @@ const COMMANDS = {
     man: `NAME\n  pwd — print name of current working directory\n\nSYNOPSIS\n  pwd`,
     handler: cmdPwd,
   },
+  projects: {
+    description: 'List all projects with one-line descriptions',
+    usage: 'projects',
+    man: `NAME\n  projects — list all portfolio projects with descriptions\n\nSYNOPSIS\n  projects\n\nDESCRIPTION\n  Lists every project with its slug, title, and one-line description.\n  Use 'cat <slug>' for details, or 'cd <slug>' to open the project page.`,
+    handler: cmdProjects,
+  },
   grep: {
     description: 'Search portfolio content',
     usage: 'grep <pattern>',
     man: `NAME\n  grep — search portfolio knowledge base\n\nSYNOPSIS\n  grep <pattern>\n\nDESCRIPTION\n  Case-insensitive search across all portfolio content including\n  skills, projects, experience, and education.\n\nEXAMPLES\n  grep python\n  grep azure\n  grep hackathon`,
     handler: cmdGrep,
   },
-  echo: {
-    description: 'Echo text to terminal',
-    usage: 'echo <text>',
-    man: `NAME\n  echo — display a line of text\n\nSYNOPSIS\n  echo [text...]`,
-    handler: cmdEcho,
-  },
   env: {
     description: 'Show environment variables',
     usage: 'env',
-    man: `NAME\n  env — print environment variables\n\nSYNOPSIS\n  env\n\nDESCRIPTION\n  Displays portfolio environment variables including identity,\n  location, and contact information.`,
+    man: `NAME\n  env — print environment variables\n\nSYNOPSIS\n  env`,
     handler: cmdEnv,
   },
   history: {
@@ -496,37 +472,25 @@ const COMMANDS = {
   man: {
     description: 'Show manual page for a command',
     usage: 'man [command]',
-    man: `NAME\n  man — format and display manual pages\n\nSYNOPSIS\n  man [command]\n\nDESCRIPTION\n  With no arguments, lists all available commands.\n  With a command name, shows its full manual page.\n\nEXAMPLES\n  man\n  man ls\n  man grep`,
+    man: `NAME\n  man — format and display manual pages\n\nSYNOPSIS\n  man [command]\n\nDESCRIPTION\n  With no arguments, lists all available commands.\n  With a command name, shows its full manual page.\n  'help' is an alias.\n\nEXAMPLES\n  man\n  man ls\n  man grep`,
     handler: cmdMan,
   },
-  ask: {
-    description: 'Ask the portfolio AI a question',
-    usage: 'ask <question>',
-    man: `NAME\n  ask — query the portfolio AI\n\nSYNOPSIS\n  ask <question>\n\nDESCRIPTION\n  Sends a question to the portfolio AI which has full knowledge\n  of Tredir's background, projects, and skills.\n  You can also just type naturally — unrecognized input is sent to the AI.\n\nEXAMPLES\n  ask what tech does Tredir use for AI?\n  ask tell me about the hackathon wins`,
-    handler: cmdAsk,
-  },
-  open: {
-    description: 'Navigate to a project page',
-    usage: 'open <slug>',
-    man: `NAME\n  open — open a project page\n\nSYNOPSIS\n  open <slug>\n\nDESCRIPTION\n  Navigates to a project detail page.\n  Use 'ls projects/' to see available slugs.\n\nEXAMPLES\n  open geology-sim\n  open financebuddy\n  open ml`,
-    handler: cmdOpen,
-  },
-  nav_to: {
-    description: 'Navigate to a site page',
-    usage: 'nav_to <page>',
-    man: `NAME\n  nav_to — navigate to a portfolio page\n\nSYNOPSIS\n  nav_to <page>\n\nDESCRIPTION\n  Navigates to a site page. Tip: 'cd /page' also works.\n\nPAGES\n  home  about  projects  skills  resume  contact`,
-    handler: cmdNavTo,
+  help: {
+    description: 'List all available commands',
+    usage: 'help',
+    man: `NAME\n  help — list all available commands (alias for man)`,
+    handler: cmdMan,
   },
   summarize: {
     description: 'AI summary of a page or project',
-    usage: 'summarize <page>  |  summarize projects <slug>',
-    man: `NAME\n  summarize — get an AI-generated summary\n\nSYNOPSIS\n  summarize <page>\n  summarize projects <slug>\n\nDESCRIPTION\n  Streams an AI-generated summary of a portfolio page or project.\n\nEXAMPLES\n  summarize about\n  summarize skills\n  summarize projects geology-sim\n  summarize projects financebuddy`,
+    usage: 'summarize <page-or-project>',
+    man: `NAME\n  summarize — get an AI-generated summary\n\nSYNOPSIS\n  summarize <page-or-project>\n\nDESCRIPTION\n  Streams an AI-generated summary of a portfolio page or project.\n  Project aliases are accepted.\n\nEXAMPLES\n  summarize about\n  summarize skills\n  summarize geology\n  summarize financebuddy`,
     handler: cmdSummarize,
   },
   mode: {
-    description: 'Switch between Dev and Recruiter mode',
-    usage: 'mode recruiter | mode dev',
-    man: `NAME\n  mode — switch terminal mode\n\nSYNOPSIS\n  mode recruiter\n  mode dev\n\nDESCRIPTION\n  recruiter  Switches to a friendly AI chatbot mode for recruiters.\n  dev        Returns to the developer terminal (this mode).`,
+    description: 'Switch between Dev and AI Chat mode',
+    usage: 'mode ai | mode dev',
+    man: `NAME\n  mode — switch terminal mode\n\nSYNOPSIS\n  mode ai\n  mode dev\n\nDESCRIPTION\n  ai   Switches to the AI Chat interface.\n  dev  Returns to the developer terminal (this mode).`,
     handler: cmdMode,
   },
   github: {
@@ -554,8 +518,13 @@ const COMMANDS = {
     },
   },
   whoami: {
-    description: 'Display current user info',
+    description: 'Display short bio',
     usage: 'whoami',
+    handler: cmdWhoami,
+  },
+  about: {
+    description: 'Display short bio (alias for whoami)',
+    usage: 'about',
     handler: cmdWhoami,
   },
   sudo: {
@@ -585,10 +554,6 @@ const COMMANDS = {
     handler: ({ addLines }) => {
       addLines([{ type: 'sym', text: 'Hi there! 👋' }, { type: 'blank' }]);
     },
-  },
-  help: {
-    description: 'Show available commands (alias for man)',
-    handler: ({ addLines }) => cmdMan({ args: [], addLines }),
   },
 };
 

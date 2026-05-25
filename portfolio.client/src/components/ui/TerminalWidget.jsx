@@ -98,7 +98,7 @@ export default function TerminalWidget() {
               </div>
 
               <span className="tw-title">
-                {mode === 'dev' ? 'bash' : 'Portfolio AI'}
+                {mode === 'dev' ? 'bash' : 'chat'}
                 {isMinimized ? ' — click to restore' : ''}
                 <span className={`tw-mode-badge tw-mode-badge-${mode}`}>
                   {mode === 'dev' ? 'DEV' : 'AI'}
